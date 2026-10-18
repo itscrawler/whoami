@@ -1,0 +1,359 @@
+{
+  "id": "535",
+  "title": "North Bridge",
+  "city": "Tacoma, WA",
+  "difficulty": "medium",
+  "incidentDate": "2019-11-08",
+  "investigationDate": "2026-10-13",
+  "summary": "Everyone believes Mia Holt jumped from the North Bridge. Seven years later, someone secretly logs into her Google account and deletes a folder.",
+  "client": "jake-holt",
+  "intro": {
+    "from": "jake-holt",
+    "channel": "forum-dm",
+    "timestamp": "2026-10-13T01:24:00-07:00",
+    "subject": "my sister",
+    "body": "My sister went missing in 2019. The police decided she killed herself. My mom and I never believed it.\n\nLast night I got a notification: someone signed in to her Google account from a new device. Her account still has my email for recovery. Someone is logging into a dead girl's account seven years later. Why?\n\nThe police say it's spam or a random hack and has nothing to do with her case. Please help. I can pay.",
+    "attachments": [
+      "ev-google-login-alert"
+    ]
+  },
+  "officialVersion": {
+    "status": "Suspended (February 2020). Probable suicide, body not found.",
+    "timeline": [
+      {
+        "time": "2019-11-08T18:40:00-08:00",
+        "text": "Mia arrives home from work."
+      },
+      {
+        "time": "2019-11-08T23:00:00-08:00",
+        "text": "Mia leaves home in her car (approximate)."
+      },
+      {
+        "time": "2019-11-08T23:47:00-08:00",
+        "text": "Last signal from her phone, cell tower near North Bridge. Phone goes offline."
+      },
+      {
+        "time": "2019-11-09T07:20:00-08:00",
+        "text": "Her car is found in the North Bridge parking lot. Bag and keys inside. No phone."
+      }
+    ]
+  },
+  "places": [
+    {
+      "id": "mia-home",
+      "name": "418 Linden St",
+      "type": "home",
+      "map": {
+        "x": 38,
+        "y": 44
+      }
+    },
+    {
+      "id": "north-bridge",
+      "name": "North Bridge",
+      "type": "bridge",
+      "map": {
+        "x": 62,
+        "y": 18
+      }
+    },
+    {
+      "id": "stonehill-quarry",
+      "name": "Old Stonehill Quarry",
+      "type": "quarry",
+      "map": {
+        "x": 81,
+        "y": 62
+      }
+    },
+    {
+      "id": "hillcrest",
+      "name": "Hillcrest",
+      "type": "district",
+      "map": {
+        "x": 24,
+        "y": 70
+      }
+    },
+    {
+      "id": "owen-home",
+      "name": "34 Ridgeback Ct",
+      "type": "home",
+      "map": {
+        "x": 21,
+        "y": 74
+      }
+    },
+    {
+      "id": "veridia-office",
+      "name": "Veridia Health office",
+      "type": "office",
+      "map": {
+        "x": 47,
+        "y": 33
+      }
+    },
+    {
+      "id": "salt-and-cedar",
+      "name": "Salt & Cedar restaurant",
+      "type": "restaurant",
+      "map": {
+        "x": 52,
+        "y": 38
+      }
+    },
+    {
+      "id": "dock-rd-warehouse",
+      "name": "15 Dock Rd warehouse",
+      "type": "warehouse",
+      "map": {
+        "x": 70,
+        "y": 30
+      }
+    },
+    {
+      "id": "walter-home",
+      "name": "421 Linden St",
+      "type": "home",
+      "map": {
+        "x": 39,
+        "y": 42
+      }
+    }
+  ],
+  "answerKey": {
+    "culprit": "owen-lind",
+    "location": "stonehill-quarry",
+    "time": {
+      "date": "2019-11-08",
+      "from": "23:09",
+      "to": "23:41"
+    },
+    "chain": [
+      {
+        "id": "how-knew",
+        "text": "Owen learned about Mia's plan through ___",
+        "answer": "screen-monitoring",
+        "options": [
+          {
+            "id": "screen-monitoring",
+            "text": "the screen monitoring software on her work laptop"
+          },
+          {
+            "id": "ethan-messages",
+            "text": "Ethan's messages"
+          },
+          {
+            "id": "kerr-told",
+            "text": "Daniel Kerr"
+          },
+          {
+            "id": "journalist",
+            "text": "the journalist"
+          }
+        ]
+      },
+      {
+        "id": "why-came",
+        "text": "Mia asked him herself to ___",
+        "answer": "encrypt-archive",
+        "options": [
+          {
+            "id": "encrypt-archive",
+            "text": "help encrypt an archive"
+          },
+          {
+            "id": "fix-laptop",
+            "text": "fix her laptop"
+          },
+          {
+            "id": "drive-home",
+            "text": "drive her home"
+          },
+          {
+            "id": "talk-kerr",
+            "text": "talk to Kerr for her"
+          }
+        ]
+      },
+      {
+        "id": "where-took",
+        "text": "He drove her in her own car to ___",
+        "answer": "stonehill-quarry",
+        "options": [
+          {
+            "id": "stonehill-quarry",
+            "text": "the old Stonehill Quarry"
+          },
+          {
+            "id": "north-bridge",
+            "text": "the North Bridge"
+          },
+          {
+            "id": "owen-home",
+            "text": "his home"
+          },
+          {
+            "id": "veridia-office",
+            "text": "the Veridia office"
+          }
+        ]
+      },
+      {
+        "id": "where-left",
+        "text": "He left the car and her phone at ___",
+        "answer": "north-bridge",
+        "options": [
+          {
+            "id": "north-bridge",
+            "text": "the North Bridge"
+          },
+          {
+            "id": "stonehill-quarry",
+            "text": "the quarry"
+          },
+          {
+            "id": "mia-home",
+            "text": "her home"
+          },
+          {
+            "id": "hillcrest",
+            "text": "Hillcrest"
+          }
+        ]
+      },
+      {
+        "id": "staged-as",
+        "text": "so it would look like ___",
+        "answer": "suicide",
+        "options": [
+          {
+            "id": "suicide",
+            "text": "a suicide"
+          },
+          {
+            "id": "robbery",
+            "text": "a robbery"
+          },
+          {
+            "id": "runaway",
+            "text": "she ran away"
+          },
+          {
+            "id": "accident",
+            "text": "a car accident"
+          }
+        ]
+      }
+    ]
+  },
+  "scoring": {
+    "points": {
+      "culprit": 30,
+      "location": 15,
+      "time": 10,
+      "timeDateOnly": 5,
+      "chain": 25,
+      "evidence": 20
+    },
+    "evidence": {
+      "min": 2,
+      "max": 5,
+      "key": 4,
+      "weak": 2,
+      "none": 0
+    },
+    "wrongCulpritMaxGrade": "D",
+    "grades": [
+      {
+        "grade": "A+",
+        "min": 95
+      },
+      {
+        "grade": "A",
+        "min": 85
+      },
+      {
+        "grade": "B",
+        "min": 70
+      },
+      {
+        "grade": "C",
+        "min": 55
+      },
+      {
+        "grade": "D",
+        "min": 40
+      },
+      {
+        "grade": "F",
+        "min": 0
+      }
+    ]
+  },
+  "endings": {
+    "bad": {
+      "condition": "culprit is wrong",
+      "variants": {
+        "ethan-brooks": {
+          "headline": "Ex-boyfriend of missing Mia Holt arrested",
+          "message": {
+            "from": "jake-holt",
+            "body": "It's not him. I know Ethan. You got it wrong."
+          }
+        },
+        "daniel-kerr": {
+          "headline": "Former Veridia CEO detained in Holt case",
+          "followUp": "A month later Kerr is released for lack of evidence. The case is closed again.",
+          "message": {
+            "from": "jake-holt",
+            "body": "They let him go. So that's it?"
+          }
+        },
+        "default": {
+          "headline": "Police question new person in Holt case",
+          "message": {
+            "from": "jake-holt",
+            "body": "The police say there's nothing there. I don't know what to think anymore."
+          }
+        }
+      }
+    },
+    "mid": {
+      "condition": "culprit is right, score < 70",
+      "headline": "Police reopen review of Mia Holt case",
+      "body": "Tacoma police have quietly reopened a review of the 2019 disappearance of Mia Holt. A former Veridia Health employee was questioned but not detained.",
+      "message": {
+        "from": "jake-holt",
+        "body": "At least something moved. Thank you."
+      }
+    },
+    "good": {
+      "condition": "culprit is right, score >= 70",
+      "steps": [
+        {
+          "type": "message",
+          "to": "jake-holt",
+          "body": "I gave everything to the police. Anonymously. The rest is their job."
+        },
+        {
+          "type": "article",
+          "delayDays": 7,
+          "outlet": "The Sound Ledger",
+          "author": "rachel-moore",
+          "headline": "Mia Holt case reopened seven years later",
+          "body": "Tacoma police have reopened the investigation into the disappearance of 24-year-old Mia Holt, who went missing in November 2019. According to sources, investigators received an anonymous package of evidence. A search is underway near the old Stonehill Quarry. A 38-year-old former employee of Veridia Health has been arrested. The company itself is also under investigation on suspicion of selling medical data of users of its Bloom app.",
+          "bonusParagraph": {
+            "requires": "ev-kerr-fake-metrics",
+            "text": "Separately, former Veridia CEO Daniel Kerr faces fraud charges for allegedly inflating user numbers to investors."
+          }
+        },
+        {
+          "type": "message",
+          "from": "jake-holt",
+          "body": "Thank you. Who are you?"
+        }
+      ]
+    }
+  }
+}

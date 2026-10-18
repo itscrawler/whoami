@@ -1,0 +1,37 @@
+/* WHOAMI — base styles
+   Direction: dark blue-gray monochrome OS, orange accent, sharp corners everywhere. */
+
+:root {
+  --bg: #12161c;
+  --surface: #1b2129;
+  --surface-2: #242c36;
+  --border: #323c48;
+  --text: #d6dde6;
+  --text-muted: #7d8996;
+  --accent: #ff7a1a;
+  --radius: 0;
+  --font-ui: system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-radius: var(--radius);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+}
+
+/* TODO: #desktop, #dock, .window, .window-header ... */
