@@ -7,12 +7,145 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Desktop: dock on the left, windows open in #windows -->
-  <div id="desktop">
-    <nav id="dock"></nav>
-    <main id="windows"></main>
-  </div>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="logo">WHOAMI<span class="cursor">_</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#cases">Cases</a></li>
+      </ul>
+      <a href="#cases" class="btn btn-small" data-cursor="PLAY">Play</a>
+    </div>
+  </nav>
 
-  <script src="js/main.js"></script>
+  <!-- Header -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="prompt">&gt; whoami</p>
+        <h1>Welcome, detective.</h1>
+        <p class="hero-lead">
+          A browser-based hacker detective game. Cold cases the police gave up on.
+          A computer screen and nothing else. You connect the dots and you name the person who did it.
+        </p>
+        <div class="hero-actions">
+          <a href="#cases" class="btn" data-cursor="START">Start</a>
+          <a href="#about" class="btn btn-ghost" data-cursor="READ FILE">Learn more</a>
+        </div>
+      </div>
+
+      <div class="terminal" aria-hidden="true">
+        <div class="terminal-bar">
+          <span>forum-dm — new message</span>
+        </div>
+        <div class="terminal-body">
+          <p><span class="muted">from:</span> jake-holt</p>
+          <p><span class="muted">subject:</span> my sister</p>
+          <p class="terminal-msg">
+            My sister went missing in 2019. The police decided she killed herself.
+            My mom and I never believed it.
+          </p>
+          <p class="terminal-msg">
+            Last night someone signed in to her Google account from a new device. Why?
+          </p>
+          <p class="accent">&gt; accept job? [y/n] <span class="cursor">_</span></p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="container">
+        <p class="section-label">01 / About</p>
+        <h2>About the game</h2>
+        <p class="section-lead">
+          You play as <strong>WHOAMI</strong>, an anonymous hacker who takes jobs on closed forums.
+          People come to you with cold cases the police gave up on years ago. You get databases, email,
+          phone records, maps, street cameras and social media. No hints, no "find" buttons.
+        </p>
+
+        <div class="features">
+          <article class="feature">
+            <h3>Fake desktop OS</h3>
+            <p>Apps open as movable, overlapping windows: database, mail, map, cameras, terminal, and more.</p>
+          </article>
+          <article class="feature">
+            <h3>Fully manual investigation</h3>
+            <p>Every search, every login, every password is on you. How-tos live in an in-game handbook, not in tooltips.</p>
+          </article>
+          <article class="feature">
+            <h3>A living database</h3>
+            <p>Not just suspects. Every resident of the city can be looked up, and some of them know more than they think.</p>
+          </article>
+          <article class="feature">
+            <h3>Fictional cases, real places</h3>
+            <p>Real US cities and real platforms like Instagram, Google, Strava and Steam. Fictional people and companies.</p>
+          </article>
+          <article class="feature">
+            <h3>Twisty cases</h3>
+            <p>Several suspects with motives, red herrings that make sense in the end, evidence spread across many apps.</p>
+          </article>
+          <article class="feature">
+            <h3>Graded reports</h3>
+            <p>File a report: who, where, when, how, and up to five pieces of evidence. Get a score, a grade from A+ to F, and one of several endings.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cases -->
+    <section id="cases" class="section section-alt">
+      <div class="container">
+        <p class="section-label">02 / Cases</p>
+        <h2>Open cases</h2>
+        <p class="section-lead">Pick a file. Read the client's message. Then you're on your own.</p>
+
+        <div class="cases">
+          <article class="case-card">
+            <div class="case-head">
+              <span class="case-id">#535</span>
+              <span class="tag tag-medium">Medium</span>
+            </div>
+            <h3>North Bridge</h3>
+            <p class="case-meta">Tacoma, WA · 2019</p>
+            <p class="case-summary">
+              Everyone believes Mia Holt jumped from the North Bridge. Seven years later, someone secretly
+              logs into her Google account and deletes a folder.
+            </p>
+            <a href="game.html?case=535" class="btn btn-block" data-cursor="OPEN CASE #535">Take the case</a>
+          </article>
+
+          <article class="case-card case-locked">
+            <div class="case-head">
+              <span class="case-id">#???</span>
+              <span class="tag">Locked</span>
+            </div>
+            <h3>Classified</h3>
+            <p class="case-meta">Location unknown</p>
+            <p class="case-summary">New cases are on the way. Check back soon.</p>
+            <span class="btn btn-block btn-disabled" data-cursor="ACCESS DENIED">Coming soon</span>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <a href="#" class="logo">WHOAMI<span class="cursor">_</span></a>
+        <p class="footer-note">Made by <strong>Crawler</strong>.</p>
+      </div>
+      <p class="footer-disclaimer">
+        All people, companies, addresses, usernames and events in this game are fictional.
+        Any resemblance to real persons is coincidental.
+      </p>
+    </div>
+  </footer>
+  <script src="js/cursor.js"></script>
 </body>
 </html>

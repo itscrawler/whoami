@@ -26,11 +26,13 @@ Case content (people, evidence, answers) lives in JSON under `data/cases/<id>/`.
 
 ```
 whoami/
-├── index.html
+├── index.html         # welcome page
+├── game.html          # game desktop (game.html?case=<id>)
 ├── css/
 │   └── style.css
 ├── js/
-│   └── main.js
+│   ├── main.js        # game entry point
+│   └── cursor.js      # custom mouse cursor
 └── data/
     └── cases/
         └── 535/

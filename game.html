@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WHOAMI — Case</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="game">
+  <!-- Top bar -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">WHOAMI<span class="cursor">_</span></a>
+      <p id="case-title" class="case-title">Loading case...</p>
+      <a href="index.html#cases" class="btn btn-small btn-ghost" data-cursor="DISCONNECT">&larr; Back</a>
+    </div>
+  </nav>
+
+  <!-- Desktop: dock on the left, windows open in #windows -->
+  <div id="desktop">
+    <nav id="dock"></nav>
+    <main id="windows">
+      <p class="desktop-placeholder">&gt; connecting<span class="cursor">_</span></p>
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cursor.js"></script>
+</body>
+</html>
