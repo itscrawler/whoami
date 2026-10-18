@@ -1,4 +1,4 @@
-# WHOAMI
+# WHO AM I?
 
 A browser-based hacker detective game.
 
