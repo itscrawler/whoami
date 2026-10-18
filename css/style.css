@@ -1,14 +1,14 @@
 /* WHOAMI — base styles
-   Direction: dark blue-gray monochrome OS, orange accent, sharp corners everywhere. */
+   Direction: dark gray monochrome OS (faint blue tint), orange accent, sharp corners everywhere. */
 
 :root {
-  --bg: #12161c;
-  --surface: #1b2129;
-  --surface-2: #242c36;
-  --border: #323c48;
-  --text: #d6dde6;
-  --text-muted: #7d8996;
-  --accent: #ff7a1a;
+  --bg: #151719;
+  --surface: #1d2023;
+  --surface-2: #26292d;
+  --border: #363a3f;
+  --text: #dcdfe3;
+  --text-muted: #858a91;
+  --accent: #ff6a00;
   --radius: 0;
   --font-ui: system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
@@ -139,6 +139,7 @@ html.has-mouse * {
   cursor: none !important;
 }
 
+.mouse-dot,
 .mouse-frame,
 .mouse-label {
   position: fixed;
@@ -149,9 +150,17 @@ html.has-mouse * {
   transition: opacity 0.2s;
 }
 
+.mouse-hidden .mouse-dot,
 .mouse-hidden .mouse-frame,
 .mouse-hidden .mouse-label {
   opacity: 0;
+}
+
+.mouse-dot {
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  background: var(--accent);
 }
 
 /* Four corner brackets */
@@ -199,7 +208,7 @@ html.has-mouse * {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(18, 22, 28, 0.92);
+  background: rgba(21, 23, 25, 0.92);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--border);
 }
