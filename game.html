@@ -4,27 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WHOAMI — Case</title>
+
+  <!-- Fonts: Barlow Condensed (headings), IBM Plex Sans (UI), JetBrains Mono (labels, data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+  <!-- style.css = shared reset and the blinking cursor; os.css = everything for the game OS -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/os.css">
 </head>
 <body class="game">
-  <!-- Top bar -->
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="index.html" class="logo">WHOAMI<span class="cursor">_</span></a>
-      <p id="case-title" class="case-title">Loading case...</p>
-      <a href="index.html#cases" class="btn btn-small btn-ghost" data-cursor="DISCONNECT">&larr; Back</a>
-    </div>
-  </nav>
+  <div class="os">
+    <!-- Top bar: case info and clock are filled in by js/topbar.js -->
+    <header class="topbar">
+      <span class="topbar-logo">WHOAMI<span class="cursor">_</span></span>
+      <span class="topbar-divider"></span>
+      <span id="case-label" class="topbar-case">LOADING CASE...</span>
 
-  <!-- Desktop: dock on the left, windows open in #windows -->
-  <div id="desktop">
-    <nav id="dock"></nav>
-    <main id="windows">
-      <p class="desktop-placeholder">&gt; connecting<span class="cursor">_</span></p>
-    </main>
+      <div class="topbar-right">
+        <span class="topbar-vpn"><span class="vpn-square"></span>VPN · NODE TAC-07</span>
+        <span id="case-city"></span>
+        <span id="game-clock">--- -- ---- · --:--</span>
+        <a href="index.html#cases" class="topbar-exit">EXIT</a>
+      </div>
+    </header>
+
+    <div class="os-main">
+      <!-- Dock: buttons are built by js/main.js from the list in js/apps.js -->
+      <nav id="dock" class="dock" aria-label="Apps"></nav>
+
+      <!-- Desktop: every app window is added in here by js/windows.js -->
+      <main id="windows" class="desktop"></main>
+    </div>
   </div>
 
+  <!-- Shown instead of the OS on small screens (see os.css) -->
+  <div class="os-small-screen">
+    <p class="os-small-title">WHOAMI<span class="cursor">_</span></p>
+    <p>WHOAMI runs on a computer. Open this page on a desktop or laptop.</p>
+  </div>
+
+  <!-- Order matters: each file uses things defined in the files above it -->
+  <script src="js/apps.js"></script>
+  <script src="js/windows.js"></script>
+  <script src="js/topbar.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/cursor.js"></script>
 </body>
 </html>
