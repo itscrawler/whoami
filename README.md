@@ -52,7 +52,7 @@ npx serve .
 
 ## Roadmap
 
-- [ ] Desktop and window system
+- [x] Desktop and window system
 - [ ] Database app (people search)
 - [ ] Mail, map, cameras, terminal
 - [ ] Case 535 fully playable
