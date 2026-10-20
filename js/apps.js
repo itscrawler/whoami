@@ -26,6 +26,7 @@ const APPS = [
     section: "apps",
     width: 760,
     height: 480,
+    render: renderDatabase, // js/database.js
     icon: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
   },
   {

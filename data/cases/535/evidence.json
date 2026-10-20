@@ -358,11 +358,11 @@
       "entries": [
         {
           "time": "2019-11-08T18:40:00-08:00",
-          "event": "Connected to Wi-Fi \"HOLT_3B\""
+          "event": "Connected to Wi-Fi \"HOLT_1B\""
         },
         {
           "time": "2019-11-08T22:56:00-08:00",
-          "event": "Disconnected from Wi-Fi \"HOLT_3B\""
+          "event": "Disconnected from Wi-Fi \"HOLT_1B\""
         },
         {
           "time": "2019-11-08T22:56:00-08:00",
@@ -684,7 +684,7 @@
         {
           "time": "2019-11-08T19:44:00-08:00",
           "from": "mia-holt",
-          "text": "thank you!! 418 Linden, 3B"
+          "text": "thank you!! 418 Linden, 1B"
         }
       ]
     }
@@ -1028,7 +1028,7 @@
     "content": {
       "type": "statement",
       "date": "2019-11-10",
-      "body": "Around ten someone went up the stairs. Heavy steps, not hers. She walks like a little bird."
+      "body": "Around ten someone walked down the hallway and knocked on her door. Heavy steps, not hers. She walks like a little bird."
     }
   },
   {

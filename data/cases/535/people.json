@@ -7,7 +7,7 @@
     "status": "Missing since 2019-11-08",
     "born": "1995-03-14",
     "birthplace": "Tacoma, WA",
-    "address": "418 Linden St, Apt 3B (until 2019)",
+    "address": "418 Linden St, Apt 1B (until 2019)",
     "phone": "(253) 555-0142 (disconnected)",
     "email": "mia.holt95@gmail.com",
     "job": "Junior Data Analyst, Veridia Health (2018–2019)",
@@ -40,7 +40,12 @@
       "Second Chance shelter: 2018 thank-you post to volunteers, Mia is on the list.",
       "Google Photos: a dog photo with no name, caption \"My best friend ❤️\"."
     ],
-    "age": "24 at time of disappearance"
+    "record": {
+      "id": "P-06289",
+      "address": "Tacoma, WA",
+      "status": "missing"
+}
+
   },
   {
     "id": "jake-holt",
@@ -80,7 +85,12 @@
       "Blog \"7 years without Mia\": one post every November 8. Latest (2025): \"I still check her page.\"",
       "\"Find Mia\" group: old posts thanking Owen for his help \"analyzing the phone data\".",
       "Pine Auto Repair reviews: \"Jake fixed everything in one day.\""
-    ]
+    ],
+    "record": {
+      "id": "P-06823",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    }
   },
   {
     "id": "linda-holt",
@@ -120,7 +130,12 @@
       "Facebook post, 2018: \"Today we lost our Biscuit. He was with us since 2011. Mia has been crying all evening…\" (password clue)",
       "Posts every March 14, Mia's birthday.",
       "Photos from the school book fair."
-    ]
+    ],
+    "record": {
+      "id": "P-05729",
+      "address": "Olympia, WA",
+      "status": "alive"
+}
   },
   {
     "id": "richard-holt",
@@ -153,7 +168,12 @@
     "findings": [
       "Divorced Linda in 2009 and moved to Idaho. Rarely in touch with the kids.",
       "His only comment under the missing-person post: \"I'm sorry.\""
-    ]
+    ],
+    "record": {
+      "id": "P-07829",
+      "address": "Boise, ID",
+      "status": "alive"
+}
   },
   {
     "id": "ethan-brooks",
@@ -186,6 +206,11 @@
       "WhatsApp group \"Tacoma Aces\": 23:30 photo from Mark, Ethan is in the shot. Alibi.",
       "Comment under Sam Wright's video: \"You don't know anything.\""
     ],
+    "record": {
+      "id": "P-08946",
+      "address": "Tacoma, WA",
+      "status": "alive"
+},
     "spoiler": "Not the killer. Was hiding gambling debts and an underground poker game."
   },
   {
@@ -194,6 +219,11 @@
     "type": "key",
     "role": "CEO of Veridia Health (red herring)",
     "status": "Alive",
+    "record": {
+      "id": "P-09001",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1981-08-19",
     "birthplace": "San Jose, CA",
     "address": "9 Bayside Terrace",
@@ -232,6 +262,11 @@
     "type": "secondary",
     "role": "Daniel Kerr's wife",
     "status": "Alive",
+    "record": {
+      "id": "P-09002",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1983-02-07",
     "birthplace": "Portland, OR",
     "address": "9 Bayside Terrace",
@@ -262,6 +297,11 @@
     "type": "key",
     "role": "Mia's neighbor (red herring → witness)",
     "status": "Alive",
+    "record": {
+      "id": "P-09003",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1958-05-03",
     "birthplace": "Tacoma, WA",
     "address": "421 Linden St (across from Mia)",
@@ -299,6 +339,11 @@
     "type": "key",
     "role": "Head of IT, Veridia Health",
     "status": "Alive",
+    "record": {
+      "id": "P-09004",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1988-10-27",
     "birthplace": "Spokane, WA",
     "address": "34 Ridgeback Ct, Hillcrest",
@@ -347,6 +392,11 @@
     "type": "secondary",
     "role": "Owen Lind's mother",
     "status": "Alive",
+    "record": {
+      "id": "P-09005",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1960-12-01",
     "birthplace": "Spokane, WA",
     "address": "880 Orchard Way",
@@ -378,6 +428,11 @@
     "type": "secondary",
     "role": "Journalist",
     "status": "Alive",
+    "record": {
+      "id": "P-09006",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1986-07-15",
     "birthplace": "Seattle, WA",
     "address": "Not listed. Newsroom: 200 Front St",
@@ -404,6 +459,11 @@
     "type": "secondary",
     "role": "Mia's coworker and friend at Veridia",
     "status": "Alive",
+    "record": {
+      "id": "P-09007",
+      "address": "Seattle, WA",
+      "status": "alive"
+    },
     "born": "1994-11-09",
     "birthplace": "Tacoma, WA",
     "address": "Seattle, WA (moved 2020)",
@@ -429,6 +489,11 @@
     "type": "secondary",
     "role": "Former Head of Product, Veridia",
     "status": "Alive",
+    "record": {
+      "id": "P-09008",
+      "address": "Portland, OR",
+      "status": "alive"
+    },
     "born": "1985-03-28",
     "birthplace": "Boston, MA",
     "address": "Portland, OR",
@@ -459,6 +524,11 @@
     "type": "secondary",
     "role": "Account manager, Northline Analytics",
     "status": "Alive",
+    "record": {
+      "id": "P-09009",
+      "address": "Portland, OR",
+      "status": "alive"
+    },
     "born": "1977-01-12",
     "birthplace": "Portland, OR",
     "address": "Portland, OR",
@@ -489,6 +559,11 @@
     "type": "secondary",
     "role": "Detective who led the case in 2019",
     "status": "Retired (2023)",
+    "record": {
+      "id": "P-09010",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1974-04-04",
     "birthplace": "Tacoma, WA",
     "address": "Not listed",
@@ -514,6 +589,11 @@
     "type": "resident",
     "role": "Patrol officer, found Mia's car",
     "status": "Alive",
+    "record": {
+      "id": "P-09011",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1991-08-08",
     "birthplace": "Tacoma, WA",
     "address": "Not listed",
@@ -538,6 +618,11 @@
     "type": "secondary",
     "role": "Runs the underground poker game",
     "status": "Alive",
+    "record": {
+      "id": "P-09012",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1979-02-19",
     "birthplace": "Tacoma, WA",
     "address": "15 Dock Rd (warehouse, back room)",
@@ -562,6 +647,11 @@
     "type": "resident",
     "role": "Poker player, Ethan's lender",
     "status": "Alive",
+    "record": {
+      "id": "P-09013",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1990-06-21",
     "birthplace": "Tacoma, WA",
     "address": "230 Pier Ave",
@@ -584,11 +674,16 @@
     "id": "dorothy-shaw",
     "name": "Dorothy Shaw",
     "type": "resident",
-    "role": "Mia's downstairs neighbor",
+    "role": "Mia's neighbor across the hallway",
     "status": "Alive",
+    "record": {
+      "id": "P-09014",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1947-10-10",
     "birthplace": "Vancouver, WA",
-    "address": "418 Linden St, Apt 2A",
+    "address": "418 Linden St, Apt 1A",
     "phone": "(253) 555-0102",
     "email": "—",
     "job": "Retired music teacher",
@@ -601,7 +696,7 @@
     ],
     "social": [],
     "findings": [
-      "Statement 2019: \"Around ten someone went up the stairs. Heavy steps, not hers.\" Written down, never followed up.",
+      "Statement 2019: \"Around ten someone walked down the hallway to her door. Heavy steps, not hers.\" Written down, never followed up.",
       "Complaint about Walter Green: \"watches me from his window\"."
     ]
   },
@@ -611,6 +706,11 @@
     "type": "resident",
     "role": "Mia's landlord",
     "status": "Alive",
+    "record": {
+      "id": "P-09015",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1963-03-03",
     "birthplace": "Tacoma, WA",
     "address": "1450 Westgate Blvd",
@@ -626,7 +726,7 @@
     ],
     "social": [],
     "findings": [
-      "Craigslist, December 2019: \"Apt 3B on Linden St for rent, freshly renovated.\" Mia's apartment was rented out a month later."
+      "Craigslist, December 2019: \"Apt 1B on Linden St for rent, freshly renovated.\" Mia's apartment was rented out a month later."
     ]
   },
   {
@@ -635,6 +735,11 @@
     "type": "resident",
     "role": "Mia's school friend",
     "status": "Alive",
+    "record": {
+      "id": "P-09016",
+      "address": "Denver, CO",
+      "status": "alive"
+    },
     "born": "1995-01-17",
     "birthplace": "Tacoma, WA",
     "address": "Denver, CO",
@@ -664,6 +769,11 @@
     "type": "resident",
     "role": "True crime YouTuber",
     "status": "Alive",
+    "record": {
+      "id": "P-09017",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1999-05-25",
     "birthplace": "Tacoma, WA",
     "address": "Tacoma (not listed)",
@@ -689,6 +799,11 @@
     "type": "resident",
     "role": "Lives near Stonehill Quarry",
     "status": "Alive",
+    "record": {
+      "id": "P-09018",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1981-09-14",
     "birthplace": "Tacoma, WA",
     "address": "12 Quarry Rd",
@@ -718,6 +833,11 @@
     "type": "resident",
     "role": "Lime scooter technician",
     "status": "Alive",
+    "record": {
+      "id": "P-09019",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1997-12-03",
     "birthplace": "Tacoma, WA",
     "address": "88 Elm Court",
@@ -742,6 +862,11 @@
     "type": "resident",
     "role": "Bought a monitor from Owen",
     "status": "Alive",
+    "record": {
+      "id": "P-09020",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "2002-04-18",
     "birthplace": "Tacoma, WA",
     "address": "501 College Ave",
@@ -766,6 +891,11 @@
     "type": "resident",
     "role": "Owen's neighbor",
     "status": "Alive",
+    "record": {
+      "id": "P-09021",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1992-07-07",
     "birthplace": "San Diego, CA",
     "address": "36 Ridgeback Ct, Hillcrest",
@@ -795,6 +925,11 @@
     "type": "resident",
     "role": "Ethan's coworker at the bar",
     "status": "Alive",
+    "record": {
+      "id": "P-09022",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1995-02-14",
     "birthplace": "Dublin, Ireland",
     "address": "19 Mill St",
@@ -819,6 +954,11 @@
     "type": "resident",
     "role": "Owner of the café near Veridia",
     "status": "Alive",
+    "record": {
+      "id": "P-09023",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1972-08-30",
     "birthplace": "San Antonio, TX",
     "address": "Morning Tide café, 305 Front St",
@@ -849,6 +989,11 @@
     "type": "resident",
     "role": "Linden St resident",
     "status": "Alive",
+    "record": {
+      "id": "P-09024",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1965-11-21",
     "birthplace": "Tacoma, WA",
     "address": "425 Linden St",
@@ -878,6 +1023,11 @@
     "type": "resident",
     "role": "Volunteer in the search",
     "status": "Alive",
+    "record": {
+      "id": "P-09025",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1987-05-05",
     "birthplace": "Tacoma, WA",
     "address": "1102 Bay St",
@@ -907,6 +1057,11 @@
     "type": "resident",
     "role": "Student in 2019, Jake's neighbor",
     "status": "Alive",
+    "record": {
+      "id": "P-09026",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1999-03-02",
     "birthplace": "Tacoma, WA",
     "address": "77 Harbor View Rd, Apt 8",
@@ -931,6 +1086,11 @@
     "type": "resident",
     "role": "Fisherman at North Bridge",
     "status": "Alive",
+    "record": {
+      "id": "P-09027",
+      "address": "Tacoma, WA",
+      "status": "alive"
+    },
     "born": "1954-06-16",
     "birthplace": "Tacoma, WA",
     "address": "3 River Rd",

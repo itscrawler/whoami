@@ -4,6 +4,9 @@
 // Case id comes from the URL: game.html?case=535
 const CASE_ID = new URLSearchParams(location.search).get("case") || "535";
 
+// The loaded case ({ caseInfo, people, evidence }). Apps read from it; null until it loads.
+let caseData = null;
+
 // Loads the three JSON files of a case at the same time.
 async function loadCase(id) {
   const base = `data/cases/${id}`;
@@ -78,6 +81,7 @@ initWindowManager(document.getElementById("windows"), updateDock);
 
 loadCase(CASE_ID)
   .then((data) => {
+    caseData = data;
     document.title = `WHOAMI — #${data.caseInfo.id} ${data.caseInfo.title}`;
     initTopbar(data.caseInfo);
 
