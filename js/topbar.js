@@ -14,6 +14,9 @@ function initTopbar(caseInfo) {
   label.append("CASE ", number, " · " + caseInfo.title.toUpperCase());
 
   document.getElementById("case-city").textContent = caseInfo.city.toUpperCase();
+  document.getElementById("help-button").addEventListener("click", () => {
+    launchApp("handbook");
+  });
 
   startClock(caseInfo.intro.timestamp);
 }

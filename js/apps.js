@@ -99,8 +99,9 @@ const APPS = [
     name: "Handbook",
     subtitle: "/ how-to",
     section: "tools",
-    width: 560,
-    height: 400,
+    width: 760,
+    height: 560,
+    render: renderHandbook, // js/handbook.js
     icon: '<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/>',
   },
   {
