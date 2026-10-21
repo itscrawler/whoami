@@ -55,8 +55,10 @@ function renderHandbook(container) {
         "SEARCH: lookup <name|number|email|vehicle> searches resident records; breach search <email|username> checks the available fictional leak; geoip <ip> searches IP locations in case records.",
         "ACCESS: scan <target> reports access requirements; connect <target> opens a simulated target after scanning and connecting the VPN; login <service> <account> <password> checks discovered credentials; logout ends account sessions; disconnect closes the target connection.",
         "WORDLIST: wordlist add <word> adds a clue you found; wordlist show lists your collected clues; crack <archive> --wordlist mine checks only those clues, never an automatic or external password list.",
-        "PHONE RECORDS: towers <number> [--date] shows an available tower log; calls shows downloaded call logs when present; sms shows downloaded text conversations.",
-        "Shortcuts: hack phone prints the first safe investigation step. sudo and rm -rf / are harmless jokes; they do not execute system commands.",
+        "PHONE: Open Phone in the dock to browse case messages, social posts, email, and device records. Locked records require the matching terminal connection or account session.",
+        "PHONE ACCESS: scan phone → vpn connect TAC-07 → connect phone unlocks carrier records. Find Mia's Google credentials in case evidence, then use login google <account> <password> for her message backup and email.",
+        "PHONE RECORDS: towers <number> [--date] shows an available tower log; calls shows downloaded call logs when present; sms shows downloaded text conversations. hack phone prints the first access step.",
+        "sudo and rm -rf / are harmless jokes; they do not execute system commands.",
       ],
     },
     {
@@ -64,7 +66,7 @@ function renderHandbook(container) {
       label: "Other apps",
       title: "Apps not available yet",
       paragraphs: [
-        "Browser, Phone, Map, Files, Evidence board, and Report are planned but are not active yet. Cameras are also unavailable. Their case data is preserved for future use; these apps do not currently provide player actions.",
+        "Browser and Phone are active. Map, Files, Evidence board, and Report are planned; Cameras are also unavailable. Their case data is preserved for future use.",
       ],
     },
   ];

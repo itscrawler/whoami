@@ -7,6 +7,16 @@ const CASE_ID = new URLSearchParams(location.search).get("case") || "535";
 // The loaded case ({ caseInfo, people, evidence }). Apps read from it; null until it loads.
 let caseData = null;
 
+// Access granted through the simulated terminal is shared with device apps.
+window.CASE_ACCESS = {
+  connectedTargets: new Set(),
+  sessions: new Map(),
+};
+
+window.notifyAccessChange = function notifyAccessChange() {
+  window.dispatchEvent(new Event("case-access-change"));
+};
+
 // Loads the three JSON files of a case at the same time.
 async function loadCase(id) {
   const base = `data/cases/${id}`;

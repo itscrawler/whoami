@@ -494,6 +494,219 @@ body.is-resizing * {
   overflow-wrap: anywhere;
 }
 
+/* ---------- Phone ---------- */
+
+.phone-app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--bg);
+}
+
+.phone-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  min-height: 34px;
+  padding: 0 12px;
+  background: var(--bar);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.phone-status-light {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  background: var(--text-dim);
+}
+
+.phone-status-light.is-connected {
+  background: var(--accent);
+}
+
+.phone-status-account {
+  margin-left: auto;
+  text-align: right;
+}
+
+.phone-nav {
+  display: flex;
+  flex-shrink: 0;
+  overflow-x: auto;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.phone-nav-button {
+  flex: 1 0 auto;
+  min-height: 38px;
+  padding: 0 15px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.phone-nav-button:hover,
+.phone-nav-button.is-active {
+  color: var(--text);
+}
+
+.phone-nav-button.is-active {
+  border-bottom-color: var(--accent);
+}
+
+.phone-content {
+  flex: 1;
+  min-height: 0;
+  padding: 14px 16px 22px;
+  overflow: auto;
+}
+
+.phone-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+}
+
+.phone-section-count {
+  color: var(--text-dim);
+}
+
+.phone-access-note {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border-left: 2px solid var(--accent);
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.phone-record {
+  margin-bottom: 10px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.phone-record.is-locked {
+  border-style: dashed;
+}
+
+.phone-record-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.phone-record-title {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.phone-record-state {
+  flex-shrink: 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.05em;
+}
+
+.phone-record-lock {
+  padding-top: 9px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.phone-message {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.phone-message:last-child {
+  border-bottom: 0;
+}
+
+.phone-message-meta,
+.phone-record-meta {
+  display: block;
+  margin: 8px 0 4px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+
+.phone-message-text,
+.phone-record-body {
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.phone-record-subject {
+  margin: 8px 0;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.phone-device-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.8fr) minmax(0, 2fr);
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.phone-device-time {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+
+.phone-device-event {
+  color: var(--text);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.phone-empty {
+  padding: 14px 0;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.phone-nav-button:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: -2px;
+}
+
 /* ---------- Database app ---------- */
 
 .db {

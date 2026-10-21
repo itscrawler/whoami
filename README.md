@@ -6,7 +6,8 @@ You play as **WHOAMI** — an anonymous hacker who takes jobs on closed forums. 
 
 ## Features
 
-- **A fake desktop OS** — apps open as movable, overlapping windows (database, mail, browser, map, cameras, terminal, and more).
+- **A fake desktop OS** — apps open as movable, overlapping windows (database, mail, browser, phone, map, cameras, terminal, and more).
+- **A simulated phone** — browse case messages, social posts, email and device records; unlock private records through in-game terminal access.
 - **A case-limited web** — search fictional public pages in Dorne without access to the wider internet.
 - **Fully manual investigation** — every search, every login, every password is on you. How-tos live in an in-game handbook, not in tooltips.
 - **A living database** — not just suspects: every resident of the city can be looked up, and some of them know more than they think.

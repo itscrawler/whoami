@@ -30,6 +30,7 @@ const TERMINAL_COMMANDS = [
   ["towers <number> [--date]", "Show an available cell-tower log."],
   ["calls", "Show downloaded call records."],
   ["sms", "Show downloaded text-message records."],
+  ["hack phone", "Show the first step for simulated phone access."],
 ];
 
 function renderTerminal(container) {
@@ -55,8 +56,8 @@ function renderTerminal(container) {
     historyIndex: null,
     vpnNode: null,
     scannedTargets: new Set(),
-    connectedTargets: new Set(),
-    sessions: new Map(),
+    connectedTargets: window.CASE_ACCESS.connectedTargets,
+    sessions: window.CASE_ACCESS.sessions,
     wordlist: new Map(),
     downloaded: new Set(),
     crackedArchives: new Set(),
@@ -126,7 +127,7 @@ function renderTerminal(container) {
     if (command === "sudo") return write("nice try");
     if (command === "rm" && rest.join(" ") === "-rf /") return write("you first");
     if (command === "hack" && rest[0]?.toLowerCase() === "phone") {
-      return write("it's not that simple. start with: scan");
+      return write("Phone access is simulated. Start with: scan phone");
     }
     if (command === "ls") return listFiles();
     if (command === "cd") return changeDirectory(rest[0]);
@@ -145,11 +146,13 @@ function renderTerminal(container) {
     if (command === "login") return login(rest);
     if (command === "logout") {
       state.sessions.clear();
+      window.notifyAccessChange();
       return write("Account sessions closed.");
     }
     if (command === "disconnect") {
       const targets = [...state.connectedTargets];
       state.connectedTargets.clear();
+      window.notifyAccessChange();
       return write(targets.length ? `Disconnected: ${targets.join(", ")}` : "No target connected.");
     }
     if (command === "crack") return crack(rest);
@@ -405,6 +408,7 @@ function renderTerminal(container) {
     if (action === "disconnect") {
       state.vpnNode = null;
       state.connectedTargets.clear();
+      window.notifyAccessChange();
       return write("VPN disconnected. Target connections closed.");
     }
     if (action === "connect" && args[1]) {
@@ -449,6 +453,7 @@ function renderTerminal(container) {
     if (!state.vpnNode) return write("too risky. need: VPN connection. Use vpn connect TAC-07.");
     state.connectedTargets.add(target);
     write(`Connected to ${target}. Available case records can now be downloaded.`);
+    window.notifyAccessChange();
   }
 
   function login(args) {
@@ -478,6 +483,7 @@ function renderTerminal(container) {
       account,
     });
     write(`Signed in to ${service} as ${account}.`);
+    window.notifyAccessChange();
   }
 
   function breachSearch(query) {

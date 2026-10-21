@@ -43,10 +43,11 @@ const APPS = [
   {
     id: "phone",
     name: "Phone",
-    subtitle: "/ call records",
+    subtitle: "/ device",
     section: "apps",
-    width: 560,
-    height: 400,
+    width: 660,
+    height: 520,
+    render: renderPhone, // js/phone.js
     icon: '<rect x="7" y="3" width="10" height="18"/><path d="M11 18h2"/>',
   },
   {
