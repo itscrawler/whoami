@@ -62,6 +62,7 @@ const APPS = [
     name: "Cameras",
     subtitle: "/ street feeds",
     section: "apps",
+    visible: false,
     width: 860,
     height: 540,
     icon: '<rect x="3" y="7" width="13" height="10"/><path d="M16 10l5-3v10l-5-3"/>',
@@ -112,6 +113,8 @@ const APPS = [
     icon: '<path d="M6 3h9l4 4v14H6z"/><path d="M9 13l2 2 4-4"/>',
   },
 ];
+
+const DOCK_APPS = APPS.filter((app) => app.visible !== false);
 
 // The exit button sits at the bottom of the dock. It is not an app (it opens no window),
 // so it lives here on its own, but it uses the same icon style.

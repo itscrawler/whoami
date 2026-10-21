@@ -24,7 +24,7 @@ function buildDock() {
   const dock = document.getElementById("dock");
   let lastSection = null;
 
-  for (const app of APPS) {
+  for (const app of DOCK_APPS) {
     // A divider line wherever the section changes (apps -> tools)
     if (lastSection && app.section !== lastSection) {
       const divider = document.createElement("div");
@@ -66,7 +66,7 @@ function createDockButton(id, label, icon) {
 // Updates the dock icons to show which apps are open or minimized.
 // The window manager calls this after every open, close, minimize and restore.
 function updateDock() {
-  for (const app of APPS) {
+  for (const app of DOCK_APPS) {
     const button = document.querySelector(`.dock-btn[data-app="${app.id}"]`);
     const state = getWindowState(app.id);
     button.classList.toggle("is-open", state !== "closed");
