@@ -74,6 +74,7 @@ const APPS = [
     section: "apps",
     width: 520,
     height: 340,
+    render: renderTerminal, // js/terminal.js
     icon: '<rect x="3" y="4" width="18" height="16"/><path d="M7 9l3 3-3 3M12 15h5"/>',
   },
   {

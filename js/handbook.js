@@ -48,7 +48,15 @@ function renderHandbook(container) {
       label: "Terminal commands",
       title: "Terminal",
       paragraphs: [
-        "The Terminal is not implemented yet, so it currently accepts no commands. There are no active shell commands to use in this case. Supported commands and examples will be added here when the Terminal is available.",
+        "This is a simulated case terminal. Commands only inspect the fictional case data and your in-game session; they do not run on your computer or contact real services.",
+        "BASICS: help [command] lists commands or explains one; clear clears output; history shows commands; date shows in-game time; whoami prints your handle; exit closes the terminal.",
+        "FILES: ls lists the current folder; cd <folder> changes folder; cat <file> prints a downloaded text record; open <file> opens a downloaded record in a viewer; download <file|all> saves records available in your current session; unzip <archive> extracts an unlocked archive.",
+        "VPN: vpn connect <node> starts the simulated tunnel; vpn status checks it; vpn disconnect closes it. A VPN is required before connecting to protected targets.",
+        "SEARCH: lookup <name|number|email|vehicle> searches resident records; breach search <email|username> checks the available fictional leak; geoip <ip> searches IP locations in case records.",
+        "ACCESS: scan <target> reports access requirements; connect <target> opens a simulated target after scanning and connecting the VPN; login <service> <account> <password> checks discovered credentials; logout ends account sessions; disconnect closes the target connection.",
+        "WORDLIST: wordlist add <word> adds a clue you found; wordlist show lists your collected clues; crack <archive> --wordlist mine checks only those clues, never an automatic or external password list.",
+        "PHONE RECORDS: towers <number> [--date] shows an available tower log; calls shows downloaded call logs when present; sms shows downloaded text conversations.",
+        "Shortcuts: hack phone prints the first safe investigation step. sudo and rm -rf / are harmless jokes; they do not execute system commands.",
       ],
     },
     {
