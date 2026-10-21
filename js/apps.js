@@ -35,8 +35,9 @@ const APPS = [
     name: "Browser",
     subtitle: "/ web",
     section: "apps",
-    width: 560,
-    height: 400,
+    width: 720,
+    height: 520,
+    render: renderBrowser, // js/browser.js
     icon: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/>',
   },
   {

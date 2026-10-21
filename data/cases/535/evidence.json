@@ -1090,5 +1090,86 @@
       "date": "2019-10-30",
       "text": "After two years I'm leaving Veridia Health. I disagreed with how the company counts its users. Proud of the team, though."
     }
+  },
+  {
+    "id": "ev-mia-instagram",
+    "title": "Mia Holt on Instagram",
+    "app": "social",
+    "access": {
+      "type": "public",
+      "platform": "Instagram",
+      "handle": "@mia.counts"
+    },
+    "people": [
+      "mia-holt"
+    ],
+    "weight": "none",
+    "content": {
+      "type": "post",
+      "platform": "Instagram",
+      "author": "mia-holt",
+      "date": "2019-11-02",
+      "text": "Numbers don't lie. People do.",
+      "photo": "A dark office window at night."
+    }
+  },
+  {
+    "id": "ev-news-mia-search",
+    "title": "Missing analyst searched for near North Bridge",
+    "app": "web",
+    "access": {
+      "type": "public",
+      "platform": "The Sound Ledger"
+    },
+    "people": [
+      "mia-holt"
+    ],
+    "weight": "none",
+    "content": {
+      "type": "article",
+      "platform": "The Sound Ledger",
+      "author": "rachel-moore",
+      "date": "2019-11-09",
+      "body": "Search teams are looking for 24-year-old Mia Holt, who was reported missing after her silver Honda Civic was found in the North Bridge parking lot. Her phone last connected to a tower near the bridge late Friday night. Police have not confirmed where she may have gone."
+    }
+  },
+  {
+    "id": "ev-news-veridia-bankruptcy",
+    "title": "Veridia Health files for bankruptcy. Investors sue founder.",
+    "app": "web",
+    "access": {
+      "type": "public",
+      "platform": "The Sound Ledger"
+    },
+    "people": [
+      "daniel-kerr",
+      "rachel-moore"
+    ],
+    "weight": "none",
+    "content": {
+      "type": "article",
+      "platform": "The Sound Ledger",
+      "author": "rachel-moore",
+      "date": "2022",
+      "body": "Veridia Health has filed for bankruptcy as investors sue founder Daniel Kerr. Reporter Rachel Moore covered the company's collapse; at the time, the story was not connected to Mia Holt's disappearance."
+    }
+  },
+  {
+    "id": "ev-walter-website",
+    "title": "Window on Linden St",
+    "app": "web",
+    "access": {
+      "type": "public",
+      "platform": "Walter Green's website"
+    },
+    "people": [
+      "walter-green"
+    ],
+    "weight": "none",
+    "content": {
+      "type": "website",
+      "description": "A neighborhood weather and birdwatching stream. Archived recordings are organized by date.",
+      "archiveEvidenceId": "ev-walter-cam"
+    }
   }
 ]

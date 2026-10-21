@@ -6,7 +6,8 @@ You play as **WHOAMI** — an anonymous hacker who takes jobs on closed forums. 
 
 ## Features
 
-- **A fake desktop OS** — apps open as movable, overlapping windows (database, mail, map, cameras, terminal, and more).
+- **A fake desktop OS** — apps open as movable, overlapping windows (database, mail, browser, map, cameras, terminal, and more).
+- **A case-limited web** — search fictional public pages in Dorne without access to the wider internet.
 - **Fully manual investigation** — every search, every login, every password is on you. How-tos live in an in-game handbook, not in tooltips.
 - **A living database** — not just suspects: every resident of the city can be looked up, and some of them know more than they think.
 - **Fictional cases in real places** — real US cities, real platforms (Instagram, Google, Strava, Steam…), fictional people and companies.
@@ -32,6 +33,7 @@ whoami/
 │   └── style.css
 ├── js/
 │   ├── main.js        # game entry point
+│   ├── browser.js     # case-limited public web search
 │   └── cursor.js      # custom mouse cursor
 └── data/
     └── cases/
@@ -53,6 +55,7 @@ npx serve .
 ## Roadmap
 
 - [x] Desktop and window system
+- [x] Browser app (case-limited public search)
 - [ ] Database app (people search)
 - [ ] Mail, map, cameras, terminal
 - [ ] Case 535 fully playable
