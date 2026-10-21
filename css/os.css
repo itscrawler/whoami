@@ -106,31 +106,6 @@ body.is-resizing * {
   color: var(--text);
 }
 
-.topbar-help {
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  background: transparent;
-  border: 1px solid var(--border-strong);
-  color: var(--text);
-  font: inherit;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.topbar-help:hover,
-.topbar-help:focus-visible {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.topbar-help:focus-visible {
-  outline: 1px solid var(--accent);
-  outline-offset: 3px;
-}
-
 .topbar-exit {
   color: var(--text-muted);
   transition: color 0.15s;
