@@ -994,6 +994,44 @@ body.is-resizing * {
   margin-bottom: 14px;
 }
 
+.mail-detail-window {
+  min-height: 100%;
+  padding: 14px;
+  overflow: auto;
+}
+
+.mail-detail-meta {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mail-detail-row {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.mail-detail-label {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.mail-detail-value {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.mail-detail-body {
+  white-space: normal;
+}
+
 .mail-sender,
 .mail-subject {
   margin: 0 0 5px;

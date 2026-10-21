@@ -15,32 +15,14 @@ function renderMail(container) {
   }
 
   const intro = caseData.caseInfo.intro;
-  const messages = [
-    {
-      id: "client-message",
-      from: intro.from,
-      subject: intro.subject,
-      body: intro.body,
-      timestamp: intro.timestamp,
-      attachmentIds: intro.attachments || [],
-    },
-    ...(caseData.evidence || [])
-      .filter(
-        (evidence) =>
-          evidence.app === "mail" &&
-          evidence.access?.type === "client" &&
-          evidence.content?.type === "email"
-      )
-      .map((evidence) => ({
-        id: evidence.id,
-        from: evidence.content.from,
-        subject: evidence.content.subject,
-        body: evidence.content.body,
-        timestamp: evidence.timestamp,
-        attachmentIds: [],
-        source: evidence.source,
-      })),
-  ];
+  const messages = [{
+    id: "client-message",
+    from: intro.from,
+    subject: intro.subject,
+    body: intro.body,
+    timestamp: intro.timestamp,
+    attachmentIds: intro.attachments || [],
+  }];
 
   let selectedId = messages[0]?.id;
   const rows = new Map();
@@ -101,10 +83,42 @@ function renderMail(container) {
           createEl("span", "", attachment.title)
         );
         attachmentList.appendChild(button);
-        rows.set(attachment.id, button);
       }
       reader.appendChild(attachmentList);
     }
+  }
+
+  function openEmailWindow(attachment) {
+    const email = attachment.content;
+    openAuxiliaryWindow({
+      id: `mail-message-${attachment.id}`,
+      name: "Email",
+      subtitle: "/ message details",
+      width: 460,
+      height: 360,
+      render(container) {
+        const detail = createEl("div", "mail-detail-window");
+        const metadata = createEl("dl", "mail-detail-meta");
+        for (const [label, value] of [
+          ["FROM", email.from],
+          ["TO", email.to],
+          ["DATE", attachment.timestamp],
+          ["SUBJECT", email.subject],
+        ]) {
+          const row = createEl("div", "mail-detail-row");
+          row.append(createEl("dt", "mail-detail-label", label));
+          row.append(createEl("dd", "mail-detail-value", value || "—"));
+          metadata.appendChild(row);
+        }
+
+        const body = createEl("div", "mail-body mail-detail-body");
+        for (const paragraph of email.body.split(/\n{2,}/)) {
+          body.appendChild(createEl("p", "", paragraph));
+        }
+        detail.append(metadata, body);
+        container.appendChild(detail);
+      },
+    });
   }
 
   inbox.addEventListener("click", (event) => {
@@ -119,31 +133,19 @@ function renderMail(container) {
 
     const attachment = caseData.evidence.find((entry) => entry.id === row.dataset.message);
     if (!attachment || attachment.access?.type !== "client") return;
-    showMessage({
-      id: attachment.id,
-      from: attachment.content.from,
-      subject: attachment.content.subject,
-      body: attachment.content.body,
-      timestamp: attachment.timestamp,
-      attachmentIds: [],
-      source: attachment.source,
-    });
+    openEmailWindow(attachment);
   });
 
   reader.addEventListener("click", (event) => {
     const button = event.target.closest("[data-message]");
     if (!button) return;
     const attachment = caseData.evidence.find((entry) => entry.id === button.dataset.message);
-    if (!attachment || attachment.access?.type !== "client") return;
-    showMessage({
-      id: attachment.id,
-      from: attachment.content.from,
-      subject: attachment.content.subject,
-      body: attachment.content.body,
-      timestamp: attachment.timestamp,
-      attachmentIds: [],
-      source: attachment.source,
-    });
+    if (
+      !attachment ||
+      attachment.access?.type !== "client" ||
+      attachment.content?.type !== "email"
+    ) return;
+    openEmailWindow(attachment);
   });
 
   app.append(inbox, reader);
