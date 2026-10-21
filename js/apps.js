@@ -15,8 +15,9 @@ const APPS = [
     name: "Mail",
     subtitle: "/ inbox",
     section: "apps",
-    width: 640,
-    height: 440,
+    width: 520,
+    height: 370,
+    render: renderMail, // js/mail.js
     icon: '<rect x="3" y="5" width="18" height="14"/><path d="M3 7l9 6 9-6"/>',
   },
   {
@@ -24,8 +25,8 @@ const APPS = [
     name: "Database",
     subtitle: "/ residents",
     section: "apps",
-    width: 760,
-    height: 480,
+    width: 1120,
+    height: 650,
     render: renderDatabase, // js/database.js
     icon: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
   },
@@ -34,8 +35,9 @@ const APPS = [
     name: "Browser",
     subtitle: "/ web",
     section: "apps",
-    width: 560,
-    height: 400,
+    width: 720,
+    height: 520,
+    render: renderBrowser, // js/browser.js
     icon: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/>',
   },
   {
@@ -61,6 +63,7 @@ const APPS = [
     name: "Cameras",
     subtitle: "/ street feeds",
     section: "apps",
+    visible: false,
     width: 860,
     height: 540,
     icon: '<rect x="3" y="7" width="13" height="10"/><path d="M16 10l5-3v10l-5-3"/>',
@@ -72,6 +75,7 @@ const APPS = [
     section: "apps",
     width: 520,
     height: 340,
+    render: renderTerminal, // js/terminal.js
     icon: '<rect x="3" y="4" width="18" height="16"/><path d="M7 9l3 3-3 3M12 15h5"/>',
   },
   {
@@ -97,8 +101,9 @@ const APPS = [
     name: "Handbook",
     subtitle: "/ how-to",
     section: "tools",
-    width: 560,
-    height: 400,
+    width: 760,
+    height: 560,
+    render: renderHandbook, // js/handbook.js
     icon: '<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/>',
   },
   {
@@ -111,6 +116,8 @@ const APPS = [
     icon: '<path d="M6 3h9l4 4v14H6z"/><path d="M9 13l2 2 4-4"/>',
   },
 ];
+
+const DOCK_APPS = APPS.filter((app) => app.visible !== false);
 
 // The exit button sits at the bottom of the dock. It is not an app (it opens no window),
 // so it lives here on its own, but it uses the same icon style.

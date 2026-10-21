@@ -56,8 +56,17 @@ function getWindowState(appId) {
 // Creates a new window for an app, puts it on the desktop and focuses it.
 // Only one window per app: if it is already open, it is just brought back.
 function openWindow(appId) {
-  const app = getApp(appId);
+  openWindowForApp(getApp(appId));
+}
+
+// Opens a standalone window that is not part of the dock app registry.
+function openAuxiliaryWindow(app) {
+  openWindowForApp(app);
+}
+
+function openWindowForApp(app) {
   if (!app) return;
+  const appId = app.id;
 
   if (wm.windows.has(appId)) {
     restoreWindow(appId);
