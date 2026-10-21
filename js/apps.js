@@ -15,8 +15,9 @@ const APPS = [
     name: "Mail",
     subtitle: "/ inbox",
     section: "apps",
-    width: 640,
-    height: 440,
+    width: 520,
+    height: 370,
+    render: renderMail, // js/mail.js
     icon: '<rect x="3" y="5" width="18" height="14"/><path d="M3 7l9 6 9-6"/>',
   },
   {
