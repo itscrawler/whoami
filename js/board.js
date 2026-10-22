@@ -314,7 +314,7 @@ function renderEvidenceBoard(container) {
         window.CASE_PROGRESS.reportEvidence.add(id);
       }
       saveCaseProgress();
-      renderCards();
+      window.dispatchEvent(new Event("case-report-evidence-change"));
       return;
     }
 
@@ -338,6 +338,7 @@ function renderEvidenceBoard(container) {
   });
 
   window.addEventListener("case-evidence-found", renderCards);
+  window.addEventListener("case-report-evidence-change", renderCards);
   window.addEventListener("resize", () => drawThreads());
   if ("ResizeObserver" in window) {
     new ResizeObserver(() => drawThreads()).observe(cards);

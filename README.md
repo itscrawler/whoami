@@ -17,7 +17,7 @@ You play as **WHOAMI** — an anonymous hacker who takes jobs on closed forums. 
 - **Saved case progress** — discovered evidence, resident dossiers, unlocked access, downloads, and open apps persist in browser storage.
 - **Fictional cases in real places** — real US cities, fictional service brands, fictional people and companies.
 - **Twisty cases** — several suspects with motives, red herrings that make sense in the end, evidence spread across many apps.
-- **Graded reports** — at the end you file a report: who, where, when, how, and up to five pieces of evidence. You get a score (0–100%) and a grade from A+ to F, plus one of several endings.
+- **Graded reports** — identify who, when, where, and reconstruct the chain of events with missing links; support it with 2–5 discovered clues. Each field is scored, a wrong culprit caps the grade at D, and your result selects an ending. Review the breakdown or replay the case.
 
 ## Cases
 
@@ -65,7 +65,7 @@ npx serve .
 - [ ] Database app (people search)
 - [ ] Mail, map, cameras, terminal
 - [ ] Case 535 fully playable
-- [ ] Report form and grading
+- [x] Report form, grading, endings and replay
 - [ ] Website with case selection, difficulty and best scores
 - [ ] Later: Unity version and desktop release
 

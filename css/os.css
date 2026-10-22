@@ -2044,6 +2044,339 @@ body.is-resizing * {
   text-align: center;
 }
 
+/* ---------- Final case report ---------- */
+
+.report-app {
+  min-height: 100%;
+  padding: 22px;
+  background:
+    radial-gradient(ellipse at top right, #ff6a0012, transparent 45%),
+    var(--bg);
+  color: var(--text);
+}
+
+.report-result {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.report-form {
+  width: 100%;
+}
+
+.report-header {
+  margin-bottom: 26px;
+}
+
+.report-eyebrow {
+  margin: 0 0 5px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.report-title,
+.report-result-headline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 1.05;
+}
+
+.report-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.report-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.report-field-label {
+  line-height: 1.45;
+}
+
+.report-select,
+.report-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 0;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  color-scheme: dark;
+}
+
+.report-select:focus,
+.report-input:focus {
+  border-color: var(--accent);
+  outline: 1px solid var(--accent);
+}
+
+.report-section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 28px 0 14px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--border);
+}
+
+.report-section-heading h3,
+.report-review h3 {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 24px;
+}
+
+.report-section-heading > span {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.report-section-heading .is-invalid {
+  color: var(--accent);
+}
+
+.report-chain {
+  display: grid;
+  gap: 16px;
+}
+
+.report-evidence-options {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.report-evidence-option {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 13px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.report-evidence-option.is-selected {
+  border-color: var(--accent);
+  background: #ff6a0010;
+}
+
+.report-evidence-checkbox {
+  flex: 0 0 auto;
+  margin: 2px 0 0;
+  accent-color: var(--accent);
+}
+
+.report-evidence-copy {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+  color: var(--text);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.report-evidence-copy small {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.report-empty-evidence,
+.report-validation {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.report-validation {
+  margin-top: 12px;
+  color: var(--accent);
+}
+
+.report-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.report-submit,
+.report-secondary {
+  min-height: 44px;
+  padding: 9px 18px;
+  border: 1px solid var(--accent);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.report-submit {
+  background: var(--accent);
+  color: #171819;
+  font-weight: 600;
+}
+
+.report-secondary {
+  background: transparent;
+  color: var(--text);
+}
+
+.report-result {
+  padding: 18px;
+  background: #17191b;
+  border: 1px solid var(--border);
+}
+
+.report-result-headline {
+  max-width: 620px;
+}
+
+.report-score {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 18px 0;
+  padding: 12px;
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+}
+
+.report-score > strong {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 1;
+}
+
+.report-grade {
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.report-ending-body,
+.report-ending-followup {
+  margin: 12px 0;
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.report-ending-message {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  background: var(--surface);
+  border-left: 2px solid var(--border-strong);
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.report-message-from {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.report-review {
+  margin-top: 24px;
+}
+
+.report-review h3 {
+  margin-bottom: 10px;
+}
+
+.report-result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+
+.report-result-copy {
+  display: grid;
+  gap: 3px;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.report-result-copy span {
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.report-result-points {
+  flex: 0 0 auto;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.report-result-row.is-correct .report-result-points {
+  color: #8fcf9b;
+}
+
+.report-ending-bad .report-result-headline {
+  color: #f08a71;
+}
+
+.report-ending-mid .report-result-headline {
+  color: #e4bd69;
+}
+
+.report-ending-good .report-result-headline {
+  color: #8fcf9b;
+}
+
+@media (max-width: 640px) {
+  .report-app {
+    padding: 14px;
+  }
+
+  .report-fields,
+  .report-evidence-options {
+    grid-template-columns: 1fr;
+  }
+
+  .report-field-wide {
+    grid-column: auto;
+  }
+
+  .report-result {
+    padding: 12px;
+  }
+}
+
 /* ---------- Public web browser ---------- */
 
 .browser-app {
@@ -2619,7 +2952,7 @@ body.is-resizing * {
   background: #171a1ccc;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   cursor: pointer;
   transform: translate(-50%, -50%);
@@ -2715,7 +3048,7 @@ body.is-resizing * {
   border: 1px solid var(--border);
   color: var(--text);
   font: inherit;
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.4;
   text-align: left;
   cursor: pointer;
@@ -2765,7 +3098,7 @@ body.is-resizing * {
 
   .case-map-layer {
     padding: 0 5px;
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .case-map-detail {

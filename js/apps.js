@@ -115,8 +115,9 @@ const APPS = [
     name: "Report",
     subtitle: "/ draft",
     section: "tools",
-    width: 560,
-    height: 400,
+    width: 760,
+    height: 680,
+    render: renderReport,
     icon: '<path d="M6 3h9l4 4v14H6z"/><path d="M9 13l2 2 4-4"/>',
   },
 ];

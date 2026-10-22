@@ -21,6 +21,8 @@ window.CASE_PROGRESS = {
   evidenceThreads: [],
   evidencePositions: new Map(),
   evidenceBoardHintSeen: false,
+  reportDraft: {},
+  reportSubmission: null,
   terminalHistory: [],
   wordlist: new Map(),
   crackedArchives: new Set(),
@@ -53,6 +55,8 @@ function saveCaseProgress() {
       evidenceThreads: window.CASE_PROGRESS.evidenceThreads,
       evidencePositions: [...window.CASE_PROGRESS.evidencePositions],
       evidenceBoardHintSeen: window.CASE_PROGRESS.evidenceBoardHintSeen,
+      reportDraft: window.CASE_PROGRESS.reportDraft,
+      reportSubmission: window.CASE_PROGRESS.reportSubmission,
       terminalHistory: window.CASE_PROGRESS.terminalHistory,
       wordlist: [...window.CASE_PROGRESS.wordlist],
       crackedArchives: [...window.CASE_PROGRESS.crackedArchives],
@@ -114,6 +118,14 @@ function restoreCaseProgress(data) {
       : []
   );
   window.CASE_PROGRESS.evidenceBoardHintSeen = saved.evidenceBoardHintSeen === true;
+  window.CASE_PROGRESS.reportDraft =
+    saved.reportDraft && typeof saved.reportDraft === "object" && !Array.isArray(saved.reportDraft)
+      ? saved.reportDraft
+      : {};
+  window.CASE_PROGRESS.reportSubmission =
+    saved.reportSubmission && typeof saved.reportSubmission === "object" && !Array.isArray(saved.reportSubmission)
+      ? saved.reportSubmission
+      : null;
   window.CASE_PROGRESS.terminalHistory.length = 0;
   if (Array.isArray(saved.terminalHistory)) {
     saved.terminalHistory
