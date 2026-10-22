@@ -56,7 +56,7 @@ function renderHandbook(container) {
         "ACCESS: scan <target> reports access requirements; connect <target> opens a simulated target after scanning and connecting the VPN; login <service> <account> <password> checks discovered credentials; logout ends account sessions; disconnect closes the target connection.",
         "WORDLIST: wordlist add <word> adds a clue you found; wordlist show lists your collected clues; crack <archive> --wordlist mine checks only those clues, never an automatic or external password list.",
         "PHONE: Open Phone in the dock to browse case messages, social posts, email, and device records. Locked records require the matching terminal connection or account session.",
-        "PHONE ACCESS: scan phone → vpn connect NYC-07 → connect phone unlocks carrier records. Find Mia's Google credentials in case evidence, then use login google <account> <password> for her message backup and email.",
+        "PHONE ACCESS: scan phone → vpn connect NYC-07 → connect phone unlocks carrier records. Find Mia's Nimbus credentials in case evidence, then use login nimbus <account> <password> for her message backup and email.",
         "PHONE RECORDS: towers <number> [--date YYYY-MM-DD] shows an available tower log, optionally filtered by date; calls shows downloaded call logs when present; sms shows downloaded text conversations. hack [target] gives a hint for the simulated access flow.",
         "sudo and rm -rf / are harmless jokes; they do not execute system commands.",
       ],

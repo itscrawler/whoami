@@ -1,7 +1,7 @@
 [
   {
     "id": "ev-google-login-alert",
-    "title": "Google sign-in alert",
+    "title": "Nimbus sign-in alert",
     "app": "mail",
     "source": "Attached by Jake",
     "timestamp": "2026-10-12T03:14:00-04:00",
@@ -15,9 +15,9 @@
     "weight": "none",
     "content": {
       "type": "email",
-      "from": "no-reply@accounts.google.com",
-      "to": "jake.holt.garage@gmail.com",
-      "subject": "Security alert for mia.holt95@gmail.com",
+      "from": "no-reply@accounts.nimbusmail.com",
+      "to": "jake.holt.garage@nimbusmail.com",
+      "subject": "Security alert for mia.holt95@nimbusmail.com",
       "body": "New sign-in on Windows PC.\nLocation: unknown (VPN)\nTime: Oct 12, 2026, 3:12 AM\nIf this wasn't you, secure the account."
     }
   },
@@ -39,11 +39,11 @@
       "leakedOn": "2026-10-03",
       "match": {
         "username": "miareads",
-        "email": "mia.holt95@gmail.com",
+        "email": "mia.holt95@nimbusmail.com",
         "password": "mia1403!"
       }
     },
-    "designNote": "Mia reused this password for Google. The player follows the same path as the killer."
+    "designNote": "Mia reused this password for Nimbus. The player follows the same path as the killer."
   },
   {
     "id": "ev-police-file",
@@ -54,7 +54,11 @@
       "target": "nypd-archive"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan police", "connect police"],
+    "needs": [
+      "vpn connect NYC-07",
+      "scan police",
+      "connect police"
+    ],
     "needFoundIn": [],
     "hint": "The police archive is reachable from the terminal with the police alias after connecting to the NYC VPN.",
     "people": [
@@ -72,7 +76,10 @@
       "lastPhoneSignal": {
         "time": "2019-11-08T23:47:00-05:00",
         "tower": "TWR-118 Marine Parkway–Gil Hodges Memorial Bridge",
-        "coordinates": [-73.8855, 40.5735]
+        "coordinates": [
+          -73.8855,
+          40.5735
+        ]
       },
       "interviews": [
         "ethan-brooks",
@@ -85,12 +92,12 @@
   },
   {
     "id": "ev-google-security-log",
-    "title": "Google account activity",
+    "title": "Nimbus account activity",
     "app": "cloud",
     "access": {
       "type": "login",
-      "service": "google",
-      "account": "mia.holt95@gmail.com",
+      "service": "nimbus",
+      "account": "mia.holt95@nimbusmail.com",
       "password": "mia1403!"
     },
     "people": [
@@ -126,8 +133,8 @@
     "app": "cloud",
     "access": {
       "type": "login",
-      "service": "google",
-      "account": "mia.holt95@gmail.com"
+      "service": "nimbus",
+      "account": "mia.holt95@nimbusmail.com"
     },
     "people": [
       "mia-holt"
@@ -167,7 +174,7 @@
     "app": "cloud",
     "access": {
       "type": "login",
-      "service": "google"
+      "service": "nimbus"
     },
     "people": [
       "mia-holt"
@@ -186,7 +193,7 @@
     "app": "social",
     "access": {
       "type": "public",
-      "platform": "Facebook"
+      "platform": "TownSquare"
     },
     "people": [
       "linda-holt",
@@ -195,7 +202,7 @@
     "weight": "none",
     "content": {
       "type": "post",
-      "platform": "Facebook",
+      "platform": "TownSquare",
       "author": "linda-holt",
       "date": "2018-05-19",
       "text": "Today we lost our Biscuit. He was with us since 2011. Mia has been crying all evening. Run free, good boy."
@@ -261,8 +268,8 @@
     "timestamp": "2019-11-08T17:48:00-05:00",
     "access": {
       "type": "login",
-      "service": "gmail",
-      "account": "mia.holt95@gmail.com"
+      "service": "nimbus",
+      "account": "mia.holt95@nimbusmail.com"
     },
     "people": [
       "mia-holt",
@@ -271,7 +278,7 @@
     "weight": "weak",
     "content": {
       "type": "email",
-      "from": "mia.holt95@gmail.com",
+      "from": "mia.holt95@nimbusmail.com",
       "to": "r.moore@kingscountyledger.news",
       "subject": "Bloom app user data",
       "body": "Hi Ms. Moore,\n\nI work at Veridia Health. I have proof that data from the Bloom app, including pregnancy data, is being sold to a data broker that resells it to insurance companies. I don't think management knows. Someone inside is doing it.\n\nCan we meet? Please don't contact me at work.\n\nMia"
@@ -284,7 +291,7 @@
     "timestamp": "2019-11-08T19:02:00-05:00",
     "access": {
       "type": "login",
-      "service": "gmail"
+      "service": "nimbus"
     },
     "people": [
       "rachel-moore",
@@ -294,7 +301,7 @@
     "content": {
       "type": "email",
       "from": "r.moore@kingscountyledger.news",
-      "to": "mia.holt95@gmail.com",
+      "to": "mia.holt95@nimbusmail.com",
       "subject": "Re: Bloom app user data",
       "body": "Mia, thank you. This is serious. Let's meet on Monday, 10am, Morning Tide café. Bring what you can. — Rachel"
     }
@@ -305,7 +312,7 @@
     "app": "phone",
     "access": {
       "type": "login",
-      "service": "google",
+      "service": "nimbus",
       "detail": "messages backup"
     },
     "people": [
@@ -351,8 +358,8 @@
     "app": "phone",
     "access": {
       "type": "login",
-      "service": "google",
-      "detail": "Google Fit / device backup"
+      "service": "nimbus",
+      "detail": "Nimbus Fit / device backup"
     },
     "people": [
       "mia-holt"
@@ -394,8 +401,14 @@
       "target": "carrier"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan phone", "connect phone"],
-    "needFoundIn": ["people:mia-holt"],
+    "needs": [
+      "vpn connect NYC-07",
+      "scan phone",
+      "connect phone"
+    ],
+    "needFoundIn": [
+      "people:mia-holt"
+    ],
     "hint": "Mia's carrier records are behind the phone target. Use the number in her profile and connect through the NYC VPN.",
     "people": [
       "mia-holt"
@@ -408,32 +421,50 @@
         {
           "time": "2019-11-08T22:57:00-05:00",
           "tower": "TWR-044 Linden St, Bushwick",
-          "coordinates": [-73.9205, 40.6992]
+          "coordinates": [
+            -73.9205,
+            40.6992
+          ]
         },
         {
           "time": "2019-11-08T23:03:00-05:00",
           "tower": "TWR-071 Flatbush",
-          "coordinates": [-73.9300, 40.6600]
+          "coordinates": [
+            -73.93,
+            40.66
+          ]
         },
         {
           "time": "2019-11-08T23:09:00-05:00",
           "tower": "TWR-093 Floyd Bennett Field",
-          "coordinates": [-73.8905, 40.5905]
+          "coordinates": [
+            -73.8905,
+            40.5905
+          ]
         },
         {
           "time": "2019-11-08T23:38:00-05:00",
           "tower": "TWR-093 Floyd Bennett Field",
-          "coordinates": [-73.8905, 40.5905]
+          "coordinates": [
+            -73.8905,
+            40.5905
+          ]
         },
         {
           "time": "2019-11-08T23:44:00-05:00",
           "tower": "TWR-102 Marine Park",
-          "coordinates": [-73.9340, 40.6080]
+          "coordinates": [
+            -73.934,
+            40.608
+          ]
         },
         {
           "time": "2019-11-08T23:47:00-05:00",
           "tower": "TWR-118 Marine Parkway–Gil Hodges Memorial Bridge",
-          "coordinates": [-73.8855, 40.5735]
+          "coordinates": [
+            -73.8855,
+            40.5735
+          ]
         }
       ]
     },
@@ -441,11 +472,11 @@
   },
   {
     "id": "ev-walter-cam",
-    "title": "\"Window on Linden St\" recording, 2019-11-08",
+    "title": "ViewTube: \"Window on Linden St\" recording, 2019-11-08",
     "app": "cameras",
     "access": {
       "type": "public",
-      "where": "Walter's website archive"
+      "where": "ViewTube, linked from Walter's website archive"
     },
     "people": [
       "walter-green",
@@ -455,6 +486,7 @@
     "weight": "key",
     "content": {
       "type": "video",
+      "platform": "ViewTube",
       "camera": "Window on Linden St",
       "clips": [
         {
@@ -478,13 +510,19 @@
     "app": "messenger",
     "access": {
       "type": "hack",
-      "target": "whatsapp",
+      "target": "chatterbox",
       "account": "ethan-brooks"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan whatsapp", "connect whatsapp"],
-    "needFoundIn": ["people:ethan-brooks"],
-    "hint": "The group photo is in Ethan's WhatsApp account; his profile identifies the account.",
+    "needs": [
+      "vpn connect NYC-07",
+      "scan chatterbox",
+      "connect chatterbox"
+    ],
+    "needFoundIn": [
+      "people:ethan-brooks"
+    ],
+    "hint": "The group photo is in Ethan's Chatterbox account; his profile identifies the account.",
     "people": [
       "mark-dellinger",
       "ethan-brooks"
@@ -511,13 +549,19 @@
     "app": "messenger",
     "access": {
       "type": "hack",
-      "target": "whatsapp",
+      "target": "chatterbox",
       "account": "ethan-brooks"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan whatsapp", "connect whatsapp"],
-    "needFoundIn": ["people:ethan-brooks"],
-    "hint": "Ethan's message history is in the same WhatsApp account as the Brooklyn Aces chat.",
+    "needs": [
+      "vpn connect NYC-07",
+      "scan chatterbox",
+      "connect chatterbox"
+    ],
+    "needFoundIn": [
+      "people:ethan-brooks"
+    ],
+    "hint": "Ethan's message history is in the same Chatterbox account as the Brooklyn Aces chat.",
     "people": [
       "tony-russo",
       "ethan-brooks"
@@ -544,9 +588,15 @@
       "target": "veridia-backup"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan veridia-backup", "connect veridia-backup"],
-    "needFoundIn": ["people:mia-holt"],
-    "hint": "The company archive is separate from Mia's Google account; look for Veridia records on the terminal target.",
+    "needs": [
+      "vpn connect NYC-07",
+      "scan veridia-backup",
+      "connect veridia-backup"
+    ],
+    "needFoundIn": [
+      "people:mia-holt"
+    ],
+    "hint": "The company archive is separate from Mia's Nimbus account; look for Veridia records on the terminal target.",
     "people": [
       "daniel-kerr",
       "owen-lind",
@@ -571,8 +621,14 @@
       "target": "veridia-backup"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan veridia-backup", "connect veridia-backup"],
-    "needFoundIn": ["people:mia-holt"],
+    "needs": [
+      "vpn connect NYC-07",
+      "scan veridia-backup",
+      "connect veridia-backup"
+    ],
+    "needFoundIn": [
+      "people:mia-holt"
+    ],
     "hint": "The agreement is stored in Veridia's restricted company archive.",
     "people": [
       "daniel-kerr",
@@ -595,8 +651,14 @@
       "target": "veridia-backup"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan veridia-backup", "connect veridia-backup"],
-    "needFoundIn": ["people:mia-holt"],
+    "needs": [
+      "vpn connect NYC-07",
+      "scan veridia-backup",
+      "connect veridia-backup"
+    ],
+    "needFoundIn": [
+      "people:mia-holt"
+    ],
     "hint": "Look in Veridia's restricted company archive for internal business files.",
     "people": [
       "daniel-kerr"
@@ -632,11 +694,11 @@
   },
   {
     "id": "ev-kerr-dinner-photo",
-    "title": "Melissa Kerr's Instagram post",
+    "title": "Melissa Kerr's Picto post",
     "app": "social",
     "access": {
       "type": "public",
-      "platform": "Instagram"
+      "platform": "Picto"
     },
     "people": [
       "melissa-kerr",
@@ -645,7 +707,7 @@
     "weight": "none",
     "content": {
       "type": "post",
-      "platform": "Instagram",
+      "platform": "Picto",
       "author": "melissa-kerr",
       "date": "2019-11-08T22:47:00-05:00",
       "text": "Evening with the best people. Go Veridia! 🥂",
@@ -663,8 +725,14 @@
       "target": "veridia-backup"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan veridia-backup", "connect veridia-backup"],
-    "needFoundIn": ["people:mia-holt"],
+    "needs": [
+      "vpn connect NYC-07",
+      "scan veridia-backup",
+      "connect veridia-backup"
+    ],
+    "needFoundIn": [
+      "people:mia-holt"
+    ],
     "hint": "The endpoint-monitoring logs are stored in Veridia's company archive.",
     "people": [
       "owen-lind",
@@ -695,15 +763,21 @@
   },
   {
     "id": "ev-slack-mia-owen",
-    "title": "Slack: Mia and Owen",
+    "title": "Teamspace: Mia and Owen",
     "app": "veridia",
     "access": {
       "type": "hack",
       "target": "veridia-backup"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan veridia-backup", "connect veridia-backup"],
-    "needFoundIn": ["people:mia-holt"],
+    "needs": [
+      "vpn connect NYC-07",
+      "scan veridia-backup",
+      "connect veridia-backup"
+    ],
+    "needFoundIn": [
+      "people:mia-holt"
+    ],
     "hint": "Mia's work messages with Owen are in Veridia's internal archive.",
     "people": [
       "mia-holt",
@@ -712,7 +786,7 @@
     "weight": "key",
     "content": {
       "type": "chat",
-      "platform": "Slack",
+      "platform": "Teamspace",
       "messages": [
         {
           "time": "2019-11-08T19:40:00-05:00",
@@ -734,15 +808,21 @@
   },
   {
     "id": "ev-priya-slack",
-    "title": "Slack: Mia and Priya",
+    "title": "Teamspace: Mia and Priya",
     "app": "veridia",
     "access": {
       "type": "hack",
       "target": "veridia-backup"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan veridia-backup", "connect veridia-backup"],
-    "needFoundIn": ["people:mia-holt"],
+    "needs": [
+      "vpn connect NYC-07",
+      "scan veridia-backup",
+      "connect veridia-backup"
+    ],
+    "needFoundIn": [
+      "people:mia-holt"
+    ],
     "hint": "Mia's work messages with Priya are in Veridia's internal archive.",
     "people": [
       "mia-holt",
@@ -751,7 +831,7 @@
     "weight": "weak",
     "content": {
       "type": "chat",
-      "platform": "Slack",
+      "platform": "Teamspace",
       "messages": [
         {
           "time": "2019-11-05T16:12:00-05:00",
@@ -795,17 +875,23 @@
   },
   {
     "id": "ev-steam-activity",
-    "title": "Steam: 0wl activity",
-    "app": "steam",
+    "title": "GamePort: 0wl activity",
+    "app": "gameport",
     "access": {
       "type": "hack",
-      "target": "steam",
+      "target": "gameport",
       "account": "0wl"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan steam", "connect steam"],
-    "needFoundIn": ["people:owen-lind"],
-    "hint": "Owen's activity log is in the Steam account listed on his profile.",
+    "needs": [
+      "vpn connect NYC-07",
+      "scan gameport",
+      "connect gameport"
+    ],
+    "needFoundIn": [
+      "people:owen-lind"
+    ],
+    "hint": "Owen's activity log is in the GamePort account listed on his profile.",
     "people": [
       "owen-lind"
     ],
@@ -835,17 +921,24 @@
   },
   {
     "id": "ev-trevor-steam-chat",
-    "title": "Steam chat: Trevor and Owen",
-    "app": "steam",
+    "title": "GamePort chat: Trevor and Owen",
+    "app": "gameport",
     "access": {
       "type": "hack",
-      "target": "steam",
+      "target": "gameport",
       "account": "0wl"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan steam", "connect steam"],
-    "needFoundIn": ["people:owen-lind", "people:trevor-nguyen"],
-    "hint": "The chat is in Owen's Steam account; compare it with the neighbor's account of that night.",
+    "needs": [
+      "vpn connect NYC-07",
+      "scan gameport",
+      "connect gameport"
+    ],
+    "needFoundIn": [
+      "people:owen-lind",
+      "people:trevor-nguyen"
+    ],
+    "hint": "The chat is in Owen's GamePort account; compare it with the neighbor's account of that night.",
     "people": [
       "trevor-nguyen",
       "owen-lind"
@@ -853,7 +946,7 @@
     "weight": "weak",
     "content": {
       "type": "chat",
-      "platform": "Steam",
+      "platform": "GamePort",
       "messages": [
         {
           "time": "2019-11-08T22:31:00-05:00",
@@ -870,23 +963,29 @@
   },
   {
     "id": "ev-lime-ride",
-    "title": "Lime ride history: Owen Lind",
-    "app": "lime",
+    "title": "ZipScoot ride history: Owen Lind",
+    "app": "zipscoot",
     "access": {
       "type": "hack",
-      "target": "lime"
+      "target": "zipscoot"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan lime", "connect lime"],
-    "needFoundIn": ["people:owen-lind"],
-    "hint": "Owen's scooter history is in the Lime account listed on his profile.",
+    "needs": [
+      "vpn connect NYC-07",
+      "scan zipscoot",
+      "connect zipscoot"
+    ],
+    "needFoundIn": [
+      "people:owen-lind"
+    ],
+    "hint": "Owen's scooter history is in the ZipScoot account listed on his profile.",
     "people": [
       "owen-lind"
     ],
     "weight": "key",
     "content": {
       "type": "log",
-      "account": "owen.lind@gmail.com",
+      "account": "owen.lind@nimbusmail.com",
       "entries": [
         {
           "time": "2019-11-09T00:04:00-05:00",
@@ -901,16 +1000,22 @@
   },
   {
     "id": "ev-jamal-lime-log",
-    "title": "Lime maintenance log",
-    "app": "lime",
+    "title": "ZipScoot maintenance log",
+    "app": "zipscoot",
     "access": {
       "type": "hack",
-      "target": "lime"
+      "target": "zipscoot"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan lime", "connect lime"],
-    "needFoundIn": ["people:owen-lind"],
-    "hint": "Lime's maintenance record identifies the scooter from Owen's ride history.",
+    "needs": [
+      "vpn connect NYC-07",
+      "scan zipscoot",
+      "connect zipscoot"
+    ],
+    "needFoundIn": [
+      "people:owen-lind"
+    ],
+    "hint": "ZipScoot's maintenance record identifies the scooter from Owen's ride history.",
     "people": [
       "jamal-williams"
     ],
@@ -927,11 +1032,11 @@
   },
   {
     "id": "ev-strava-walk",
-    "title": "Strava: \"Evening Walk\"",
-    "app": "strava",
+    "title": "TrailTrack: \"Evening Walk\"",
+    "app": "trailtrack",
     "access": {
       "type": "public",
-      "platform": "Strava",
+      "platform": "TrailTrack",
       "handle": "@owenruns"
     },
     "people": [
@@ -940,7 +1045,7 @@
     "weight": "key",
     "content": {
       "type": "activity",
-      "platform": "Strava",
+      "platform": "TrailTrack",
       "author": "owen-lind",
       "name": "Evening Walk",
       "start": "2019-11-08T23:14:00-05:00",
@@ -953,11 +1058,11 @@
   },
   {
     "id": "ev-craigslist-monitor",
-    "title": "Craigslist: \"Selling gaming monitor\"",
+    "title": "SwapMeet: \"Selling gaming monitor\"",
     "app": "web",
     "access": {
       "type": "public",
-      "platform": "Craigslist"
+      "platform": "SwapMeet"
     },
     "people": [
       "owen-lind"
@@ -965,7 +1070,7 @@
     "weight": "weak",
     "content": {
       "type": "ad",
-      "platform": "Craigslist",
+      "platform": "SwapMeet",
       "date": "2025-03-08",
       "title": "27\" 144Hz gaming monitor — $120",
       "body": "Barely used. Pick up in Gerritsen Beach. Text only.",
@@ -982,9 +1087,15 @@
       "number": "(718) 555-0187"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan phone", "connect phone"],
-    "needFoundIn": ["ev-google-security-log"],
-    "hint": "This number appears in the failed recovery-phone change in Mia's Google activity log.",
+    "needs": [
+      "vpn connect NYC-07",
+      "scan phone",
+      "connect phone"
+    ],
+    "needFoundIn": [
+      "ev-google-security-log"
+    ],
+    "hint": "This number appears in the failed recovery-phone change in Mia's Nimbus activity log.",
     "people": [
       "nick-kowalski",
       "owen-lind"
@@ -1008,11 +1119,11 @@
   },
   {
     "id": "ev-find-mia-group",
-    "title": "\"Find Mia\" Facebook group",
+    "title": "\"Find Mia\" TownSquare group",
     "app": "social",
     "access": {
       "type": "public",
-      "platform": "Facebook"
+      "platform": "TownSquare"
     },
     "people": [
       "owen-lind",
@@ -1022,7 +1133,7 @@
     "weight": "none",
     "content": {
       "type": "posts",
-      "platform": "Facebook",
+      "platform": "TownSquare",
       "posts": [
         {
           "date": "2019-11-12",
@@ -1051,7 +1162,11 @@
       "target": "nypd-archive"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan police", "connect police"],
+    "needs": [
+      "vpn connect NYC-07",
+      "scan police",
+      "connect police"
+    ],
     "needFoundIn": [],
     "hint": "The patrol report is in the NYPD archive; connect to the police target in the terminal.",
     "people": [
@@ -1075,7 +1190,11 @@
       "target": "nypd-archive"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan police", "connect police"],
+    "needs": [
+      "vpn connect NYC-07",
+      "scan police",
+      "connect police"
+    ],
     "needFoundIn": [],
     "hint": "Witness statements are kept in the NYPD archive.",
     "people": [
@@ -1097,7 +1216,11 @@
       "target": "nypd-archive"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan police", "connect police"],
+    "needs": [
+      "vpn connect NYC-07",
+      "scan police",
+      "connect police"
+    ],
     "needFoundIn": [],
     "hint": "Witness statements are kept in the NYPD archive.",
     "people": [
@@ -1119,7 +1242,11 @@
       "target": "nypd-archive"
     },
     "method": "hack",
-    "needs": ["vpn connect NYC-07", "scan police", "connect police"],
+    "needs": [
+      "vpn connect NYC-07",
+      "scan police",
+      "connect police"
+    ],
     "needFoundIn": [],
     "hint": "Detective Reyes' case notes are in the NYPD archive.",
     "people": [
@@ -1135,11 +1262,11 @@
   },
   {
     "id": "ev-heather-nextdoor",
-    "title": "Nextdoor post: car at Dead Horse Bay",
+    "title": "Blockline post: car at Dead Horse Bay",
     "app": "social",
     "access": {
       "type": "public",
-      "platform": "Nextdoor"
+      "platform": "Blockline"
     },
     "people": [
       "heather-klein"
@@ -1147,7 +1274,7 @@
     "weight": "weak",
     "content": {
       "type": "post",
-      "platform": "Nextdoor",
+      "platform": "Blockline",
       "author": "heather-klein",
       "date": "2019-11-09",
       "text": "Someone was driving around Dead Horse Bay again last night. Around 11pm a car was parked with its lights off. Teenagers?"
@@ -1155,11 +1282,11 @@
   },
   {
     "id": "ev-kyle-linkedin",
-    "title": "Kyle Bennett on LinkedIn",
+    "title": "Kyle Bennett on WorkNet",
     "app": "social",
     "access": {
       "type": "public",
-      "platform": "LinkedIn"
+      "platform": "WorkNet"
     },
     "people": [
       "kyle-bennett",
@@ -1168,7 +1295,7 @@
     "weight": "none",
     "content": {
       "type": "post",
-      "platform": "LinkedIn",
+      "platform": "WorkNet",
       "author": "kyle-bennett",
       "date": "2019-10-30",
       "text": "After two years I'm leaving Veridia Health. I disagreed with how the company counts its users. Proud of the team, though."
@@ -1176,11 +1303,11 @@
   },
   {
     "id": "ev-mia-instagram",
-    "title": "Mia Holt on Instagram",
+    "title": "Mia Holt on Picto",
     "app": "social",
     "access": {
       "type": "public",
-      "platform": "Instagram",
+      "platform": "Picto",
       "handle": "@mia.counts"
     },
     "people": [
@@ -1189,7 +1316,7 @@
     "weight": "none",
     "content": {
       "type": "post",
-      "platform": "Instagram",
+      "platform": "Picto",
       "author": "mia-holt",
       "date": "2019-11-02",
       "text": "Numbers don't lie. People do.",

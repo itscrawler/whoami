@@ -30,14 +30,14 @@ function renderPhone(container) {
 
   function draw() {
     const connected = window.CASE_ACCESS.connectedTargets.has("carrier");
-    const google = hasSession("google");
+    const nimbus = hasSession("nimbus");
     app.replaceChildren();
 
     const status = createEl("div", "phone-status");
     status.append(
       createEl("span", `phone-status-light${connected ? " is-connected" : ""}`),
       createEl("span", "", connected ? "DEVICE LINK ACTIVE" : "DEVICE NOT CONNECTED"),
-      createEl("span", "phone-status-account", google ? "GOOGLE · SIGNED IN" : "GOOGLE · SIGNED OUT"),
+      createEl("span", "phone-status-account", nimbus ? "NIMBUS · SIGNED IN" : "NIMBUS · SIGNED OUT"),
     );
 
     const nav = createEl("nav", "phone-nav");
@@ -59,11 +59,11 @@ function renderPhone(container) {
       createEl("span", "phone-section-count", String(entries.length).padStart(2, "0")),
     );
     content.appendChild(heading);
-    if (activeSection === "messages" && !connected && !google) {
+    if (activeSection === "messages" && !connected && !nimbus) {
       content.appendChild(createEl(
         "p",
         "phone-access-note",
-        "Use Terminal: scan phone → vpn connect NYC-07 → connect phone. Sign in to Mia's Google account to view message backups.",
+        "Use Terminal: scan phone → vpn connect NYC-07 → connect phone. Sign in to Mia's Nimbus account to view message backups.",
       ));
     }
 

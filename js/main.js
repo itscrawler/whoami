@@ -110,7 +110,14 @@ function restoreCaseProgress(data) {
       ? saved.sessions.filter((entry) =>
         Array.isArray(entry) && entry.length === 2 &&
         typeof entry[1]?.service === "string" && typeof entry[1]?.account === "string"
-      )
+      ).map(([key, session]) => {
+        const service = session.service.toLowerCase();
+        return [key, {
+          ...session,
+          service: ["google", "gmail", "nimbus mail"].includes(service) ? "nimbus" : session.service,
+          account: session.account.replace(/@gmail\.com$/i, "@nimbusmail.com"),
+        }];
+      })
       : []
   );
   return true;

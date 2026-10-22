@@ -9,7 +9,7 @@
     "birthplace": "Brooklyn, NY",
     "address": "418 Linden St, Apt 1B, Bushwick, Brooklyn, NY (until 2019)",
     "phone": "(718) 555-0142 (disconnected)",
-    "email": "mia.holt95@gmail.com",
+    "email": "mia.holt95@nimbusmail.com",
     "job": "Junior Data Analyst, Veridia Health (2018–2019)",
     "car": "2012 Honda Civic, silver, NY BKR-2187 (returned to family)",
     "family": [
@@ -28,24 +28,23 @@
     ],
     "social": [
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "@mia.counts",
         "note": "last post 2019-11-02"
       }
     ],
     "findings": [
       "Quiet and meticulous. Brooklyn College (CUNY), Mathematics & Statistics, 2017. Volunteered on weekends at the Second Chance animal shelter.",
-      "Instagram: coffee at work, the shelter, sunsets over the bay. Last post 2019-11-02: a dark office window at night, caption \"Numbers don't lie. People do.\"",
+      "Picto: coffee at work, the shelter, sunsets over the bay. Last post 2019-11-02: a dark office window at night, caption \"Numbers don't lie. People do.\"",
       "News 2019: \"Missing analyst searched for near Marine Parkway–Gil Hodges Memorial Bridge\", \"Search for Mia Holt called off\".",
       "Second Chance shelter: 2018 thank-you post to volunteers, Mia is on the list.",
-      "Google Photos: a dog photo with no name, caption \"My best friend ❤️\"."
+      "Nimbus Photos: a dog photo with no name, caption \"My best friend ❤️\"."
     ],
     "record": {
       "id": "P-06289",
       "address": "Brooklyn, NY",
       "status": "missing"
-}
-
+    }
   },
   {
     "id": "jake-holt",
@@ -57,7 +56,7 @@
     "birthplace": "Brooklyn, NY",
     "address": "77 Harbor View Rd, Apt 12, Brooklyn, NY",
     "phone": "(718) 555-0118",
-    "email": "jake.holt.garage@gmail.com",
+    "email": "jake.holt.garage@nimbusmail.com",
     "job": "Auto mechanic, Pine Auto Repair",
     "car": "2016 Ford F-150, dark blue, NY JKH-4410",
     "family": [
@@ -72,11 +71,11 @@
     ],
     "social": [
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "@jakeholt_fixes"
       },
       {
-        "platform": "Facebook",
+        "platform": "TownSquare",
         "handle": "admin of the group \"Find Mia\""
       }
     ],
@@ -102,7 +101,7 @@
     "birthplace": "Olympia, WA",
     "address": "1203 Cedar Hollow Ln, Brooklyn, NY (family home)",
     "phone": "(718) 555-0107",
-    "email": "linda.holt.books@gmail.com",
+    "email": "linda.holt.books@nimbusmail.com",
     "job": "School librarian, East Ridge High School",
     "car": "2014 Subaru Outback, green, NY LHB-0921",
     "family": [
@@ -121,13 +120,13 @@
     ],
     "social": [
       {
-        "platform": "Facebook",
+        "platform": "TownSquare",
         "handle": "public profile"
       }
     ],
     "findings": [
       "Signed an NDA with Daniel Kerr in exchange for \"family support\" after Mia disappeared. Still regrets it.",
-      "Facebook post, 2018: \"Today we lost our Biscuit. He was with us since 2011. Mia has been crying all evening…\" (password clue)",
+      "TownSquare post, 2018: \"Today we lost our Biscuit. He was with us since 2011. Mia has been crying all evening…\" (password clue)",
       "Posts every March 14, Mia's birthday.",
       "Photos from the school book fair."
     ],
@@ -135,7 +134,7 @@
       "id": "P-05729",
       "address": "Brooklyn, NY",
       "status": "alive"
-}
+    }
   },
   {
     "id": "richard-holt",
@@ -147,7 +146,7 @@
     "birthplace": "Boise, ID",
     "address": "Boise, Idaho",
     "phone": "(208) 555-0193",
-    "email": "rholt.trucking@gmail.com",
+    "email": "rholt.trucking@nimbusmail.com",
     "job": "Long-haul truck driver",
     "car": "Kenworth T680 (work truck)",
     "family": [
@@ -173,7 +172,7 @@
       "id": "P-07829",
       "address": "Boise, ID",
       "status": "alive"
-}
+    }
   },
   {
     "id": "ethan-brooks",
@@ -185,7 +184,7 @@
     "birthplace": "Brooklyn, NY",
     "address": "56 Mill St, Apt 4, Brooklyn, NY (since 2021)",
     "phone": "(718) 555-0133",
-    "email": "ethanbrooks.bar@gmail.com",
+    "email": "ethanbrooks.bar@nimbusmail.com",
     "job": "2019: bartender, The Rusty Anchor. 2026: bar manager, same place",
     "car": "2009 Dodge Charger (sold in 2020)",
     "family": [
@@ -196,21 +195,21 @@
     ],
     "social": [
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "@ethan_pours"
       }
     ],
     "findings": [
       "Dated Mia for a year and a half. Lied to the police that he was home that night.",
-      "Craigslist 2020: sold his Dodge Charger in a hurry, \"need cash\". Hint at debts.",
-      "WhatsApp group \"Brooklyn Aces\": 23:30 photo from Mark, Ethan is in the shot. Alibi.",
+      "SwapMeet 2020: sold his Dodge Charger in a hurry, \"need cash\". Hint at debts.",
+      "Chatterbox group \"Brooklyn Aces\": 23:30 photo from Mark, Ethan is in the shot. Alibi.",
       "Comment under Sam Wright's video: \"You don't know anything.\""
     ],
     "record": {
       "id": "P-08946",
       "address": "Brooklyn, NY",
       "status": "alive"
-},
+    },
     "spoiler": "Not the killer. Was hiding gambling debts and an underground poker game."
   },
   {
@@ -239,19 +238,19 @@
     ],
     "social": [
       {
-        "platform": "LinkedIn",
+        "platform": "WorkNet",
         "handle": "Daniel Kerr"
       },
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "@dankerr"
       }
     ],
     "findings": [
       "Founder of Veridia. Charismatic, loves talking about the company's \"mission\". Deleted Mia's work email the morning after and paid her family.",
       "News 2022: \"Veridia Health files for bankruptcy. Investors sue founder.\"",
-      "LinkedIn: \"Sometimes a startup is 99 failures and one truth.\" Liked by ex-employees, except Kyle Bennett.",
-      "Dinner with investors 2019-11-08 on Melissa's Instagram and Salt & Cedar's page. Alibi.",
+      "WorkNet: \"Sometimes a startup is 99 failures and one truth.\" Liked by ex-employees, except Kyle Bennett.",
+      "Dinner with investors 2019-11-08 on Melissa's Picto and Salt & Cedar's page. Alibi.",
       "Plate DKR-0001 — yes, he paid for it."
     ],
     "spoiler": "Not the killer. Faked user metrics for investors."
@@ -282,12 +281,12 @@
     ],
     "social": [
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "@melissa.kerr.home"
       }
     ],
     "findings": [
-      "Instagram post 2019-11-08 22:47: table at Salt & Cedar, \"Evening with the best people. Go Veridia!\" Daniel is in the photo. Confirms his alibi.",
+      "Picto post 2019-11-08 22:47: table at Salt & Cedar, \"Evening with the best people. Go Veridia!\" Daniel is in the photo. Confirms his alibi.",
       "Lots of photos of their home interior — clearly beyond a startup's means."
     ]
   },
@@ -306,7 +305,7 @@
     "birthplace": "Brooklyn, NY",
     "address": "421 Linden St, Bushwick, Brooklyn, NY (across from Mia)",
     "phone": "(718) 555-0161",
-    "email": "walt.birds@gmail.com",
+    "email": "walt.birds@nimbusmail.com",
     "job": "Retired, former ferry mechanic",
     "car": "1998 Buick LeSabre, maroon",
     "family": [
@@ -348,7 +347,7 @@
     "birthplace": "Spokane, WA",
     "address": "34 Gerritsen Ave, Gerritsen Beach, Brooklyn, NY",
     "phone": "(718) 555-0129; prepaid: (718) 555-0187",
-    "email": "owen.lind@gmail.com",
+    "email": "owen.lind@nimbusmail.com",
     "job": "2019: Head of IT & Security, Veridia Health. 2026: security consultant, Cascade Secure",
     "car": "2017 Toyota RAV4, gray, NY OWL-3327",
     "family": [
@@ -359,28 +358,28 @@
     ],
     "social": [
       {
-        "platform": "Strava",
+        "platform": "TrailTrack",
         "handle": "@owenruns"
       },
       {
-        "platform": "Steam",
+        "platform": "GamePort",
         "handle": "0wl"
       },
       {
-        "platform": "LinkedIn",
+        "platform": "WorkNet",
         "handle": "Owen Lind"
       },
       {
-        "platform": "Lime",
+        "platform": "ZipScoot",
         "handle": "account"
       }
     ],
     "findings": [
       "Friendly, \"one of the guys\", fixed everyone's laptops. Runs trails on weekends. In 2020 the city gave him an award for helping search for Mia Holt.",
-      "Strava @owenruns: dozens of runs, including at Dead Horse Bay — so the 2019-11-08 \"walk\" there doesn't look strange until you check the time (23:14).",
-      "Steam \"0wl\": shown online all night on 2019-11-08, but the activity log has a gap 22:00–00:40.",
-      "Lime: ride 00:04–00:31 from Marine Parkway–Gil Hodges Memorial Bridge to Gerritsen Beach.",
-      "Craigslist 2025: \"Selling gaming monitor\", number (718) 555-0187.",
+      "TrailTrack @owenruns: dozens of runs, including at Dead Horse Bay — so the 2019-11-08 \"walk\" there doesn't look strange until you check the time (23:14).",
+      "GamePort \"0wl\": shown online all night on 2019-11-08, but the activity log has a gap 22:00–00:40.",
+      "ZipScoot: ride 00:04–00:31 from Marine Parkway–Gil Hodges Memorial Bridge to Gerritsen Beach.",
+      "SwapMeet 2025: \"Selling gaming monitor\", number (718) 555-0187.",
       "News 2020: photo with the mayor and the award.",
       "\"Find Mia\" group: the most active member, posts \"the map of the phone's last location\"."
     ],
@@ -401,7 +400,7 @@
     "birthplace": "Spokane, WA",
     "address": "880 Orchard Way, Brooklyn, NY",
     "phone": "(718) 555-0170",
-    "email": "carol.lind60@gmail.com",
+    "email": "carol.lind60@nimbusmail.com",
     "job": "Retired, former nurse",
     "car": "2011 Honda CR-V, beige",
     "family": [
@@ -412,14 +411,14 @@
     ],
     "social": [
       {
-        "platform": "Facebook",
+        "platform": "TownSquare",
         "handle": "posts garden photos and her son"
       }
     ],
     "findings": [
       "Doesn't know a company is registered in her name and at her address. Her son \"asked her to sign some tax papers\".",
       "Business registry: OL Data Consulting LLC, owner Carol Lind, 880 Orchard Way.",
-      "Facebook, 2019: \"My Owen is helping the police again! So proud!\""
+      "TownSquare, 2019: \"My Owen is helping the police again! So proud!\""
     ]
   },
   {
@@ -443,14 +442,14 @@
     "family": [],
     "social": [
       {
-        "platform": "X",
+        "platform": "Pulse",
         "handle": "@rachelwrites"
       }
     ],
     "findings": [
       "Mia's email of 2019-11-08 and her reply \"Let's meet on Monday\".",
       "Her 2022 article on Veridia's bankruptcy — she never connected it to Mia.",
-      "X, 2019-11-11: \"Source didn't show up. It happens.\""
+      "Pulse, 2019-11-11: \"Source didn't show up. It happens.\""
     ]
   },
   {
@@ -468,18 +467,18 @@
     "birthplace": "Brooklyn, NY",
     "address": "Seattle, WA (moved 2020)",
     "phone": "(206) 555-0124",
-    "email": "priya.n@gmail.com",
+    "email": "priya.n@nimbusmail.com",
     "job": "Data analyst, Seattle",
     "car": "None",
     "family": [],
     "social": [
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "@priya.codes"
       }
     ],
     "findings": [
-      "Sat next to Mia. In Slack on 2019-11-05 Mia wrote to her: \"I found something really bad in the data. Can't say yet.\"",
+      "Sat next to Mia. In Teamspace on 2019-11-05 Mia wrote to her: \"I found something really bad in the data. Can't say yet.\"",
       "Anniversary post: \"She was always the last to leave. I still think I should have stayed with her that night.\""
     ]
   },
@@ -498,7 +497,7 @@
     "birthplace": "Boston, MA",
     "address": "Portland, OR",
     "phone": "(503) 555-0148",
-    "email": "kyle.bennett@gmail.com",
+    "email": "kyle.bennett@nimbusmail.com",
     "job": "Product manager at another company",
     "car": "2018 Volvo XC60",
     "family": [
@@ -509,12 +508,12 @@
     ],
     "social": [
       {
-        "platform": "LinkedIn",
+        "platform": "WorkNet",
         "handle": "Kyle Bennett"
       }
     ],
     "findings": [
-      "Left Veridia in October 2019. LinkedIn: \"Left because I disagreed with how the company counts its users.\" Hint at Kerr's fake metrics.",
+      "Left Veridia in October 2019. WorkNet: \"Left because I disagreed with how the company counts its users.\" Hint at Kerr's fake metrics.",
       "If contacted, replies: \"Ask Dan where Bloom got a million active users.\""
     ]
   },
@@ -544,13 +543,13 @@
     ],
     "social": [
       {
-        "platform": "LinkedIn",
+        "platform": "WorkNet",
         "handle": "Greg Holloway"
       }
     ],
     "findings": [
       "Listed as \"buyer contact\" in the spreadsheet from Mia's archive.",
-      "LinkedIn: \"Data is the new oil.\""
+      "WorkNet: \"Data is the new oil.\""
     ]
   },
   {
@@ -604,7 +603,7 @@
     "family": [],
     "social": [
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "@b.tate_"
       }
     ],
@@ -633,7 +632,7 @@
     "family": [],
     "social": [
       {
-        "platform": "WhatsApp",
+        "platform": "Chatterbox",
         "handle": "group \"Brooklyn Aces\""
       }
     ],
@@ -656,13 +655,13 @@
     "birthplace": "Brooklyn, NY",
     "address": "230 Pier Ave, Brooklyn, NY",
     "phone": "(718) 555-0151",
-    "email": "tonyr@gmail.com",
+    "email": "tonyr@nimbusmail.com",
     "job": "Delivery driver",
     "car": "2015 Nissan Altima",
     "family": [],
     "social": [
       {
-        "platform": "WhatsApp",
+        "platform": "Chatterbox",
         "handle": "group \"Brooklyn Aces\""
       }
     ],
@@ -715,7 +714,7 @@
     "birthplace": "Brooklyn, NY",
     "address": "1450 Westgate Blvd, Brooklyn, NY",
     "phone": "(718) 555-0114",
-    "email": "olsen.rentals@gmail.com",
+    "email": "olsen.rentals@nimbusmail.com",
     "job": "Landlord, Olsen Rentals",
     "car": "2019 Ford Explorer",
     "family": [
@@ -726,7 +725,7 @@
     ],
     "social": [],
     "findings": [
-      "Craigslist, December 2019: \"Apt 1B on Linden St for rent, freshly renovated.\" Mia's apartment was rented out a month later."
+      "SwapMeet, December 2019: \"Apt 1B on Linden St for rent, freshly renovated.\" Mia's apartment was rented out a month later."
     ]
   },
   {
@@ -744,7 +743,7 @@
     "birthplace": "Brooklyn, NY",
     "address": "Denver, CO",
     "phone": "(720) 555-0166",
-    "email": "chloe.m@gmail.com",
+    "email": "chloe.m@nimbusmail.com",
     "job": "Nurse",
     "car": "2019 Kia Soul",
     "family": [
@@ -755,7 +754,7 @@
     ],
     "social": [
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "@chloe.m.travels"
       }
     ],
@@ -767,7 +766,7 @@
     "id": "sam-wright",
     "name": "Sam Wright",
     "type": "resident",
-    "role": "True crime YouTuber",
+    "role": "True crime video creator",
     "status": "Alive",
     "record": {
       "id": "P-09017",
@@ -779,12 +778,12 @@
     "address": "Brooklyn (not listed)",
     "phone": "—",
     "email": "biz@brooklynmysteries.tv",
-    "job": "Runs the YouTube channel \"Brooklyn Mysteries\"",
+    "job": "Runs the ViewTube channel \"Brooklyn Mysteries\"",
     "car": "—",
     "family": [],
     "social": [
       {
-        "platform": "YouTube",
+        "platform": "ViewTube",
         "handle": "Brooklyn Mysteries, 40K subscribers"
       }
     ],
@@ -808,7 +807,7 @@
     "birthplace": "Brooklyn, NY",
     "address": "12 Quarry Rd, Brooklyn, NY",
     "phone": "(718) 555-0122",
-    "email": "heather.walks@gmail.com",
+    "email": "heather.walks@nimbusmail.com",
     "job": "Dog walker (small business)",
     "car": "2016 Toyota Sienna",
     "family": [
@@ -819,19 +818,19 @@
     ],
     "social": [
       {
-        "platform": "Nextdoor",
+        "platform": "Blockline",
         "handle": "Heather K."
       }
     ],
     "findings": [
-      "Nextdoor post 2019-11-09: \"Someone was driving around Dead Horse Bay again last night. Around 11pm a car was parked with its lights off. Teenagers?\""
+      "Blockline post 2019-11-09: \"Someone was driving around Dead Horse Bay again last night. Around 11pm a car was parked with its lights off. Teenagers?\""
     ]
   },
   {
     "id": "jamal-williams",
     "name": "Jamal Williams",
     "type": "resident",
-    "role": "Lime scooter technician",
+    "role": "ZipScoot scooter technician",
     "status": "Alive",
     "record": {
       "id": "P-09019",
@@ -842,18 +841,18 @@
     "birthplace": "Brooklyn, NY",
     "address": "88 Elm Court, Brooklyn, NY",
     "phone": "(718) 555-0145",
-    "email": "jamal.w@gmail.com",
-    "job": "Scooter maintenance technician, Lime",
+    "email": "jamal.w@nimbusmail.com",
+    "job": "Scooter maintenance technician, ZipScoot",
     "car": "2010 Honda Civic",
     "family": [],
     "social": [
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "@jamal.wheels"
       }
     ],
     "findings": [
-      "Lime maintenance log 2019-11-09: \"Scooter #4471 left in Gerritsen Beach outside parking zone, moved.\" The same scooter."
+      "ZipScoot maintenance log 2019-11-09: \"Scooter #4471 left in Gerritsen Beach outside parking zone, moved.\" The same scooter."
     ]
   },
   {
@@ -871,18 +870,18 @@
     "birthplace": "Brooklyn, NY",
     "address": "501 College Ave, Brooklyn, NY",
     "phone": "(718) 555-0190",
-    "email": "nickk@gmail.com",
+    "email": "nickk@nimbusmail.com",
     "job": "Student",
     "car": "None",
     "family": [],
     "social": [
       {
-        "platform": "Steam",
+        "platform": "GamePort",
         "handle": "nikkko"
       }
     ],
     "findings": [
-      "Craigslist chat 2025 with (718) 555-0187: \"Ok, I'll pick it up Saturday. Gerritsen Ave, 34?\" — \"Yes, call when you're here. Owen.\""
+      "SwapMeet chat 2025 with (718) 555-0187: \"Ok, I'll pick it up Saturday. Gerritsen Ave, 34?\" — \"Yes, call when you're here. Owen.\""
     ]
   },
   {
@@ -900,7 +899,7 @@
     "birthplace": "San Diego, CA",
     "address": "36 Gerritsen Ave, Gerritsen Beach, Brooklyn, NY",
     "phone": "(718) 555-0136",
-    "email": "trevor.ng@gmail.com",
+    "email": "trevor.ng@nimbusmail.com",
     "job": "Software developer",
     "car": "2020 Mazda 3",
     "family": [
@@ -911,12 +910,12 @@
     ],
     "social": [
       {
-        "platform": "Steam",
+        "platform": "GamePort",
         "handle": "trevng"
       }
     ],
     "findings": [
-      "Steam chat 2019-11-08 22:31: \"wanna play?\" — Owen doesn't answer until 00:52: \"sorry, fell asleep\". His status was \"online\" the whole time."
+      "GamePort chat 2019-11-08 22:31: \"wanna play?\" — Owen doesn't answer until 00:52: \"sorry, fell asleep\". His status was \"online\" the whole time."
     ]
   },
   {
@@ -934,13 +933,13 @@
     "birthplace": "Dublin, Ireland",
     "address": "19 Mill St, Brooklyn, NY",
     "phone": "(718) 555-0128",
-    "email": "liam.oc@gmail.com",
+    "email": "liam.oc@nimbusmail.com",
     "job": "Bartender, The Rusty Anchor",
     "car": "None",
     "family": [],
     "social": [
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "@liam_shakes"
       }
     ],
@@ -974,7 +973,7 @@
     ],
     "social": [
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "café page"
       }
     ],
@@ -998,7 +997,7 @@
     "birthplace": "Brooklyn, NY",
     "address": "425 Linden St, Bushwick, Brooklyn, NY",
     "phone": "(718) 555-0105",
-    "email": "maggie.h@gmail.com",
+    "email": "maggie.h@nimbusmail.com",
     "job": "Realtor",
     "car": "2017 Lexus RX",
     "family": [
@@ -1009,7 +1008,7 @@
     ],
     "social": [
       {
-        "platform": "Facebook",
+        "platform": "TownSquare",
         "handle": "Margaret Hughes"
       }
     ],
@@ -1032,7 +1031,7 @@
     "birthplace": "Brooklyn, NY",
     "address": "1102 Bay St, Brooklyn, NY",
     "phone": "(718) 555-0131",
-    "email": "andy.flores@gmail.com",
+    "email": "andy.flores@nimbusmail.com",
     "job": "Firefighter",
     "car": "2020 Ram 1500",
     "family": [
@@ -1043,7 +1042,7 @@
     ],
     "social": [
       {
-        "platform": "Facebook",
+        "platform": "TownSquare",
         "handle": "Andy Flores"
       }
     ],
@@ -1066,13 +1065,13 @@
     "birthplace": "Brooklyn, NY",
     "address": "77 Harbor View Rd, Apt 8, Brooklyn, NY",
     "phone": "(718) 555-0117",
-    "email": "liv.chen@gmail.com",
+    "email": "liv.chen@nimbusmail.com",
     "job": "Graphic designer",
     "car": "None",
     "family": [],
     "social": [
       {
-        "platform": "Instagram",
+        "platform": "Picto",
         "handle": "@oliviadraws"
       }
     ],
