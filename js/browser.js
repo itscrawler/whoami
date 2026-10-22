@@ -3,9 +3,7 @@
 function renderBrowser(container) {
   const app = createEl("div", "browser-app");
   const pageById = new Map(
-    caseData?.evidence
-      .filter((entry) => entry.access?.type === "public" && entry.app !== "terminal")
-      .map((entry) => [entry.id, entry]) || []
+    caseData?.web.map((entry) => [entry.id, entry]) || []
   );
   const tabs = [{ id: 1, history: [{ type: "home" }], index: 0 }];
   let activeTabId = 1;
@@ -303,9 +301,10 @@ function renderBrowser(container) {
     return [...pageById.values()].filter((entry) => {
       const haystack = [
         entry.title,
-        entry.access?.platform,
-        entry.access?.handle,
-        entry.access?.where,
+        entry.platform,
+        entry.handle,
+        entry.url,
+        entry.queries?.join(" "),
         entry.people?.map(personName).join(" "),
         JSON.stringify(entry.content || {}),
       ].join(" ").toLocaleLowerCase();
@@ -319,6 +318,11 @@ function renderBrowser(container) {
     if (/^https?:\/\//i.test(address)) {
       try {
         const url = new URL(address);
+        const page = [...pageById.values()].find((entry) => entry.url === url.href);
+        if (page) {
+          openPage(page.id);
+          return;
+        }
         const id = url.pathname.split("/").filter(Boolean).pop();
         if (pageById.has(id)) {
           openPage(id);
@@ -344,9 +348,7 @@ function renderBrowser(container) {
     if (location.type === "home") return "https://dorne.local/";
     if (location.type === "search") return `https://dorne.local/search?q=${encodeURIComponent(location.query)}`;
     const entry = pageById.get(location.id);
-    return entry
-      ? `https://dorne.local/${platformFor(entry).toLowerCase().replace(/[^a-z0-9]+/g, "-")}/${entry.id}`
-      : "https://dorne.local/";
+    return entry?.url || "https://dorne.local/";
   }
 
   function pageTitle(tab) {
@@ -367,7 +369,7 @@ function renderBrowser(container) {
   }
 
   function platformFor(entry) {
-    return entry.access?.platform || entry.content?.platform || entry.access?.where || "Public record";
+    return entry.platform || entry.content?.platform || "Public record";
   }
 
   function pageSummary(entry) {

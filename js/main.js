@@ -4,7 +4,7 @@
 // Case id comes from the URL: game.html?case=535
 const CASE_ID = new URLSearchParams(location.search).get("case") || "535";
 
-// The loaded case ({ caseInfo, people, evidence }). Apps read from it; null until it loads.
+// The loaded case ({ caseInfo, people, evidence, web }). Apps read from it; null until it loads.
 let caseData = null;
 
 // Access granted through the simulated terminal is shared with device apps.
@@ -17,15 +17,16 @@ window.notifyAccessChange = function notifyAccessChange() {
   window.dispatchEvent(new Event("case-access-change"));
 };
 
-// Loads the three JSON files of a case at the same time.
+// Loads the case data files at the same time.
 async function loadCase(id) {
   const base = `data/cases/${id}`;
-  const [caseInfo, people, evidence] = await Promise.all([
+  const [caseInfo, people, evidence, web] = await Promise.all([
     fetch(`${base}/case.json`).then((r) => r.json()),
     fetch(`${base}/people.json`).then((r) => r.json()),
     fetch(`${base}/evidence.json`).then((r) => r.json()),
+    fetch(`${base}/web.json`).then((r) => r.json()),
   ]);
-  return { caseInfo, people, evidence };
+  return { caseInfo, people, evidence, web };
 }
 
 // Builds the dock from the APPS list in apps.js:
@@ -97,6 +98,7 @@ loadCase(CASE_ID)
 
     console.log("Case loaded:", data.caseInfo.title);
     console.log(`${data.people.length} people, ${data.evidence.length} pieces of evidence`);
+    console.log(`${data.web.length} public web pages`);
   })
   .catch((error) => {
     console.error(error);

@@ -24,7 +24,7 @@ You play as **WHOAMI** — an anonymous hacker who takes jobs on closed forums. 
 ## Tech
 
 Plain **HTML, CSS and JavaScript** — no frameworks, no build step.
-Case content (people, evidence, answers) lives in JSON under `data/cases/<id>/`.
+Case content (places, people, evidence, browser pages and answers) lives in JSON under `data/cases/<id>/`.
 
 ```
 whoami/
@@ -41,7 +41,8 @@ whoami/
         └── 535/
             ├── case.json      # case info, intro, places, answer key, endings
             ├── people.json    # everyone in the in-game database
-            └── evidence.json  # every piece of evidence and where it is found
+            ├── evidence.json  # investigation evidence and access requirements
+            └── web.json       # fictional browser pages, URLs, search queries and content
 ```
 
 ## Run locally

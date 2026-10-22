@@ -1,0 +1,231 @@
+[
+  {
+    "id": "ev-linda-biscuit-post",
+    "title": "Linda's post about Biscuit",
+    "url": "https://dorne.local/facebook/ev-linda-biscuit-post",
+    "queries": ["Biscuit", "Linda Holt dog password", "Biscuit2011"],
+    "platform": "Facebook",
+    "people": ["linda-holt", "mia-holt"],
+    "content": {
+      "type": "post",
+      "platform": "Facebook",
+      "author": "linda-holt",
+      "date": "2018-05-19",
+      "text": "Today we lost our Biscuit. He was with us since 2011. Mia has been crying all evening. Run free, good boy."
+    }
+  },
+  {
+    "id": "ev-walter-cam",
+    "title": "\"Window on Linden St\" recording, 2019-11-08",
+    "url": "https://dorne.local/cameras/ev-walter-cam",
+    "queries": ["Window on Linden St camera", "Walter Green camera November 8 2019", "418 Linden St recording"],
+    "platform": "Walter's website archive",
+    "people": ["walter-green", "mia-holt", "owen-lind"],
+    "content": {
+      "type": "video",
+      "camera": "Window on Linden St",
+      "clips": [
+        {
+          "time": "2019-11-08T22:12:00-05:00",
+          "description": "A man in a dark hooded jacket, carrying a laptop bag, walks into the entrance of 418 Linden St. Face not visible."
+        },
+        {
+          "time": "2019-11-08T22:56:00-05:00",
+          "description": "Two people leave the building. The taller one opens the driver's door of the silver Civic."
+        },
+        {
+          "time": "2019-11-08T22:58:00-05:00",
+          "description": "The Civic (NY BKR-2187) drives away. The driver's head almost touches the roof. A smaller person in the passenger seat."
+        }
+      ]
+    }
+  },
+  {
+    "id": "ev-kerr-dinner-photo",
+    "title": "Melissa Kerr's Instagram post",
+    "url": "https://dorne.local/instagram/ev-kerr-dinner-photo",
+    "queries": ["Melissa Kerr Instagram dinner", "Salt Cedar Veridia investors November 8", "Daniel Kerr alibi"],
+    "platform": "Instagram",
+    "people": ["melissa-kerr", "daniel-kerr"],
+    "content": {
+      "type": "post",
+      "platform": "Instagram",
+      "author": "melissa-kerr",
+      "date": "2019-11-08T22:47:00-05:00",
+      "text": "Evening with the best people. Go Veridia! 🥂",
+      "location": "Salt & Cedar",
+      "photo": "Long dinner table, Daniel raising a glass with five investors."
+    }
+  },
+  {
+    "id": "ev-business-registry",
+    "title": "Business registry: OL Data Consulting LLC",
+    "url": "https://dorne.local/registry/ev-business-registry",
+    "queries": ["OL Data Consulting LLC", "Carol Lind business registry", "Owen Lind company"],
+    "platform": "New York State business registry",
+    "people": ["carol-lind", "owen-lind"],
+    "content": {
+      "type": "record",
+      "company": "OL Data Consulting LLC",
+      "registered": "2019-04-15",
+      "owner": "Carol Lind",
+      "address": "880 Orchard Way, Brooklyn, NY",
+      "status": "Dissolved 2022"
+    }
+  },
+  {
+    "id": "ev-strava-walk",
+    "title": "Strava: \"Evening Walk\"",
+    "url": "https://dorne.local/strava/ev-strava-walk",
+    "queries": ["Owen Lind Strava", "Evening Walk November 8 2019", "Dead Horse Bay run"],
+    "platform": "Strava",
+    "handle": "@owenruns",
+    "people": ["owen-lind"],
+    "content": {
+      "type": "activity",
+      "platform": "Strava",
+      "author": "owen-lind",
+      "name": "Evening Walk",
+      "start": "2019-11-08T23:14:00-05:00",
+      "end": "2019-11-08T23:41:00-05:00",
+      "distance": "0.75 mi",
+      "location": "Floyd Bennett Field / Dead Horse Bay",
+      "map": "Short loop from the trail at Dead Horse Bay to the edge of the shoreline and back."
+    }
+  },
+  {
+    "id": "ev-craigslist-monitor",
+    "title": "Craigslist: \"Selling gaming monitor\"",
+    "url": "https://dorne.local/craigslist/ev-craigslist-monitor",
+    "queries": ["gaming monitor Craigslist", "Gerritsen Beach monitor", "718 555 0187"],
+    "platform": "Craigslist",
+    "people": ["owen-lind"],
+    "content": {
+      "type": "ad",
+      "platform": "Craigslist",
+      "date": "2025-03-08",
+      "title": "27\" 144Hz gaming monitor — $120",
+      "body": "Barely used. Pick up in Gerritsen Beach. Text only.",
+      "contact": "(718) 555-0187"
+    }
+  },
+  {
+    "id": "ev-find-mia-group",
+    "title": "\"Find Mia\" Facebook group",
+    "url": "https://dorne.local/facebook/ev-find-mia-group",
+    "queries": ["Find Mia Facebook group", "Owen phone data last signal", "Mia search Marine Parkway"],
+    "platform": "Facebook",
+    "people": ["owen-lind", "jake-holt", "andy-flores"],
+    "content": {
+      "type": "posts",
+      "platform": "Facebook",
+      "posts": [
+        {
+          "date": "2019-11-12",
+          "author": "owen-lind",
+          "text": "I went through the phone data. Her last signal was at Marine Parkway–Gil Hodges Memorial Bridge, 11:47pm. I'm so sorry. Map attached."
+        },
+        {
+          "date": "2019-11-12",
+          "author": "jake-holt",
+          "text": "Thank you Owen. Couldn't do this without you."
+        },
+        {
+          "date": "2019-11-14",
+          "author": "andy-flores",
+          "text": "Weird nobody saw her at the bridge. There's always someone fishing there."
+        }
+      ]
+    }
+  },
+  {
+    "id": "ev-heather-nextdoor",
+    "title": "Nextdoor post: car at Dead Horse Bay",
+    "url": "https://dorne.local/nextdoor/ev-heather-nextdoor",
+    "queries": ["Dead Horse Bay car November 2019", "Heather Klein Nextdoor", "car with lights off"],
+    "platform": "Nextdoor",
+    "people": ["heather-klein"],
+    "content": {
+      "type": "post",
+      "platform": "Nextdoor",
+      "author": "heather-klein",
+      "date": "2019-11-09",
+      "text": "Someone was driving around Dead Horse Bay again last night. Around 11pm a car was parked with its lights off. Teenagers?"
+    }
+  },
+  {
+    "id": "ev-kyle-linkedin",
+    "title": "Kyle Bennett on LinkedIn",
+    "url": "https://dorne.local/linkedin/ev-kyle-linkedin",
+    "queries": ["Kyle Bennett LinkedIn Veridia", "Veridia user counts", "Kyle leaving Veridia"],
+    "platform": "LinkedIn",
+    "people": ["kyle-bennett", "daniel-kerr"],
+    "content": {
+      "type": "post",
+      "platform": "LinkedIn",
+      "author": "kyle-bennett",
+      "date": "2019-10-30",
+      "text": "After two years I'm leaving Veridia Health. I disagreed with how the company counts its users. Proud of the team, though."
+    }
+  },
+  {
+    "id": "ev-mia-instagram",
+    "title": "Mia Holt on Instagram",
+    "url": "https://dorne.local/instagram/ev-mia-instagram",
+    "queries": ["Mia Holt Instagram", "mia.counts numbers do not lie", "dark office window"],
+    "platform": "Instagram",
+    "handle": "@mia.counts",
+    "people": ["mia-holt"],
+    "content": {
+      "type": "post",
+      "platform": "Instagram",
+      "author": "mia-holt",
+      "date": "2019-11-02",
+      "text": "Numbers don't lie. People do.",
+      "photo": "A dark office window at night."
+    }
+  },
+  {
+    "id": "ev-news-mia-search",
+    "title": "Missing analyst searched for near Marine Parkway–Gil Hodges Memorial Bridge",
+    "url": "https://dorne.local/kings-county-ledger/ev-news-mia-search",
+    "queries": ["Mia Holt missing analyst search", "Marine Parkway bridge missing woman", "Kings County Ledger Mia"],
+    "platform": "The Kings County Ledger",
+    "people": ["mia-holt"],
+    "content": {
+      "type": "article",
+      "platform": "The Kings County Ledger",
+      "author": "rachel-moore",
+      "date": "2019-11-09",
+      "body": "Search teams are looking for 24-year-old Mia Holt, who was reported missing after her silver Honda Civic was found in the Marine Parkway–Gil Hodges Memorial Bridge parking lot. Her phone last connected to a tower near the bridge late Friday night. Police have not confirmed where she may have gone."
+    }
+  },
+  {
+    "id": "ev-news-veridia-bankruptcy",
+    "title": "Veridia Health files for bankruptcy. Investors sue founder.",
+    "url": "https://dorne.local/kings-county-ledger/ev-news-veridia-bankruptcy",
+    "queries": ["Veridia Health bankruptcy", "Daniel Kerr investors sue", "Kings County Ledger Veridia"],
+    "platform": "The Kings County Ledger",
+    "people": ["daniel-kerr", "rachel-moore"],
+    "content": {
+      "type": "article",
+      "platform": "The Kings County Ledger",
+      "author": "rachel-moore",
+      "date": "2022",
+      "body": "Veridia Health has filed for bankruptcy as investors sue founder Daniel Kerr. Reporter Rachel Moore covered the company's collapse; at the time, the story was not connected to Mia Holt's disappearance."
+    }
+  },
+  {
+    "id": "ev-walter-website",
+    "title": "Window on Linden St",
+    "url": "https://dorne.local/walter-green/ev-walter-website",
+    "queries": ["Walter Green Window on Linden St", "Linden St weather birdwatching camera", "Walter camera archive"],
+    "platform": "Walter Green's website",
+    "people": ["walter-green"],
+    "content": {
+      "type": "website",
+      "description": "A neighborhood weather and birdwatching stream. Archived recordings are organized by date.",
+      "archiveEvidenceId": "ev-walter-cam"
+    }
+  }
+]
