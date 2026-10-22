@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WHOAMI — Map demo (NYC)</title>
+<title>WHOAMI — Map (NYC)</title>
+
+<!-- Same fonts as the game: IBM Plex Sans (UI), JetBrains Mono (labels, data) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap">
 
 <!-- MapLibre GL: the interactive map engine used for pan and zoom. -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css">
@@ -13,11 +18,12 @@
   :root{
     --bg:#151719; --surface:#1b1e21; --surface-2:#26292d; --border:#363a3f;
     --border-strong:#44494f; --text:#dcdfe3; --muted:#9aa0a8; --dim:#5d636b; --accent:#ff6a00;
-    --mono:ui-monospace,"JetBrains Mono",Menlo,monospace;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace; --ui:"IBM Plex Sans",system-ui,sans-serif;
+    --tower:#7db1d3; --camera:#d99cff;
   }
   *{box-sizing:border-box;margin:0}
   html,body{height:100%}
-  body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;overflow:hidden}
+  body{background:var(--bg);color:var(--text);font-family:var(--ui);overflow:hidden}
   #map{position:absolute;inset:0;background:var(--bg)}
 
   /* top bar */
@@ -45,12 +51,23 @@
 
   /* markers */
   .mk{position:relative;width:14px;height:14px;background:var(--surface);border:2px solid var(--muted);cursor:pointer}
-  .mk.key{background:var(--accent);border-color:#151719;outline:1px solid var(--accent)}
   .mk .lbl{position:absolute;left:18px;top:-4px;white-space:nowrap;padding:3px 8px;
     background:rgba(27,30,33,.92);border:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text)}
-  .mk .brk{position:absolute;width:5px;height:5px;border:0 solid var(--accent)}
-  .mk.key .brk.tl{top:-4px;left:-4px;border-top-width:1.5px;border-left-width:1.5px}
-  .mk.key .brk.br{bottom:-4px;right:-4px;border-bottom-width:1.5px;border-right-width:1.5px}
+
+  /* embedded in the game window: the game draws its own bar, so the demo bar is hidden */
+  body.embed .topbar{display:none}
+  body.embed .levels{top:12px}
+
+  .mk.selected{background:var(--accent);border-color:#151719;outline:1px solid var(--accent)}
+  .mk .lbl{pointer-events:none}
+  .mk.tower{width:10px;height:10px;border-color:var(--tower);background:#151719}
+  .mk.tower .lbl,.mk.camera .lbl{display:none}
+  .mk.tower:hover .lbl,.mk.camera:hover .lbl,.mk.selected .lbl{display:block}
+  .mk.tower.selected{background:var(--tower);outline-color:var(--tower)}
+  .mk.camera{width:auto;height:auto;padding:1px 4px;border-color:var(--camera);color:var(--camera);
+    font-family:var(--mono);font-size:9px;font-weight:700}
+  .mk.camera.selected{background:var(--camera);color:#151719;outline-color:var(--camera)}
+  .mk.is-hidden{display:none}
 
   /* key banner if no map key yet */
   .note{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9;max-width:520px;
@@ -69,7 +86,7 @@
 <header class="topbar">
   <span style="font-weight:700;letter-spacing:.14em">WHOAMI<span style="color:var(--accent)">_</span></span>
   <span class="muted">MAP / NEW YORK CITY</span>
-  <span style="margin-left:auto" class="muted"><span class="sq"></span> CASE #535 · MARINE PARKWAY BRIDGE</span>
+  <span style="margin-left:auto" class="muted"><span class="sq"></span> DEMO · EVERY CASE LOCATION</span>
 </header>
 
 <div class="levels">
@@ -98,34 +115,52 @@
 const KEY = "JVcZ1WnVBAIhsf3s1jme";
 // ====================================================================
 
+// Two ways to open this file:
+//   map-demo.html?embed=1  — inside the game's Map window. js/map.js sends what to show via WhoamiMap.
+//   map-demo.html          — on its own: a demo with every location of case 535 from the JSON files.
+const EMBEDDED = new URLSearchParams(location.search).has("embed");
+if (EMBEDDED) document.body.classList.add("embed");
+
 if (KEY.startsWith("GET_A_FREE")) {
   document.getElementById("note").style.display = "block";
 }
 
-// Case places in NYC (real locations). Later these come from case.json.
-const PLACES = [
-  { id:"mia-home",    name:"Mia's apartment · Linden St",      lng:-73.9205, lat:40.6992, key:true, found:true },
-  { id:"north-bridge",name:"Marine Parkway–Gil Hodges Memorial Bridge (car found)", lng:-73.8855, lat:40.5735, key:true, found:true },
-  { id:"body-site",   name:"Dead Horse Bay / Floyd Bennett Field", lng:-73.8905, lat:40.5905, key:true, found:false },
-  { id:"owen-home",   name:"Owen Lind · Gerritsen Beach",      lng:-73.9250, lat:40.5885, found:false },
-  { id:"veridia",     name:"Veridia Health · DUMBO",           lng:-73.9890, lat:40.7030, found:false },
-  { id:"warehouse",   name:"Poker warehouse · Red Hook",       lng:-74.0150, lat:40.6760, found:false },
-  { id:"restaurant",  name:"Salt & Cedar · DUMBO",             lng:-73.9860, lat:40.7040, found:false },
-]
-const foundPlaceIds = new Set(PLACES.filter(place => place.found).map(place => place.id));
-let routeFound = false;
-
-// Cell-tower route of Mia's phone that night (orange dashed line)
-const TOWER_ROUTE = {
-  type:"Feature",
-  geometry:{ type:"LineString", coordinates:[
-    [-73.9205,40.6992], // home, Bushwick
-    [-73.9300,40.6600], // Flatbush, 23:03
-    [-73.8905,40.5905], // Floyd Bennett Field, 23:09–23:38
-    [-73.9340,40.6080], // Marine Park, 23:44
-    [-73.8855,40.5735], // Marine Parkway Bridge, 23:47
-  ]}
+// What is drawn right now: { places, towers, route, cameras, layers, selected }
+let state = {
+  places: [], towers: [], route: [], cameras: [],
+  layers: { places: true, towers: true, route: true, cameras: true },
+  selected: null,
 };
+const markers = new Map(); // "kind:id" -> { marker, el }
+let map = null;
+
+// API used by js/map.js in the parent window. Defined first, so it exists even if the map fails to load.
+window.WhoamiMap = {
+  setData(next) {
+    state = { ...state, ...next };
+    draw();
+  },
+  focus(kind, id) {
+    const item = findItem(kind, id);
+    if (!item || !map) return;
+    map.flyTo({ center: item.coordinates, zoom: Math.max(map.getZoom(), 14) });
+  },
+};
+
+function findItem(kind, id) {
+  const list = { place: state.places, tower: state.towers, camera: state.cameras }[kind] || [];
+  return list.find((item) => item.id === id);
+}
+
+// Tells the game which marker was clicked.
+function selectMarker(kind, id) {
+  if (EMBEDDED && window.parent !== window) {
+    window.parent.dispatchEvent(new window.parent.CustomEvent("whoami:map-select", { detail: { kind, id } }));
+  } else {
+    state.selected = { kind, id };
+    draw();
+  }
+}
 
 // ---- custom game-style map (dark, sharp, orange accent) ----
 const style = {
@@ -165,72 +200,122 @@ const style = {
   ]
 };
 
-const map = new maplibregl.Map({
-  container:"map", style,
-  center:[-73.95,40.66], zoom:11, minzoom:9, maxzoom:18,
-  attributionControl:{ compact:true }
-});
+// Adds missing markers, removes ones no longer in the data, updates visibility and selection.
+function draw() {
+  if (!map) return;
+  const wanted = new Map();
+  for (const place of state.places) wanted.set(`place:${place.id}`, { kind: "place", item: place, layer: "places" });
+  for (const tower of state.towers) wanted.set(`tower:${tower.id}`, { kind: "tower", item: tower, layer: "towers" });
+  for (const camera of state.cameras) wanted.set(`camera:${camera.id}`, { kind: "camera", item: camera, layer: "cameras" });
 
-const markers = new Map();
-
-function addPlaceMarker(place) {
-  if (markers.has(place.id)) return;
-  const el = document.createElement("div");
-  el.className = "mk" + (place.key ? " key" : "");
-  el.innerHTML = place.key
-    ? `<span class="brk tl"></span><span class="brk br"></span><span class="lbl">${place.name}</span>`
-    : `<span class="lbl">${place.name}</span>`;
-  markers.set(place.id, new maplibregl.Marker({ element:el, anchor:"center" })
-    .setLngLat([place.lng, place.lat]).addTo(map));
-}
-
-function revealPlace(id) {
-  const place = PLACES.find(entry => entry.id === id);
-  if (!place) {
-    console.warn(`Unknown map location: ${id}`);
-    return;
+  for (const [key, entry] of markers) {
+    if (!wanted.has(key)) {
+      entry.marker.remove();
+      markers.delete(key);
+    }
   }
-  foundPlaceIds.add(id);
-  if (map.loaded()) addPlaceMarker(place);
+
+  for (const [key, { kind, item, layer }] of wanted) {
+    let entry = markers.get(key);
+    if (!entry) {
+      const el = document.createElement("div");
+      el.className = `mk ${kind}`;
+      el.title = item.name;
+      if (kind === "camera") el.append("CAM");
+      const label = document.createElement("span");
+      label.className = "lbl";
+      label.textContent = item.name;
+      el.appendChild(label);
+      el.addEventListener("click", (event) => {
+        event.stopPropagation();
+        selectMarker(kind, item.id);
+      });
+      const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(item.coordinates).addTo(map);
+      entry = { marker, el };
+      markers.set(key, entry);
+    }
+    entry.el.classList.toggle("is-hidden", !state.layers[layer]);
+    entry.el.classList.toggle("selected", state.selected?.kind === kind && state.selected?.id === item.id);
+  }
+
+  drawRoute();
 }
 
-function revealRoute() {
-  routeFound = true;
-  if (map.getLayer("route")) map.setLayoutProperty("route", "visibility", "visible");
+function drawRoute() {
+  if (!map.getSource("route")) return; // added on "load"
+  map.getSource("route").setData({
+    type: "Feature",
+    properties: {},
+    geometry: { type: "LineString", coordinates: state.route.length > 1 ? state.route : [] },
+  });
+  map.setLayoutProperty("route", "visibility", state.layers.route ? "visible" : "none");
 }
 
-window.addEventListener("whoami:location-found", event => revealPlace(event.detail?.id));
-window.addEventListener("whoami:route-found", revealRoute);
+// Inside the game, hotkeys (Esc, 1–9, 0) still work while the map has focus.
+if (EMBEDDED && window.parent !== window) {
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" && !/^[0-9]$/.test(event.key)) return;
+    window.parent.document.dispatchEvent(new window.parent.KeyboardEvent("keydown", {
+      key: event.key, ctrlKey: event.ctrlKey, metaKey: event.metaKey, altKey: event.altKey,
+    }));
+  });
+}
 
-map.on("load", () => {
-  // route line
-  map.addSource("route",{ type:"geojson", data:TOWER_ROUTE });
-  map.addLayer({ id:"route", type:"line", source:"route",
-    layout:{ visibility: routeFound ? "visible" : "none" },
-    paint:{ "line-color":"#ff6a00", "line-width":2, "line-dasharray":[2,2] } });
+if (window.maplibregl) {
+  map = new maplibregl.Map({
+    container:"map", style,
+    center:[-73.95,40.66], zoom:11, minZoom:9, maxZoom:18,
+    attributionControl:{ compact:true }
+  });
 
-  // place markers
-  PLACES.filter(place => foundPlaceIds.has(place.id)).forEach(addPlaceMarker);
-});
+  map.on("load", () => {
+    // Cell-tower route of the phone (orange dashed line)
+    map.addSource("route", { type:"geojson", data:{ type:"Feature", properties:{}, geometry:{ type:"LineString", coordinates:[] } } });
+    map.addLayer({ id:"route", type:"line", source:"route",
+      paint:{ "line-color":"#ff6a00", "line-width":2, "line-dasharray":[2,2] } });
+    draw();
+  });
 
-// coordinate readout
-map.on("mousemove", e => {
-  document.getElementById("coords").textContent =
-    `${e.lngLat.lat.toFixed(4)}° N · ${Math.abs(e.lngLat.lng).toFixed(4)}° W · ZOOM ${map.getZoom().toFixed(0)}`;
-});
+  // coordinate readout
+  map.on("mousemove", e => {
+    document.getElementById("coords").textContent =
+      `${e.lngLat.lat.toFixed(4)}° N · ${Math.abs(e.lngLat.lng).toFixed(4)}° W · ZOOM ${map.getZoom().toFixed(0)}`;
+  });
 
-// zoom buttons
-document.getElementById("zin").onclick = () => map.zoomIn();
-document.getElementById("zout").onclick = () => map.zoomOut();
+  // zoom buttons
+  document.getElementById("zin").onclick = () => map.zoomIn();
+  document.getElementById("zout").onclick = () => map.zoomOut();
 
-// City / District / Street
-document.querySelectorAll(".levels button").forEach(b => {
-  b.onclick = () => {
-    document.querySelectorAll(".levels button").forEach(x => x.classList.remove("is-active"));
-    b.classList.add("is-active");
-    map.flyTo({ zoom:+b.dataset.zoom, center:[-73.92,40.62] });
-  };
-});
+  // City / District / Street
+  document.querySelectorAll(".levels button").forEach(b => {
+    b.onclick = () => {
+      document.querySelectorAll(".levels button").forEach(x => x.classList.remove("is-active"));
+      b.classList.add("is-active");
+      map.flyTo({ zoom:+b.dataset.zoom, center: map.getCenter() });
+    };
+  });
+} else {
+  document.getElementById("coords").textContent = "MAP OFFLINE · street tiles could not load";
+}
+
+// Standalone demo: show every location, tower and camera of case 535 straight from the JSON files.
+if (!EMBEDDED) {
+  Promise.all([
+    fetch("data/cases/535/case.json").then(r => r.json()),
+    fetch("data/cases/535/evidence.json").then(r => r.json()),
+  ]).then(([caseInfo, evidence]) => {
+    const towerLog = evidence.find(entry => (entry.content?.entries || []).some(record => record.tower));
+    const towerEntries = (towerLog?.content.entries || []).filter(record => record.coordinates);
+    const towers = new Map(towerEntries.map(record => [record.tower, { id: record.tower, name: record.tower, coordinates: record.coordinates }]));
+    window.WhoamiMap.setData({
+      places: caseInfo.places,
+      towers: [...towers.values()],
+      route: towerEntries.map(record => record.coordinates),
+      cameras: caseInfo.places.filter(place => place.cameraEvidenceId)
+        .map(place => ({ id: place.cameraEvidenceId, name: place.name, coordinates: place.coordinates })),
+    });
+  }).catch(error => console.warn("Demo data could not load (serve the folder over http).", error));
+}
 
 </script>
 </body>

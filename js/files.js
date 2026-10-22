@@ -31,23 +31,6 @@ function renderFiles(container) {
   let currentPath = homePath;
   let history = [];
 
-  function evidenceList() {
-    return caseData?.evidence || [];
-  }
-
-  function evidenceById(id) {
-    return evidenceList().find((entry) => entry.id === id);
-  }
-
-  function fileName(evidence) {
-    if (evidence.content?.name) return evidence.content.name;
-    if (evidence.content?.type === "dataLeak") return "booknook_users_2016.csv";
-    if (/\.(?:txt|csv|pdf|xlsx|json|log|png|jpg|zip)$/i.test(evidence.title || "")) {
-      return evidence.title;
-    }
-    return `${evidence.id}.txt`;
-  }
-
   function downloadedEvidence() {
     return [...window.CASE_PROGRESS.downloaded]
       .map(evidenceById)
@@ -72,7 +55,7 @@ function renderFiles(container) {
         entry.id !== "ev-mia-note-hint" &&
         entry.id !== "ev-archive-payments")
       .map((entry) => ({
-        name: fileName(entry),
+        name: evidenceFileName(entry),
         evidence: entry,
       }));
 
@@ -96,38 +79,19 @@ function renderFiles(container) {
             archive: true,
           });
         } else if (name) {
-          const note = evidenceById("ev-mia-note-hint");
-          if (note && window.CASE_PROGRESS.downloaded.has(note.id)) {
-            entries.push({ name, evidence: note });
-          } else {
-            entries.push({ name, evidence: note, available: Boolean(note) });
-          }
+          // Restored files open straight from the recovered folder.
+          const restored = (caseData?.evidence || []).find((entry) =>
+            entry.access?.type === "restore" && entry.access.from === trash.id && entry.title === name
+          );
+          entries.push({ name, evidence: restored, available: Boolean(restored) });
         }
       }
     }
     const extracted = evidenceById("ev-archive-payments");
     if (extracted && window.CASE_PROGRESS.downloaded.has(extracted.id)) {
-      entries.push({ name: fileName(extracted), evidence: extracted });
+      entries.push({ name: evidenceFileName(extracted), evidence: extracted });
     }
     return entries;
-  }
-
-  function openEvidence(evidence) {
-    openAuxiliaryWindow({
-      id: `files-viewer-${evidence.id}`,
-      name: fileName(evidence),
-      subtitle: "/ local file",
-      width: 620,
-      height: 440,
-      render(viewer) {
-        const pre = createEl("pre", "terminal-file-viewer");
-        const content = evidence.content || {};
-        pre.textContent = content.type === "text" && typeof content.body === "string"
-          ? content.body
-          : JSON.stringify(content, null, 2);
-        viewer.appendChild(pre);
-      },
-    });
   }
 
   function openArchive() {
@@ -214,7 +178,7 @@ function renderFiles(container) {
         : entry.archive
           ? "Encrypted archive · open for details"
           : entry.available === false
-            ? "Recovered file · download it in Terminal to open"
+            ? "Unreadable file"
             : entry.evidence?.title || "Downloaded case record";
       details.appendChild(createEl("span", "files-entry-description", description));
       button.append(icon, details);
@@ -255,7 +219,7 @@ function renderFiles(container) {
     if (entry.dataset.available === "false") return;
     if (entry.dataset.archive === "true") return openArchive();
     const evidence = evidenceById(entry.dataset.evidenceId);
-    if (evidence) openEvidence(evidence);
+    if (evidence) openEvidenceViewer(evidence, "/ local file");
   });
 
   backButton.addEventListener("click", () => {
@@ -266,7 +230,7 @@ function renderFiles(container) {
     if (currentPath.endsWith("/backup_veridia")) return navigate(`${homePath}/downloads`);
     if (currentPath !== homePath) navigate(homePath);
   });
-  window.addEventListener("case-files-change", render);
+  onCaseEvent(explorer, "case-files-change", render);
 
   render();
 }

@@ -383,10 +383,6 @@ function renderBrowser(container) {
     return String(text).replace(/\s+/g, " ").trim();
   }
 
-  function personName(id) {
-    return caseData.people.find((person) => person.id === id)?.name || id || "";
-  }
-
   function tabTitle(tab) {
     const title = pageTitle(tab);
     return title.length > 22 ? `${title.slice(0, 21)}…` : title;

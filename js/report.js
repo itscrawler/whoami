@@ -3,6 +3,10 @@
 function renderReport(container) {
   const report = createEl("div", "report-app");
   container.appendChild(report);
+  if (!caseData) {
+    report.appendChild(createEl("p", "report-empty-evidence", "Case files are still loading. Reopen the report in a moment."));
+    return;
+  }
 
   const caseInfo = caseData.caseInfo;
   const answerKey = caseInfo.answerKey;
@@ -11,9 +15,9 @@ function renderReport(container) {
   const places = caseInfo.places || [];
   let evidenceSyncListener = null;
 
+  // Everything on the evidence board (every found record) can support the report.
   function availableEvidence() {
-    return (caseData.evidence || [])
-      .filter((entry) => window.CASE_PROGRESS.foundEvidence.has(entry.id));
+    return [...window.CASE_PROGRESS.foundEvidence].map(evidenceById).filter(Boolean);
   }
 
   function saveDraft() {
@@ -227,12 +231,15 @@ function renderReport(container) {
         validation.hidden = false;
         return;
       }
-      window.CASE_PROGRESS.reportSubmission = evaluateReport(
-        draft,
-        [...window.CASE_PROGRESS.reportEvidence]
-      );
+      window.CASE_PROGRESS.reportSubmission = {
+        ...evaluateReport(draft, [...window.CASE_PROGRESS.reportEvidence]),
+        submittedAt: gameTimestamp(),
+      };
       saveCaseProgress();
       showResult();
+      // The news and the client's reply arrive in Mail.
+      window.dispatchEvent(new Event("case-mail-change"));
+      announceMail(caseInfo.client);
     });
   }
 
@@ -368,7 +375,7 @@ function renderReport(container) {
       window.CASE_PROGRESS.reportSubmission = null;
       return showForm();
     }
-    const result = evaluateReport(answers, answers.evidence);
+    const result = { ...evaluateReport(answers, answers.evidence), submittedAt: savedSubmission.submittedAt };
     window.CASE_PROGRESS.reportSubmission = result;
     report.replaceChildren();
     const outcome = createEl("section", `report-result report-ending-${result.ending.type}`);
@@ -456,6 +463,7 @@ function renderReport(container) {
     edit.addEventListener("click", () => {
       window.CASE_PROGRESS.reportSubmission = null;
       saveCaseProgress();
+      window.dispatchEvent(new Event("case-mail-change"));
       showForm();
     });
     const replay = createEl("button", "report-submit", "Replay case");
@@ -472,6 +480,11 @@ function renderReport(container) {
     actions.append(edit, replay);
     report.append(outcome, review, actions);
   }
+
+  // Evidence found while the form is open is added to its list.
+  onCaseEvent(report, "case-evidence-found", () => {
+    if (report.querySelector(".report-form")) showForm();
+  });
 
   if (window.CASE_PROGRESS.reportSubmission) showResult();
   else showForm();

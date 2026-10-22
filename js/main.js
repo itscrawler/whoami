@@ -13,8 +13,8 @@ const CASE_PROGRESS_KEY = `whoami:case:${CASE_ID}:progress`;
 
 // Progress shared by apps and persisted independently for each case.
 window.CASE_PROGRESS = {
-  foundEvidence: new Set(),
-  foundPeople: new Set(),
+  foundEvidence: new Set(), // records the player has found: on the evidence board, unlock map places and mail
+  foundPeople: new Set(), // dossiers the player has opened (leads for terminal targets)
   openedApps: new Set(),
   downloaded: new Set(),
   reportEvidence: new Set(),
@@ -27,6 +27,8 @@ window.CASE_PROGRESS = {
   wordlist: new Map(),
   crackedArchives: new Set(),
   extractedArchives: new Set(),
+  deliveredMail: new Map(), // mail id -> in-game time it arrived
+  readMail: new Set(),
 };
 
 // Access granted through the simulated terminal is shared with device apps.
@@ -61,6 +63,8 @@ function saveCaseProgress() {
       wordlist: [...window.CASE_PROGRESS.wordlist],
       crackedArchives: [...window.CASE_PROGRESS.crackedArchives],
       extractedArchives: [...window.CASE_PROGRESS.extractedArchives],
+      deliveredMail: [...window.CASE_PROGRESS.deliveredMail],
+      readMail: [...window.CASE_PROGRESS.readMail],
       vpnNode: window.CASE_ACCESS.vpnNode,
       scannedTargets: [...window.CASE_ACCESS.scannedTargets],
       connectedTargets: [...window.CASE_ACCESS.connectedTargets],
@@ -86,6 +90,7 @@ function restoreCaseProgress(data) {
   const evidenceIds = new Set(data.evidence.map((entry) => entry.id));
   const personIds = new Set(data.people.map((entry) => entry.id));
   const appIds = new Set(DOCK_APPS.map((app) => app.id));
+  const mailIds = new Set((data.caseInfo.mail || []).map((entry) => entry.id));
   const targetIds = new Set(data.evidence
     .filter((entry) => entry.access?.type === "hack")
     .map((entry) => entry.access.target));
@@ -102,7 +107,6 @@ function restoreCaseProgress(data) {
     ? saved.evidenceThreads.filter((thread) =>
       Array.isArray(thread) && thread.length === 2 &&
       thread[0] !== thread[1] &&
-      evidenceIds.has(thread[0]) && evidenceIds.has(thread[1]) &&
       window.CASE_PROGRESS.foundEvidence.has(thread[0]) &&
       window.CASE_PROGRESS.foundEvidence.has(thread[1])
     ).map((thread) => [...thread].sort())
@@ -144,6 +148,16 @@ function restoreCaseProgress(data) {
     Array.isArray(saved.crackedArchives) ? saved.crackedArchives.filter((value) => typeof value === "string") : []
   );
   window.CASE_PROGRESS.extractedArchives = setKnown(saved.extractedArchives, evidenceIds);
+  window.CASE_PROGRESS.deliveredMail = new Map(
+    Array.isArray(saved.deliveredMail)
+      ? saved.deliveredMail.filter((entry) =>
+        Array.isArray(entry) && mailIds.has(entry[0]) && typeof entry[1] === "string"
+      )
+      : []
+  );
+  window.CASE_PROGRESS.readMail = new Set(
+    Array.isArray(saved.readMail) ? saved.readMail.filter((value) => typeof value === "string") : []
+  );
   window.CASE_ACCESS.vpnNode = saved.vpnNode === "NYC-07" ? saved.vpnNode : null;
   window.CASE_ACCESS.scannedTargets = setKnown(saved.scannedTargets, targetIds);
   window.CASE_ACCESS.connectedTargets = setKnown(saved.connectedTargets, targetIds);
@@ -169,15 +183,93 @@ window.markEvidenceFound = function markEvidenceFound(id) {
   if (!caseData?.evidence.some((entry) => entry.id === id) || window.CASE_PROGRESS.foundEvidence.has(id)) return;
   window.CASE_PROGRESS.foundEvidence.add(id);
   saveCaseProgress();
+  announceEvidence(id); // before the event, so the board already shows the card as NEW
   window.refreshCaseMap?.(id);
   window.dispatchEvent(new Event("case-evidence-found"));
+  deliverTriggeredMail();
 };
+
+// Found records go straight to the evidence board with a "NEW EVIDENCE" notice on top.
+// Records found in one go (e.g. "download all") share a single notice.
+const newEvidenceQueue = [];
+
+// Board cards the player hasn't looked at yet (marked NEW on the board and on its dock icon).
+// Kept for this session only: after a reload everything already found counts as seen.
+const unseenEvidence = new Set();
+
+function announceEvidence(id) {
+  unseenEvidence.add(id);
+  updateBoardBadge();
+  newEvidenceQueue.push(id);
+  if (newEvidenceQueue.length > 1) return;
+  window.setTimeout(() => {
+    const ids = newEvidenceQueue.splice(0);
+    const text = ids.length === 1
+      ? `NEW EVIDENCE · ${evidenceById(ids[0])?.title || ids[0]}`
+      : `NEW EVIDENCE · ${ids.length} records`;
+    playSound("success");
+    showToast(text, {
+      onClick: () => {
+        openWindow("board");
+        window.dispatchEvent(new CustomEvent("case-board-reveal", { detail: { id: ids[0] } }));
+      },
+    });
+  }, 0);
+}
+
+function markEvidenceSeen(id) {
+  if (!unseenEvidence.delete(id)) return;
+  updateBoardBadge();
+}
+
+function updateBoardBadge() {
+  const button = document.querySelector('.dock-btn[data-app="board"]');
+  if (button) button.classList.toggle("has-unread", unseenEvidence.size > 0);
+}
 
 window.markPersonFound = function markPersonFound(id) {
   if (!caseData?.people.some((entry) => entry.id === id) || window.CASE_PROGRESS.foundPeople.has(id)) return;
   window.CASE_PROGRESS.foundPeople.add(id);
   saveCaseProgress();
+  window.dispatchEvent(new Event("case-person-found"));
+  deliverTriggeredMail();
 };
+
+// ---------- Mail triggers ----------
+
+// A message in case.json "mail" arrives once any of its trigger leads has been found.
+// Leads use the same format as needFoundIn: an evidence id or "people:<id>".
+function deliverTriggeredMail() {
+  const arrived = [];
+  for (const message of caseData?.caseInfo.mail || []) {
+    if (window.CASE_PROGRESS.deliveredMail.has(message.id)) continue;
+    const leads = message.trigger?.any || [];
+    if (!leads.some(isLeadFound)) continue;
+    window.CASE_PROGRESS.deliveredMail.set(message.id, gameTimestamp());
+    arrived.push(message);
+  }
+  if (!arrived.length) return;
+  saveCaseProgress();
+  window.dispatchEvent(new Event("case-mail-change"));
+  for (const message of arrived) announceMail(message.from);
+}
+
+function announceMail(from) {
+  playSound("notify");
+  showToast(`NEW MESSAGE · ${from}`, { onClick: () => openWindow("mail") });
+}
+
+function unreadMailCount() {
+  if (!caseData) return 0;
+  return mailboxMessages().filter((message) => !window.CASE_PROGRESS.readMail.has(message.id)).length;
+}
+
+function updateMailBadge() {
+  const button = document.querySelector('.dock-btn[data-app="mail"]');
+  if (button) button.classList.toggle("has-unread", unreadMailCount() > 0);
+}
+
+// ---------- Dock ----------
 
 // Loads the shared handbook and case data at the same time.
 async function loadCase(id) {
@@ -198,7 +290,7 @@ function buildDock() {
   const dock = document.getElementById("dock");
   let lastSection = null;
 
-  for (const app of DOCK_APPS) {
+  for (const [index, app] of DOCK_APPS.entries()) {
     // A divider line wherever the section changes (apps -> tools)
     if (lastSection && app.section !== lastSection) {
       const divider = document.createElement("div");
@@ -207,8 +299,11 @@ function buildDock() {
     }
     lastSection = app.section;
 
-    const button = createDockButton(app.id, app.name, app.icon);
-    button.addEventListener("click", () => launchApp(app.id));
+    const button = createDockButton(app.id, app.name, app.icon, dockHotkey(index));
+    button.addEventListener("click", () => {
+      playSound("click");
+      launchApp(app.id);
+    });
     dock.appendChild(button);
   }
 
@@ -220,17 +315,23 @@ function buildDock() {
   dock.appendChild(exitButton);
 }
 
+// Keys 1–9 and 0 open the first ten dock apps.
+function dockHotkey(index) {
+  return index < 9 ? String(index + 1) : index === 9 ? "0" : "";
+}
+
 // Makes one dock button: the icon plus a tooltip with the name (shown on hover).
-function createDockButton(id, label, icon) {
+function createDockButton(id, label, icon, hotkey = "") {
   const button = document.createElement("button");
   button.type = "button";
   button.className = "dock-btn";
   button.dataset.app = id;
   button.setAttribute("aria-label", label);
+  if (hotkey) button.setAttribute("aria-keyshortcuts", hotkey);
 
   const tooltip = document.createElement("span");
   tooltip.className = "dock-tooltip";
-  tooltip.textContent = label;
+  tooltip.textContent = hotkey ? `${label} · ${hotkey}` : label;
   tooltip.setAttribute("aria-hidden", "true"); // screen readers already get aria-label
 
   button.append(createIcon(icon), tooltip);
@@ -252,10 +353,44 @@ function updateDock() {
   saveCaseProgress();
 }
 
+// ---------- Hotkeys ----------
+
+function isTyping(target) {
+  return target instanceof HTMLElement &&
+    (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+}
+
+// Esc: leave a text field, or close the active window. 1–9, 0: open a dock app.
+function handleHotkey(event) {
+  if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
+
+  if (event.key === "Escape") {
+    if (isTyping(event.target)) {
+      event.target.blur();
+      return;
+    }
+    if (wm.activeId) {
+      event.preventDefault();
+      closeWindow(wm.activeId);
+    }
+    return;
+  }
+
+  if (isTyping(event.target) || !/^[0-9]$/.test(event.key)) return;
+  const index = event.key === "0" ? 9 : Number(event.key) - 1;
+  const app = DOCK_APPS[index];
+  if (!app) return;
+  event.preventDefault();
+  playSound("click");
+  launchApp(app.id);
+}
+
 // ---------- Start ----------
 
 buildDock();
 initWindowManager(document.getElementById("windows"), updateDock);
+document.addEventListener("keydown", handleHotkey);
+window.addEventListener("case-mail-change", updateMailBadge);
 
 loadCase(CASE_ID)
   .then((data) => {
@@ -268,9 +403,14 @@ loadCase(CASE_ID)
     console.log("Case loaded:", data.caseInfo.title);
     console.log(`${data.people.length} people, ${data.evidence.length} pieces of evidence`);
     console.log(`${data.web.length} public web pages`);
-    if (hasSavedProgress) {
+    if (hasSavedProgress && window.CASE_PROGRESS.openedApps.size) {
       for (const appId of window.CASE_PROGRESS.openedApps) launchApp(appId);
+    } else {
+      // Every case starts with the client's message.
+      launchApp("mail");
     }
+    deliverTriggeredMail();
+    updateMailBadge();
   })
   .catch((error) => {
     console.error(error);

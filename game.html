@@ -23,7 +23,8 @@
       <span id="case-label" class="topbar-case">LOADING CASE...</span>
 
       <div class="topbar-right">
-        <span class="topbar-vpn"><span class="vpn-square"></span>VPN · NODE NYC-07</span>
+        <span id="topbar-vpn" class="topbar-vpn is-off"><span class="vpn-square"></span><span>VPN · OFF</span></span>
+        <button id="sound-toggle" class="topbar-sound" type="button" aria-label="Sound">SND · ON</button>
         <span id="case-city"></span>
         <span id="game-clock">--- -- ---- · --:--</span>
         <a href="index.html#cases" class="topbar-exit">EXIT</a>
@@ -46,6 +47,8 @@
   </div>
 
   <!-- Order matters: each file uses things defined in the files above it -->
+  <script src="js/sound.js"></script>
+  <script src="js/evidence.js"></script>
   <script src="js/database.js"></script>
   <script src="js/handbook.js"></script>
   <script src="js/mail.js"></script>
@@ -58,7 +61,7 @@
   <script src="js/map.js"></script>
   <script src="js/apps.js"></script>
   <script src="js/windows.js"></script>
-  <script src="js/topbar.js?v=3"></script>
-  <script src="js/main.js?v=3"></script>
+  <script src="js/topbar.js?v=4"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>

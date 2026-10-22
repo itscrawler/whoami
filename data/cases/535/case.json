@@ -14,9 +14,46 @@
     "subject": "my sister",
     "body": "My sister went missing in 2019. The police decided she killed herself. My mom and I never believed it.\n\nLast night I got a notification: someone signed in to her Nimbus account from a new device. Her account still has my email for recovery. Someone is logging into a dead girl's account seven years later. Why?\n\nThe police say it's spam or a random hack and has nothing to do with her case. Please help. I can pay.",
     "attachments": [
-      "ev-nimbus-login-alert"
+      "ev-google-login-alert"
     ]
   },
+  "mail": [
+    {
+      "id": "jake-folder",
+      "from": "jake-holt",
+      "subject": "the folder",
+      "trigger": {
+        "any": [
+          "ev-google-security-log",
+          "ev-google-trash"
+        ]
+      },
+      "body": "You got into her account? I never could. Mom says Mia kept copies of everything, she was like that since school.\n\nIf someone deleted a folder seven years later, there was something in it. Please be careful."
+    },
+    {
+      "id": "jake-camera",
+      "from": "jake-holt",
+      "subject": "Linden St",
+      "trigger": {
+        "any": [
+          "ev-walter-cam",
+          "ev-walter-website"
+        ]
+      },
+      "body": "The man with the camera across the street from Mia. The police talked to him once and called him a creep. Nobody ever asked to see his recordings.\n\nI don't know if that means anything. I just keep thinking about it."
+    },
+    {
+      "id": "jake-mom",
+      "from": "jake-holt",
+      "subject": "mom",
+      "trigger": {
+        "any": [
+          "ev-kerr-nda-payment"
+        ]
+      },
+      "body": "I asked Mom about Veridia. She cried. They paid her after Mia was gone and made her sign something. She thought it would help with the search.\n\nShe never told me. Please don't think badly of her."
+    }
+  ],
   "officialVersion": {
     "status": "Suspended (February 2020). Probable suicide, body not found.",
     "timeline": [
@@ -43,128 +80,123 @@
       "id": "mia-home",
       "name": "Linden St, Bushwick, Brooklyn",
       "type": "home",
-      "unlockedBy": ["ev-mia-pedometer", "ev-walter-cam"],
+      "unlockedBy": [
+        "ev-mia-pedometer",
+        "ev-walter-cam"
+      ],
       "coordinates": [
         -73.9205,
         40.6992
-      ],
-      "map": {
-        "x": 58,
-        "y": 29
-      }
+      ]
     },
     {
       "id": "marine-parkway-bridge",
       "name": "Marine Parkway–Gil Hodges Memorial Bridge",
       "type": "bridge",
-      "unlockedBy": ["ev-tower-log", "ev-police-file"],
+      "unlockedBy": [
+        "ev-tower-log",
+        "ev-police-file"
+      ],
       "coordinates": [
         -73.8855,
         40.5735
       ],
-      "map": {
-        "x": 83,
-        "y": 73
-      }
+      "known": true
     },
     {
       "id": "dead-horse-bay",
       "name": "Floyd Bennett Field / Dead Horse Bay",
       "type": "park",
-      "unlockedBy": ["ev-strava-walk", "ev-tower-log", "ev-heather-nextdoor"],
+      "unlockedBy": [
+        "ev-strava-walk",
+        "ev-tower-log",
+        "ev-heather-nextdoor"
+      ],
       "coordinates": [
         -73.8905,
         40.5905
-      ],
-      "map": {
-        "x": 77,
-        "y": 82
-      }
+      ]
     },
     {
       "id": "gerritsen-beach",
       "name": "Gerritsen Beach",
       "type": "district",
-      "unlockedBy": ["ev-craigslist-monitor", "ev-nick-craigslist-chat", "ev-lime-ride", "ev-jamal-lime-log"],
-      "coordinates": [
-        -73.925,
-        40.5885
+      "unlockedBy": [
+        "ev-craigslist-monitor",
+        "ev-nick-craigslist-chat",
+        "ev-lime-ride",
+        "ev-jamal-lime-log"
       ],
-      "map": {
-        "x": 91,
-        "y": 69
-      }
+      "coordinates": [
+        -73.919,
+        40.5862
+      ]
     },
     {
       "id": "owen-home",
       "name": "34 Gerritsen Ave, Gerritsen Beach",
       "type": "home",
-      "unlockedBy": ["ev-craigslist-monitor", "ev-nick-craigslist-chat", "ev-lime-ride", "ev-jamal-lime-log"],
+      "unlockedBy": [
+        "ev-craigslist-monitor",
+        "ev-nick-craigslist-chat",
+        "ev-lime-ride",
+        "ev-jamal-lime-log"
+      ],
       "coordinates": [
         -73.925,
         40.5885
-      ],
-      "map": {
-        "x": 90,
-        "y": 71
-      }
+      ]
     },
     {
       "id": "veridia-office",
       "name": "Veridia Health office, DUMBO",
       "type": "office",
-      "unlockedBy": ["ev-slack-mia-owen", "ev-priya-slack", "ev-veridia-admin-log"],
+      "unlockedBy": [
+        "ev-slack-mia-owen",
+        "ev-priya-slack",
+        "ev-veridia-admin-log"
+      ],
       "coordinates": [
         -73.989,
         40.703
-      ],
-      "map": {
-        "x": 53,
-        "y": 35
-      }
+      ]
     },
     {
       "id": "salt-and-cedar",
       "name": "Salt & Cedar restaurant",
       "type": "restaurant",
-      "unlockedBy": ["ev-kerr-dinner-photo"],
+      "unlockedBy": [
+        "ev-kerr-dinner-photo"
+      ],
       "coordinates": [
         -73.986,
         40.704
-      ],
-      "map": {
-        "x": 55,
-        "y": 37
-      }
+      ]
     },
     {
       "id": "red-hook-warehouse",
       "name": "Red Hook warehouse, Brooklyn, NY",
       "type": "warehouse",
-      "unlockedBy": ["ev-poker-photo"],
+      "unlockedBy": [
+        "ev-poker-photo"
+      ],
       "coordinates": [
         -74.015,
         40.676
-      ],
-      "map": {
-        "x": 43,
-        "y": 56
-      }
+      ]
     },
     {
       "id": "walter-home",
       "name": "421 Linden St, Bushwick",
       "type": "home",
-      "unlockedBy": ["ev-walter-cam"],
+      "unlockedBy": [
+        "ev-walter-cam"
+      ],
       "cameraEvidenceId": "ev-walter-cam",
       "coordinates": [
         -73.92,
         40.6995
-      ],
-      "map": {
-        "x": 59,
-        "y": 28
-      }
+      ]
     }
   ],
   "answerKey": {

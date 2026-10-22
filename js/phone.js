@@ -11,6 +11,9 @@ const PHONE_SECTIONS = [
   ["device", "Device"],
 ];
 
+// Whose device the Phone app shows. Only records that involve this person appear on it.
+const PHONE_OWNER = "mia-holt";
+
 const PHONE_APP_CATALOG = [
   ["messages", "Messages", "Private conversations and message backups."],
   ["calls", "Phone", "Call history stored on the device."],
@@ -31,15 +34,7 @@ function renderPhone(container) {
   let activeSection = "messages";
   container.appendChild(app);
   draw();
-  window.addEventListener("case-access-change", onAccessChange);
-
-  function onAccessChange() {
-    if (!app.isConnected) {
-      window.removeEventListener("case-access-change", onAccessChange);
-      return;
-    }
-    draw();
-  }
+  onCaseEvent(app, "case-access-change", draw);
 
   function draw() {
     const connected = window.CASE_ACCESS.connectedTargets.has("carrier");
@@ -50,7 +45,7 @@ function renderPhone(container) {
     status.append(
       createEl("span", `phone-status-light${connected ? " is-connected" : ""}`),
       createEl("span", "", connected ? "DEVICE LINK ACTIVE" : "DEVICE NOT CONNECTED"),
-      createEl("span", "phone-status-account", "MIA HOLT · DEVICE"),
+      createEl("span", "phone-status-account", `${personName(PHONE_OWNER).toUpperCase()} · DEVICE`),
       createEl("span", `phone-status-account${nimbus ? " is-signed-in" : ""}`, nimbus ? "NIMBUS · SIGNED IN" : "NIMBUS · SIGNED OUT"),
     );
 
@@ -104,7 +99,7 @@ function renderPhone(container) {
   }
 
   function entriesForSection(section) {
-    return caseData.evidence.filter((entry) => {
+    return caseData.evidence.filter((entry) => (entry.people || []).includes(PHONE_OWNER)).filter((entry) => {
       if (section === "messages") {
         return entry.app === "phone" && entry.content?.type === "chat";
       }
@@ -130,19 +125,23 @@ function renderPhone(container) {
     });
   }
 
-  function renderEntry(entry) {
-    const available = isAvailable(entry);
-    if (available) window.markEvidenceFound(entry.id);
-    const card = createEl("article", `phone-record${available ? "" : " is-locked"}`);
+  function recordHeading(entry, available) {
     const heading = createEl("div", "phone-record-heading");
     heading.append(
       createEl("h3", "phone-record-title", entry.title),
       createEl("span", "phone-record-state", available ? "AVAILABLE" : "LOCKED"),
     );
-    card.appendChild(heading);
+    return heading;
+  }
+
+  function renderEntry(entry) {
+    const available = isEvidenceAvailable(entry);
+    if (available) window.markEvidenceFound(entry.id);
+    const card = createEl("article", `phone-record${available ? "" : " is-locked"}`);
+    card.appendChild(recordHeading(entry, available));
 
     if (!available) {
-      card.appendChild(createEl("p", "phone-record-lock", accessHint(entry)));
+      card.appendChild(createEl("p", "phone-record-lock", evidenceAccessHint(entry)));
       return card;
     }
 
@@ -195,7 +194,7 @@ function renderPhone(container) {
     const grid = createEl("div", "phone-app-grid");
     for (const [section, name, description] of PHONE_APP_CATALOG) {
       const entries = entriesForSection(section);
-      const available = entries.some(isAvailable);
+      const available = entries.some(isEvidenceAvailable);
       const button = createEl("button", `phone-app-tile${available ? "" : " is-locked"}`);
       button.type = "button";
       button.dataset.appSection = section;
@@ -204,7 +203,7 @@ function renderPhone(container) {
         createEl("span", "phone-app-name", name),
         createEl("span", "phone-app-description", description),
         createEl("span", "phone-app-state", entries.length
-          ? `${entries.filter(isAvailable).length}/${entries.length} RECORDS AVAILABLE`
+          ? `${entries.filter(isEvidenceAvailable).length}/${entries.length} RECORDS AVAILABLE`
           : "NO RECORDS"),
       );
       grid.appendChild(button);
@@ -219,17 +218,12 @@ function renderPhone(container) {
   }
 
   function renderStepRecord(entry) {
-    const available = isAvailable(entry);
+    const available = isEvidenceAvailable(entry);
     if (available) window.markEvidenceFound(entry.id);
     const card = createEl("article", `phone-record phone-step-record${available ? "" : " is-locked"}`);
-    const header = createEl("div", "phone-record-heading");
-    header.append(
-      createEl("h3", "phone-record-title", entry.title),
-      createEl("span", "phone-record-state", available ? "AVAILABLE" : "LOCKED"),
-    );
-    card.appendChild(header);
+    card.appendChild(recordHeading(entry, available));
     if (!available) {
-      card.appendChild(createEl("p", "phone-record-lock", accessHint(entry)));
+      card.appendChild(createEl("p", "phone-record-lock", evidenceAccessHint(entry)));
       return card;
     }
 
@@ -277,40 +271,6 @@ function renderPhone(container) {
     })[section] || "APP";
   }
 
-  function isAvailable(entry) {
-    const access = entry.access || {};
-    if (access.type === "public" || access.type === "client") return true;
-    if (access.type === "hack") return window.CASE_ACCESS.connectedTargets.has(access.target);
-    if (access.type === "login") return hasSession(access.service, access.account);
-    return false;
-  }
-
-  function hasSession(service, account) {
-    for (const session of window.CASE_ACCESS.sessions.values()) {
-      const sameService = serviceMatches(session.service, service);
-      const sameAccount = !account || normalize(session.account) === normalize(account);
-      if (sameService && sameAccount) return true;
-    }
-    return false;
-  }
-
-  function accessHint(entry) {
-    const access = entry.access || {};
-    if (access.type === "hack") {
-      return "Connect through Terminal: scan phone → vpn connect NYC-07 → connect phone.";
-    }
-    if (access.type === "login") {
-      const service = access.service || "account";
-      const person = caseData.people.find((entry) => entry.id === "mia-holt");
-      const account = access.account || (
-        (entry.people || []).includes("mia-holt") ? person?.email : null
-      );
-      const accountArgument = account ? ` ${account}` : " <account>";
-      return `Sign in through Terminal: login ${service}${accountArgument} <password>.`;
-    }
-    return "This record is not available yet.";
-  }
-
   function recordFields(content) {
     if (content.type === "log") {
       return (content.entries || []).map((entry) => [
@@ -323,16 +283,11 @@ function renderPhone(container) {
       .map(([key, value]) => [key.replace(/([A-Z])/g, " $1").toUpperCase(), String(value)]);
   }
 
-  function personName(id) {
-    return caseData.people.find((person) => person.id === id)?.name || id || "Unknown";
-  }
-
   function sectionLabel(section) {
     return PHONE_SECTIONS.find(([id]) => id === section)?.[1] || "Phone";
   }
 
   function formatTime(timestamp) {
-    if (!timestamp) return "";
-    return timestamp.replace("T", " ").replace(/([+-]\d{2}:\d{2}|Z)$/, "");
+    return formatEvidenceTime(timestamp);
   }
 }

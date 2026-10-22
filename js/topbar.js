@@ -1,7 +1,10 @@
 // WHOAMI — top bar
-// Shows the case number and title, the city, and the in-game clock.
+// Shows the case number and title, VPN state, sound switch, the city, and the in-game clock.
 
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+// The clock state, shared with gameTimestamp() (e.g. for the time new mail arrives).
+const gameClock = { start: 0, realStart: 0, offsetMinutes: 0 };
 
 // Fills the top bar with info from case.json and starts the clock.
 function initTopbar(caseInfo) {
@@ -15,6 +18,27 @@ function initTopbar(caseInfo) {
 
   document.getElementById("case-city").textContent = caseInfo.city.toUpperCase();
   startClock(caseInfo.intro.timestamp);
+  updateVpnIndicator();
+  window.addEventListener("case-access-change", updateVpnIndicator);
+}
+
+// "VPN · NODE NYC-07" with an orange square when the terminal tunnel is up, "VPN · OFF" otherwise.
+function updateVpnIndicator() {
+  const indicator = document.getElementById("topbar-vpn");
+  const node = window.CASE_ACCESS.vpnNode;
+  indicator.classList.toggle("is-off", !node);
+  indicator.lastChild.textContent = node ? `VPN · NODE ${node}` : "VPN · OFF";
+}
+
+function initSoundToggle() {
+  const button = document.getElementById("sound-toggle");
+  function update() {
+    button.textContent = sound.enabled ? "SND · ON" : "SND · OFF";
+    button.setAttribute("aria-pressed", String(sound.enabled));
+  }
+  button.addEventListener("click", () => setSoundEnabled(!sound.enabled));
+  window.addEventListener("sound-change", update);
+  update();
 }
 
 // Shown in the top bar when the case files can't be loaded (e.g. wrong ?case= id).
@@ -27,20 +51,34 @@ function showCaseNotFound(caseId) {
 // It shows the time in the case city's time zone, not the player's.
 function startClock(timestamp) {
   const clock = document.getElementById("game-clock");
-  const gameStart = Date.parse(timestamp); // the case start time, in milliseconds
-  const realStart = Date.now(); // when the player opened the page
-  const offset = getUtcOffsetMinutes(timestamp) * 60 * 1000;
+  gameClock.start = Date.parse(timestamp); // the case start time, in milliseconds
+  gameClock.realStart = Date.now(); // when the player opened the page
+  gameClock.offsetMinutes = getUtcOffsetMinutes(timestamp);
 
   function update() {
-    const passed = Date.now() - realStart;
-    // Trick: shift the time by the city's UTC offset and then read it with the
-    // getUTC... methods. That gives the city's local time in any time zone.
-    const cityTime = new Date(gameStart + passed + offset);
-    clock.textContent = formatClock(cityTime);
+    clock.textContent = formatClock(cityTime());
   }
 
   update();
   setInterval(update, 1000);
+}
+
+// Trick: shift the time by the city's UTC offset and then read it with the
+// getUTC... methods. That gives the city's local time in any time zone.
+function cityTime() {
+  const passed = Date.now() - gameClock.realStart;
+  return new Date(gameClock.start + passed + gameClock.offsetMinutes * 60 * 1000);
+}
+
+// The current in-game time as an ISO string with the city's offset, e.g. "2026-10-13T01:31:00-04:00".
+function gameTimestamp() {
+  const date = cityTime();
+  const twoDigits = (n) => String(Math.abs(n)).padStart(2, "0");
+  const offset = gameClock.offsetMinutes;
+  const sign = offset < 0 ? "-" : "+";
+  return `${date.getUTCFullYear()}-${twoDigits(date.getUTCMonth() + 1)}-${twoDigits(date.getUTCDate())}` +
+    `T${twoDigits(date.getUTCHours())}:${twoDigits(date.getUTCMinutes())}:00` +
+    `${sign}${twoDigits(Math.trunc(offset / 60))}:${twoDigits(offset % 60)}`;
 }
 
 // Reads the time zone at the end of a timestamp, e.g. "-07:00" -> -420 minutes.
@@ -63,3 +101,5 @@ function formatClock(date) {
   const minutes = twoDigits(date.getUTCMinutes());
   return `${month} ${day} ${year} · ${hours}:${minutes}`;
 }
+
+initSoundToggle();

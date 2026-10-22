@@ -1,6 +1,6 @@
 /* WHOAMI — Game OS (game.html only)
    Loaded after style.css: reuses its reset and the blinking .cursor,
-   and overrides the color/font tokens for the game.
+   its font tokens, and overrides the color tokens for the game.
    Sharp corners everywhere (border-radius is 0 from style.css). */
 
 :root {
@@ -16,10 +16,7 @@
   --text-dim: #5d636b;
   --accent: #ff6a00;
   --grid-line: #1c1f23;
-
-  --font-display: "Barlow Condensed", sans-serif;
-  --font-ui: "IBM Plex Sans", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Fonts come from style.css */
 }
 
 body.game {
@@ -100,6 +97,26 @@ body.is-resizing * {
   width: 6px;
   height: 6px;
   background: var(--accent);
+}
+
+.topbar-vpn.is-off .vpn-square {
+  background: var(--text-dim);
+}
+
+.topbar-sound {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--text-muted);
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
+.topbar-sound:hover,
+.topbar-sound:focus-visible {
+  color: var(--accent);
+  outline: none;
 }
 
 #game-clock {
@@ -186,6 +203,17 @@ body.is-resizing * {
   width: 4px;
   height: 4px;
   margin-left: -2px;
+  background: var(--accent);
+}
+
+/* Unread mail: small orange square in the top-right corner of the Mail icon */
+.dock-btn.has-unread::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 6px;
+  height: 6px;
   background: var(--accent);
 }
 
@@ -1404,6 +1432,41 @@ body.is-resizing * {
   letter-spacing: 0.08em;
 }
 
+.db-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.db-action {
+  padding: 4px 8px;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.db-action:hover:not(:disabled),
+.db-action:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: none;
+}
+
+.db-action:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.db-connection.is-external {
+  color: var(--text-muted);
+  cursor: default;
+}
+
 .db-connection {
   display: flex;
   justify-content: space-between;
@@ -1534,6 +1597,11 @@ body.is-resizing * {
   white-space: nowrap;
 }
 
+.mail-message.is-unread .mail-message-from,
+.mail-message.is-unread .mail-message-subject {
+  color: var(--accent);
+}
+
 .mail-message-preview {
   display: -webkit-box;
   overflow: hidden;
@@ -1614,6 +1682,7 @@ body.is-resizing * {
 
 .mail-body p {
   margin: 0 0 10px;
+  white-space: pre-line;
 }
 
 .mail-attachments {
@@ -1979,6 +2048,17 @@ body.is-resizing * {
   font-family: var(--font-mono);
   font-size: 8px;
   text-transform: uppercase;
+}
+
+/* Found since the player last looked: orange outline until pointed at */
+.board-card.is-new {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.board-card.is-new .board-card-tag {
+  color: #8d3b0b;
+  font-weight: 700;
 }
 
 .board-report-toggle {
@@ -2799,15 +2879,7 @@ body.is-resizing * {
 }
 
 /* ---------- Case map ---------- */
-
-.case-map-frame {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  border: 0;
-  background: var(--bg);
-}
+/* The street map is MapLibre inside an iframe (map-demo.html); the toolbar and detail panel are here. */
 
 .case-map {
   display: flex;
@@ -2820,7 +2892,6 @@ body.is-resizing * {
 .case-map-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 8px;
   min-height: 40px;
   padding: 5px 8px;
@@ -2828,15 +2899,14 @@ body.is-resizing * {
   border-bottom: 1px solid var(--border);
 }
 
-.case-map-layers,
-.case-map-zoom {
+.case-map-layers {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 5px;
 }
 
-.case-map-layer,
-.case-map-control {
+.case-map-layer {
   min-height: 27px;
   padding: 0 8px;
   background: transparent;
@@ -2852,25 +2922,9 @@ body.is-resizing * {
   color: var(--accent);
 }
 
-.case-map-layer:hover,
-.case-map-control:hover {
+.case-map-layer:hover {
   border-color: var(--accent);
   color: var(--text);
-}
-
-.case-map-control {
-  width: 27px;
-  padding: 0;
-  color: var(--text);
-  font-size: 15px;
-}
-
-.case-map-zoom-label {
-  min-width: 38px;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  text-align: center;
 }
 
 .case-map-body {
@@ -2887,109 +2941,13 @@ body.is-resizing * {
   background: #101b24;
 }
 
-.case-map-scene {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  transform-origin: center;
-  transition: transform 150ms ease;
-}
-
-.case-map-backdrop {
-  position: absolute;
-  inset: 0;
+.case-map-frame {
+  display: block;
   width: 100%;
   height: 100%;
-}
-
-.case-map-land {
-  fill: #1c2425;
-  stroke: #323b3d;
-  stroke-width: 2;
-}
-
-.case-map-waterway {
-  fill: none;
-  stroke: #101b24;
-  stroke-width: 13;
-}
-
-.case-map-road {
-  fill: none;
-  stroke: #31393a;
-  stroke-width: 2;
-}
-
-.case-map-park {
-  fill: #202e28;
-  stroke: #35463c;
-  stroke-width: 2;
-}
-
-.case-map-label {
-  fill: #65716e;
-  font-family: var(--font-mono);
-  font-size: 18px;
-  letter-spacing: 4px;
-}
-
-.case-map-label-small {
-  fill: #737f7b;
-  font-size: 11px;
-  letter-spacing: 2px;
-}
-
-.case-map-marker {
-  position: absolute;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  width: 25px;
-  height: 25px;
-  padding: 0;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  background: #171a1ccc;
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 0 3px #ff6a0026;
-}
-
-.case-map-marker:hover,
-.case-map-marker:focus-visible {
-  z-index: 4;
-  background: var(--accent);
-  color: #151719;
-  outline: 2px solid var(--text);
-}
-
-.case-map-marker-tower {
-  width: 19px;
-  height: 19px;
-  border-color: #7db1d3;
-  color: #a9d1eb;
-  box-shadow: 0 0 0 3px #7db1d326;
-}
-
-.case-map-marker-camera {
-  width: 25px;
-  height: 25px;
-  border-color: #d99cff;
-  color: #e1b9ff;
-  box-shadow: 0 0 0 3px #d99cff26;
-}
-
-.case-map-route {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 4;
-  stroke-dasharray: 10 8;
-  vector-effect: non-scaling-stroke;
-  pointer-events: none;
+  min-height: 0;
+  border: 0;
+  background: var(--bg);
 }
 
 .case-map-detail {
@@ -3020,8 +2978,7 @@ body.is-resizing * {
 }
 
 .case-map-copy,
-.case-map-meta,
-.case-map-hint {
+.case-map-meta {
   margin: 0 0 12px;
   color: var(--text-muted);
   font-size: 11px;
@@ -3029,14 +2986,28 @@ body.is-resizing * {
   overflow-wrap: anywhere;
 }
 
-.case-map-meta,
-.case-map-hint {
+.case-map-meta {
   font-family: var(--font-mono);
   font-size: 9px;
 }
 
 .case-map-section-label {
   margin: 20px 0 6px;
+}
+
+.case-map-back {
+  margin-bottom: 14px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.case-map-back:hover {
+  color: var(--accent);
 }
 
 .case-map-evidence {
@@ -3060,42 +3031,13 @@ body.is-resizing * {
   color: var(--accent);
 }
 
-.case-map-evidence-viewer {
-  height: 100%;
-  margin: 0;
-  padding: 16px;
-  overflow: auto;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.6;
-  white-space: pre-wrap;
-}
-
-.case-map-empty {
-  padding: 24px;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 11px;
-}
-
 .case-map-layer:focus-visible,
-.case-map-control:focus-visible,
-.case-map-marker:focus-visible {
+.case-map-back:focus-visible {
   outline: 1px solid var(--accent);
   outline-offset: 2px;
 }
 
 @media (max-width: 720px) {
-  .case-map-toolbar {
-    align-items: flex-start;
-  }
-
-  .case-map-layers {
-    flex-wrap: wrap;
-  }
-
   .case-map-layer {
     padding: 0 5px;
     font-size: 10px;
@@ -3104,6 +3046,80 @@ body.is-resizing * {
   .case-map-detail {
     flex-basis: 190px;
     padding: 14px 10px;
+  }
+}
+
+/* ---------- Record viewer ---------- */
+
+.evidence-viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.evidence-viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.evidence-viewer-title {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.evidence-viewer .terminal-file-viewer {
+  flex: 1;
+  min-height: 0;
+  height: auto;
+}
+
+/* ---------- Toasts ---------- */
+
+.toast-stack {
+  position: fixed;
+  top: 52px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.toast {
+  padding: 8px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  pointer-events: auto;
+  animation: toast-in 0.2s ease-out;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
   }
 }
 

@@ -1,12 +1,32 @@
 // WHOAMI — Database app (resident search and dossiers)
 
 // What the dropdown next to the search box can search by.
+// match(person, query) gets a lowercased query; phone numbers match in any format.
 const DB_FIELDS = [
-  { value: "name", label: "NAME", get: (person) => person.name },
-  { value: "id", label: "ID", get: (person) => person.record.id },
-  { value: "born", label: "BORN", get: (person) => person.born },
-  { value: "address", label: "ADDRESS", get: (person) => person.record.address },
-  { value: "status", label: "STATUS", get: (person) => person.record.status },
+  {
+    value: "all",
+    label: "ALL",
+    match: (person, query) => DB_FIELDS.slice(1).some((field) => field.match(person, query)),
+  },
+  { value: "name", label: "NAME", match: (person, query) => normalize(person.name).includes(query) },
+  {
+    value: "phone",
+    label: "PHONE",
+    match: (person, query) => phoneMatches(person.phone, query) || normalize(person.phone).includes(query),
+  },
+  {
+    value: "address",
+    label: "ADDRESS",
+    match: (person, query) => normalize(person.address || person.record.address).includes(query),
+  },
+  {
+    value: "vehicle",
+    label: "VEHICLE",
+    match: (person, query) => normalize(person.car).includes(query) ||
+      (digitsOnly(query).length > 0 && normalize(person.car).replace(/[^a-z0-9]/g, "")
+        .includes(query.replace(/[^a-z0-9]/g, ""))),
+  },
+  { value: "id", label: "ID", match: (person, query) => normalize(person.record.id).includes(query) },
 ];
 
 // Builds the app inside its window. Called by renderApp in apps.js.
@@ -22,7 +42,7 @@ function renderDatabase(container) {
 
   const input = createEl("input", "db-input");
   input.type = "text";
-  input.placeholder = "search residents";
+  input.placeholder = "name, phone, address, plate";
   input.autocomplete = "off";
   input.spellcheck = false;
   input.setAttribute("aria-label", "Search query");
@@ -83,11 +103,7 @@ function renderDatabase(container) {
 
     const field = DB_FIELDS.find((f) => f.value === fieldValue);
     const matches = caseData.people.filter(
-      (person) =>
-        person.record &&
-        String(field.get(person) || "")
-          .toLowerCase()
-          .includes(query)
+      (person) => person.record && isCityResident(person) && field.match(person, query)
     );
 
     for (const person of matches) {
@@ -111,6 +127,13 @@ function renderDatabase(container) {
   });
 
   dossier.addEventListener("click", (event) => {
+    const mapButton = event.target.closest("[data-show-on-map]");
+    if (mapButton) {
+      openWindow("map");
+      window.focusCaseMap?.("place", mapButton.dataset.showOnMap);
+      return;
+    }
+
     const connection = event.target.closest("[data-connection]");
     if (connection) {
       selectPerson(connection.dataset.connection);
@@ -128,7 +151,7 @@ function renderDatabase(container) {
   });
 
   function selectPerson(personId) {
-    const person = caseData.people.find((entry) => entry.id === personId && entry.record);
+    const person = caseData.people.find((entry) => entry.id === personId && entry.record && isCityResident(entry));
     if (!person) return;
 
     window.markPersonFound(person.id);
@@ -177,6 +200,20 @@ function renderDossier(dossier, person) {
   );
   identity.append(portrait, profile);
 
+  const actions = createEl("div", "db-actions");
+  const mapButton = createEl("button", "db-action", "SHOW ON MAP");
+  mapButton.type = "button";
+  const place = (caseData.caseInfo.places || []).find((entry) => entry.id === person.place);
+  if (place && isPlaceDiscovered(place)) {
+    mapButton.dataset.showOnMap = place.id;
+    mapButton.title = place.name;
+  } else {
+    mapButton.disabled = true;
+    mapButton.title = place ? "This location hasn't come up in the case yet" : "No case location for this person";
+  }
+  actions.appendChild(mapButton);
+  profile.appendChild(actions);
+
   const facts = createEl("dl", "db-facts");
   const factValues = [
     ["DOB", person.born],
@@ -223,12 +260,20 @@ function renderDossier(dossier, person) {
     .filter((relative) => relative.person);
   if (family.length) {
     for (const relative of family) {
-      const button = createEl("button", "db-connection");
-      button.type = "button";
-      button.dataset.connection = relative.person.id;
+      // People outside the city are not in this database: shown, but not clickable.
+      const resident = isCityResident(relative.person);
+      const button = createEl(resident ? "button" : "div", `db-connection${resident ? "" : " is-external"}`);
+      if (resident) {
+        button.type = "button";
+        button.dataset.connection = relative.person.id;
+      }
       button.append(
         createEl("span", "", relative.person.name),
-        createEl("span", "db-connection-relation", relative.relation.toUpperCase())
+        createEl(
+          "span",
+          "db-connection-relation",
+          `${relative.relation.toUpperCase()}${resident ? "" : ` · ${relative.person.record.address.toUpperCase()}`}`
+        )
       );
       connections.appendChild(button);
     }

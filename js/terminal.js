@@ -19,7 +19,7 @@ const TERMINAL_COMMANDS = [
   ["lookup <name|number|email|vehicle>", "Search resident records."],
   ["breach search <email|username>", "Search the fictional public leak."],
   ["geoip <ip>", "Search case records for an IP location."],
-  ["scan <target>", "Inspect a fictional target and show access requirements."],
+  ["scan [target]", "List targets you have leads for, or inspect one and show what it needs."],
   ["connect <target>", "Connect to a scanned target over the simulated VPN."],
   ["login <service> <account> <password>", "Check credentials found in case evidence."],
   ["logout", "End simulated account sessions."],
@@ -86,6 +86,7 @@ function renderTerminal(container) {
   });
 
   input.addEventListener("keydown", (event) => {
+    if (event.key.length === 1 || event.key === "Backspace" || event.key === "Enter") playSound("key");
     if (event.key === "ArrowUp") {
       event.preventDefault();
       if (!state.history.length) return;
@@ -106,6 +107,7 @@ function renderTerminal(container) {
   });
 
   function write(text, kind = "") {
+    if (kind === "terminal-error") playSound("error");
     const line = createEl("div", `terminal-line ${kind}`.trim(), text);
     output.appendChild(line);
     output.scrollTop = output.scrollHeight;
@@ -131,13 +133,8 @@ function renderTerminal(container) {
     if (command === "whoami") return write("WHOAMI");
     if (command === "exit") return closeWindow("terminal");
     if (command === "sudo") return write("nice try");
-    if (command === "rm" && rest.join(" ") === "-rf /") return write("you first");
-    if (command === "hack") {
-      if (rest[0]?.toLowerCase() === "phone") {
-        return write("Phone access is simulated. Start with: scan phone");
-      }
-      return write(`This is a case simulation. Start with: scan ${rest.join(" ") || "<target>"}`);
-    }
+    if (command === "rm" && rest.some((arg) => /^-[a-z]*r[a-z]*f|^-[a-z]*f[a-z]*r/i.test(arg))) return write("you first");
+    if (command === "hack") return hackHint(rest.join(" "));
     if (command === "ls") return listFiles();
     if (command === "cd") return changeDirectory(rest[0]);
     if (command === "cat") return catFile(rest.join(" "));
@@ -208,36 +205,6 @@ function renderTerminal(container) {
 
   function evidenceList() {
     return caseData?.evidence || [];
-  }
-
-  function evidenceById(id) {
-    return evidenceList().find((evidence) => evidence.id === id);
-  }
-
-  function evidenceFileName(evidence) {
-    return evidence.content?.name || `${evidence.id}.txt`;
-  }
-
-  function isLoggedIn(access) {
-    if (access.type !== "login") return false;
-    for (const session of state.sessions.values()) {
-      const sameService = serviceMatches(session.service, access.service);
-      const sameAccount = !access.account || normalize(session.account) === normalize(access.account);
-      if (sameService && sameAccount) return true;
-    }
-    return false;
-  }
-
-  function isAvailable(evidence) {
-    const access = evidence.access || {};
-    if (access.type === "public" || access.type === "client") return true;
-    if (access.type === "hack") return state.connectedTargets.has(access.target);
-    if (access.type === "login") return isLoggedIn(access);
-    if (access.type === "restore") {
-      return state.downloaded.has(access.from) || state.extractedArchives.has(access.from);
-    }
-    if (access.type === "decrypt") return state.crackedArchives.has(access.file);
-    return false;
   }
 
   function listFiles() {
@@ -332,8 +299,10 @@ function renderTerminal(container) {
     }
     const evidence = findDownloadedFile(name);
     if (!evidence) return write(`file not found: ${name || "(missing filename)"}`, "terminal-error");
-    if (!isTextEvidence(evidence)) return write("This record is structured. Use open <file> to view it.");
-    write(formatEvidence(evidence));
+    if (!evidence.content || evidence.content.type === "archive") return write("Binary archive. Use crack or unzip.");
+    if (["photo", "video"].includes(evidence.content.type)) return write("Binary file. Use open <file> to view it.");
+    window.markEvidenceFound(evidence.id);
+    write(formatEvidenceText(evidence));
   }
 
   function openFile(name) {
@@ -342,29 +311,20 @@ function renderTerminal(container) {
     }
     const evidence = findDownloadedFile(name);
     if (!evidence) return write(`file not found: ${name || "(missing filename)"}`, "terminal-error");
-    openAuxiliaryWindow({
-      id: `terminal-file-${evidence.id}`,
-      name: evidence.title || evidenceFileName(evidence),
-      subtitle: "/ downloaded record",
-      width: 620,
-      height: 440,
-      render(viewer) {
-        const content = createEl("pre", "terminal-file-viewer", formatEvidence(evidence));
-        viewer.appendChild(content);
-      },
-    });
-    write(`Opened ${evidence.title || evidenceFileName(evidence)} in a viewer window.`);
+    if (!evidenceById(evidence.id)) return write("Encrypted archive. Use crack, then unzip.");
+    openEvidenceViewer(evidence, "/ downloaded record");
+    write(`Opened ${evidenceFileName(evidence)} in a viewer window.`);
   }
 
   function download(name) {
     if (!name) return write("Usage: download <file|all>", "terminal-error");
-    const candidates = evidenceList().filter(isAvailable);
+    const candidates = evidenceList().filter(isEvidenceAvailable);
     if (normalize(name) === "all") {
       const scoped = candidates.filter((evidence) => {
         const access = evidence.access || {};
         return (
-          (access.type === "hack" && state.connectedTargets.has(access.target)) ||
-          (access.type === "login" && isLoggedIn(access))
+          access.type === "hack" ||
+          access.type === "login"
         );
       });
       if (!scoped.length) return write("No records available. Connect to a target or log in first.");
@@ -409,6 +369,7 @@ function renderTerminal(container) {
     if (!evidence) return write("No extraction record is attached to this archive.", "terminal-error");
     state.extractedArchives.add(evidence.id);
     state.downloaded.add(evidence.id);
+    window.markEvidenceFound(evidence.id);
     saveCaseProgress();
     window.dispatchEvent(new Event("case-files-change"));
     write(`Extracted ${evidence.content?.name || evidence.title} to ~/downloads.`);
@@ -429,7 +390,7 @@ function renderTerminal(container) {
       const node = args[1].toUpperCase();
       if (node !== "NYC-07") return write(`Unknown node: ${args[1]}. Available node: NYC-07.`, "terminal-error");
       state.vpnNode = node;
-      saveCaseProgress();
+      window.notifyAccessChange();
       return write(`VPN connected · NODE ${node}`);
     }
     write("Usage: vpn connect <node> | vpn status | vpn disconnect", "terminal-error");
@@ -448,17 +409,63 @@ function renderTerminal(container) {
       .filter(Boolean))];
   }
 
+  function targetEvidence(target) {
+    return evidenceList().filter((evidence) => evidence.access?.type === "hack" && evidence.access.target === target);
+  }
+
+  // A target shows up once the player has a lead for at least one of its records.
+  function knownTargets() {
+    return hackTargets().filter((target) => targetEvidence(target).some(evidenceLeadsFound));
+  }
+
+  function aliasFor(target) {
+    return { carrier: "phone", "nypd-archive": "police" }[target];
+  }
+
   function scan(value) {
+    if (!normalize(value)) {
+      const targets = knownTargets();
+      if (!targets.length) return write("No known targets. Find a lead first: a profile, an account, a number.");
+      write("KNOWN TARGETS");
+      for (const target of targets) {
+        const alias = aliasFor(target);
+        write(`  ${target}${alias ? ` (alias: ${alias})` : ""}`);
+      }
+      return write("Use scan <target> for details.");
+    }
     const target = targetName(value);
-    if (!target) return write("Usage: scan <target>", "terminal-error");
     if (!hackTargets().includes(target)) {
       return write(`No simulated target named "${value}" in this case.`, "terminal-error");
     }
     state.scannedTargets.add(target);
     saveCaseProgress();
+    const records = targetEvidence(target);
+    const reachable = records.filter(evidenceLeadsFound);
+    const steps = [...new Set(records.flatMap((evidence) => evidence.needs || []))];
     write(`SCAN ${target.toUpperCase()} · case simulation`);
-    write("need: vpn connect NYC-07");
-    write("need: connect target after the VPN tunnel is active");
+    for (const step of steps) write(`  [${stepDone(step, target) ? "x" : " "}] ${step}`);
+    write(`records you have leads for: ${reachable.length}/${records.length}`);
+    if (reachable.length < records.length) write("Some records need a lead you haven't found yet.");
+  }
+
+  // Checks one "needs" step from evidence.json against the current terminal state.
+  function stepDone(step, target) {
+    const [verb, , argument] = step.split(" ");
+    if (verb === "vpn") return Boolean(state.vpnNode);
+    if (verb === "scan") return state.scannedTargets.has(target);
+    if (verb === "connect") return state.connectedTargets.has(target);
+    return Boolean(argument);
+  }
+
+  // "hack <target>": the case's own hint for that target, only once the player has a lead for it.
+  function hackHint(value) {
+    if (!normalize(value)) {
+      return write("This is a case simulation. Flow: scan → vpn connect <node> → connect <target> → download. Try: scan");
+    }
+    const target = targetName(value);
+    const hints = targetEvidence(target).filter(evidenceLeadsFound).map((evidence) => evidence.hint).filter(Boolean);
+    if (!hints.length) return write(`Nothing to go on for "${value}" yet. Start with: scan`);
+    for (const hint of [...new Set(hints)]) write(`hint: ${hint}`);
   }
 
   function connect(value) {
@@ -468,7 +475,12 @@ function renderTerminal(container) {
     if (!state.scannedTargets.has(target)) return write(`too risky. start with: scan ${target}`);
     if (!state.vpnNode) return write("too risky. need: VPN connection. Use vpn connect NYC-07.");
     state.connectedTargets.add(target);
-    write(`Connected to ${target}. Available case records can now be downloaded.`);
+    const reachable = targetEvidence(target).filter(evidenceLeadsFound);
+    playSound("success");
+    write(`Connected to ${target}.`);
+    if (!reachable.length) write("Nothing here you know how to look for yet. Find a lead first.");
+    for (const evidence of reachable) write(`  ${evidenceFileName(evidence)}`);
+    if (reachable.length) write("Use download <file> or download all.");
     window.notifyAccessChange();
   }
 
@@ -498,6 +510,7 @@ function renderTerminal(container) {
       service: normalizedService,
       account,
     });
+    playSound("success");
     write(`Signed in to ${service} as ${account}.`);
     window.notifyAccessChange();
   }
@@ -524,13 +537,14 @@ function renderTerminal(container) {
     const normalized = normalize(query);
     const people = caseData?.people || [];
     const matches = people.filter((person) => {
-      const fields = [person.name, person.phone, person.email, person.car, person.record?.id, person.record?.address];
-      return fields.some((value) => value && normalize(value).includes(normalized));
+      const fields = [person.name, person.phone, person.email, person.car, person.record?.id, person.address];
+      return phoneMatches(person.phone, query) ||
+        fields.some((value) => value && normalize(value).includes(normalized));
     });
     if (!matches.length) return write("No resident records found.");
     matches.forEach((person) => {
       window.markPersonFound(person.id);
-      write(`${person.name} · ${person.role || person.type || "Resident"}`);
+      write(`${person.name} · ${person.record?.id || "—"} · ${person.record?.address || "address unknown"}`);
       if (person.phone) write(`  phone: ${person.phone}`);
       if (person.email) write(`  email: ${person.email}`);
       if (person.car) write(`  vehicle: ${person.car}`);
@@ -584,7 +598,7 @@ function renderTerminal(container) {
     if (!number) return write("Usage: towers <number> [--date YYYY-MM-DD]", "terminal-error");
     const evidence = evidenceList().find((entry) =>
       entry.content?.type === "log" &&
-      entry.content.number === number &&
+      digitsOnly(entry.content.number) === digitsOnly(number) &&
       (entry.content.entries || []).some((record) => record.tower)
     );
     if (!evidence || !state.downloaded.has(evidence.id)) {
@@ -595,7 +609,7 @@ function renderTerminal(container) {
     );
     if (!entries.length) return write(`No tower entries found${date ? ` for ${date}` : ""}.`);
     for (const entry of entries) {
-      write(`${entry.time} · ${entry.tower}`);
+      write(`${formatEvidenceTime(entry.time)} · ${entry.tower}`);
     }
   }
 
@@ -611,20 +625,13 @@ function renderTerminal(container) {
       write(evidence.title);
       for (const record of evidence.content.messages || evidence.content.entries || []) {
         const details = record.text
-          ? `${record.from}: ${record.text}`
-          : JSON.stringify(record);
-        write(`${record.time || ""} ${details}`.trim());
+          ? `${personName(record.from)}: ${record.text}`
+          : record.event || JSON.stringify(record);
+        write(`${formatEvidenceTime(record.time)} ${details}`.trim());
       }
     }
   }
 
-  function isTextEvidence(evidence) {
-    return ["text", "dataLeak", "email", "note", "statement", "chat"].includes(evidence.content?.type);
-  }
-
-  function formatEvidence(evidence) {
-    return JSON.stringify(evidence.content || {}, null, 2);
-  }
 }
 
 function tokenize(line) {
@@ -635,10 +642,6 @@ function tokenize(line) {
     }
     return token;
   });
-}
-
-function normalize(value) {
-  return String(value || "").trim().toLowerCase();
 }
 
 function isValidDate(value) {
@@ -652,7 +655,3 @@ function sameFileName(first, second) {
   return clean(first) === clean(second);
 }
 
-function serviceMatches(first, second) {
-  const aliases = new Set([normalize(first), normalize(second)]);
-  return aliases.size === 1 || (aliases.has("google") && aliases.has("gmail"));
-}

@@ -26,7 +26,7 @@ function renderEvidenceBoard(container) {
   hintCard.appendChild(createEl(
     "p",
     "board-hint-message",
-    "Move evidence cards anywhere on the board. Drag a card title onto another card to connect them with an orange line."
+    "Every record you find lands here automatically. Move cards anywhere on the board. Drag a card title onto another card to connect them with an orange line."
   ));
   const dismissHint = createEl("button", "board-hint-dismiss", "Got it");
   dismissHint.type = "button";
@@ -44,13 +44,28 @@ function renderEvidenceBoard(container) {
     hintOverlay.hidden = true;
   });
 
+  // Every found record, as a card item, in the order the player found them.
+  // New finds are always added at the end, so cards already on the board never move.
   function evidenceList() {
-    return (caseData?.evidence || [])
-      .filter((evidence) => window.CASE_PROGRESS.foundEvidence.has(evidence.id));
+    return [...window.CASE_PROGRESS.foundEvidence]
+      .map(evidenceById)
+      .filter(Boolean)
+      .map((evidence) => ({
+        id: evidence.id,
+        tag: evidence.app || "evidence",
+        title: evidence.title || evidence.id,
+        description: cardSummary(evidence),
+        footer: evidence.timestamp ? formatEvidenceTime(evidence.timestamp) : "",
+      }));
   }
 
-  function evidenceById(id) {
-    return (caseData?.evidence || []).find((entry) => entry.id === id);
+  function cardSummary(evidence) {
+    const summary = evidence.source || evidence.content?.body || evidence.content?.text || evidence.content?.caption;
+    return typeof summary === "string" ? summary : formatEvidenceText(evidence).split("\n").find(Boolean) || "";
+  }
+
+  function itemTitle(id) {
+    return evidenceById(id)?.title || id;
   }
 
   function getThreads() {
@@ -97,21 +112,18 @@ function renderEvidenceBoard(container) {
     }
 
     for (const [first, second] of threads) {
-      const firstEvidence = evidenceById(first);
-      const secondEvidence = evidenceById(second);
-      if (!firstEvidence || !secondEvidence) continue;
       const row = createEl("div", "board-thread");
       row.appendChild(createEl(
         "span",
         "board-thread-label",
-        `${firstEvidence.title} ↔ ${secondEvidence.title}`
+        `${itemTitle(first)} ↔ ${itemTitle(second)}`
       ));
       const remove = createEl("button", "board-thread-remove", "Remove");
       remove.type = "button";
       remove.dataset.thread = pairKey(first, second);
       remove.setAttribute(
         "aria-label",
-        `Remove connection between ${firstEvidence.title} and ${secondEvidence.title}`
+        `Remove connection between ${itemTitle(first)} and ${itemTitle(second)}`
       );
       row.appendChild(remove);
       threadList.appendChild(row);
@@ -134,37 +146,34 @@ function renderEvidenceBoard(container) {
     for (const [index, entry] of evidence.entries()) {
       const card = createEl("article", "board-card");
       card.dataset.evidenceId = entry.id;
+      card.classList.toggle("is-new", unseenEvidence.has(entry.id));
       const position = getPosition(entry.id, index);
       card.style.left = `${position.x}px`;
       card.style.top = `${position.y}px`;
 
       const heading = createEl("div", "board-card-heading");
-      heading.appendChild(createEl("span", "board-card-tag", entry.app || "evidence"));
+      heading.appendChild(createEl(
+        "span",
+        "board-card-tag",
+        unseenEvidence.has(entry.id) ? `NEW · ${entry.tag}` : entry.tag
+      ));
+      const inReport = window.CASE_PROGRESS.reportEvidence.has(entry.id);
       const reportButton = createEl(
         "button",
-        `board-report-toggle${window.CASE_PROGRESS.reportEvidence.has(entry.id) ? " is-selected" : ""}`,
-        window.CASE_PROGRESS.reportEvidence.has(entry.id) ? "In report" : "Add to report"
+        `board-report-toggle${inReport ? " is-selected" : ""}`,
+        inReport ? "In report" : "Add to report"
       );
       reportButton.type = "button";
       reportButton.dataset.reportEvidence = entry.id;
-      reportButton.setAttribute(
-        "aria-pressed",
-        String(window.CASE_PROGRESS.reportEvidence.has(entry.id))
-      );
+      reportButton.setAttribute("aria-pressed", String(inReport));
       heading.appendChild(reportButton);
 
-      const openButton = createEl("button", "board-card-title", entry.title || entry.id);
+      const openButton = createEl("button", "board-card-title", entry.title);
       openButton.type = "button";
-      openButton.dataset.openEvidence = entry.id;
-      const summary = entry.source || entry.content?.body || entry.content?.text || entry.content?.caption;
-      const description = createEl(
-        "p",
-        "board-card-description",
-        typeof summary === "string" ? summary : "Collected case evidence."
-      );
+      openButton.dataset.openItem = entry.id;
+      const description = createEl("p", "board-card-description", entry.description || "Collected case evidence.");
       const cardFooter = createEl("div", "board-card-footer");
-      const date = entry.timestamp ? new Date(entry.timestamp).toLocaleString() : "";
-      cardFooter.appendChild(createEl("span", "board-card-date", date));
+      cardFooter.appendChild(createEl("span", "board-card-date", entry.footer));
       card.append(heading, openButton, description, cardFooter);
       cards.appendChild(card);
     }
@@ -199,19 +208,9 @@ function renderEvidenceBoard(container) {
     }
   }
 
-  function openEvidence(evidence) {
-    openAuxiliaryWindow({
-      id: `board-evidence-${evidence.id}`,
-      name: evidence.title || evidence.id,
-      subtitle: "/ collected evidence",
-      width: 620,
-      height: 440,
-      render(viewer) {
-        const pre = createEl("pre", "terminal-file-viewer");
-        pre.textContent = JSON.stringify(evidence.content || {}, null, 2);
-        viewer.appendChild(pre);
-      },
-    });
+  function openItem(id) {
+    const evidence = evidenceById(id);
+    if (evidence) openEvidenceViewer(evidence, "/ collected evidence");
   }
 
   function addThread(first, second) {
@@ -228,10 +227,10 @@ function renderEvidenceBoard(container) {
     if (event.button !== 0) return;
     const card = event.target.closest(".board-card");
     if (!card) return;
-    if (event.target.closest("button") && !event.target.closest("[data-open-evidence]")) return;
+    if (event.target.closest("button") && !event.target.closest("[data-open-item]")) return;
 
     card.style.zIndex = String(++topCardZ);
-    const isConnection = Boolean(event.target.closest("[data-open-evidence]"));
+    const isConnection = Boolean(event.target.closest("[data-open-item]"));
     const evidenceId = card.dataset.evidenceId;
     const initialX = event.clientX;
     const initialY = event.clientY;
@@ -318,11 +317,10 @@ function renderEvidenceBoard(container) {
       return;
     }
 
-    const openButton = event.target.closest("[data-open-evidence]");
+    const openButton = event.target.closest("[data-open-item]");
     if (openButton) {
       if (openButton.closest(".board-card").dataset.dragged) return;
-      const evidence = evidenceById(openButton.dataset.openEvidence);
-      if (evidence) openEvidence(evidence);
+      openItem(openButton.dataset.openItem);
     }
   });
 
@@ -337,9 +335,24 @@ function renderEvidenceBoard(container) {
     drawThreads();
   });
 
-  window.addEventListener("case-evidence-found", renderCards);
-  window.addEventListener("case-report-evidence-change", renderCards);
-  window.addEventListener("resize", () => drawThreads());
+  onCaseEvent(board, "case-evidence-found", renderCards);
+  // From the "NEW EVIDENCE" notice: scroll the board to the new card.
+  onCaseEvent(board, "case-board-reveal", (event) => {
+    const card = cards.querySelector(`[data-evidence-id="${CSS.escape(event.detail.id)}"]`);
+    card?.scrollIntoView({ block: "center", inline: "center" });
+  });
+
+  // A NEW card counts as seen once the player points at it or opens it.
+  cards.addEventListener("pointerover", (event) => {
+    const card = event.target.closest(".board-card.is-new");
+    if (!card) return;
+    card.classList.remove("is-new");
+    card.querySelector(".board-card-tag").textContent =
+      card.querySelector(".board-card-tag").textContent.replace(/^NEW · /, "");
+    markEvidenceSeen(card.dataset.evidenceId);
+  });
+  onCaseEvent(board, "case-report-evidence-change", renderCards);
+  onCaseEvent(board, "resize", () => drawThreads());
   if ("ResizeObserver" in window) {
     new ResizeObserver(() => drawThreads()).observe(cards);
   }

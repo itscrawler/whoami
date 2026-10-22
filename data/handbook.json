@@ -17,7 +17,10 @@
               "description": "Select an app in the dock to open it. Drag windows by their title bars; minimize, maximize, close, or resize them with the window controls."
             },
             {
-              "description": "Use the ? button beside the clock or open Handbook from the dock to return to these instructions."
+              "description": "Keyboard: 1–9 and 0 open the dock apps in order, Esc closes the active window (press it once more if you are typing in a field)."
+            },
+            {
+              "description": "Open Handbook from the dock to return to these instructions. Mail is where every case begins."
             }
           ]
         },
@@ -36,10 +39,13 @@
           "title": "Evidence board",
           "items": [
             {
-              "description": "Found evidence appears on the Evidence board automatically. Select two cards and connect them to draw a thread; you can remove a thread at any time."
+              "description": "Every record you find lands on the Evidence board automatically, with a NEW EVIDENCE notice at the top of the screen."
             },
             {
-              "description": "Use Add to report on evidence cards to choose which collected records should be available to the final report."
+              "description": "Drag a card title onto another card to connect them with a thread; remove a thread at any time."
+            },
+            {
+              "description": "Use Add to report on evidence cards to choose which records support your final report."
             }
           ]
         }
@@ -107,19 +113,24 @@
       "label": "How to hack",
       "title": "Unlocking simulated records",
       "paragraphs": [
-        "Some fictional records require a simulated access path. Follow the requirements shown by the case; not every record uses every step."
+        "Some fictional records require a simulated access path. Follow the requirements shown by the case; not every record uses every step.",
+        "A target only matters once you know what to look for on it: a profile you opened, an account, a number from another record. Leads come first."
       ],
       "groups": [
         {
           "title": "Protected targets",
           "items": [
             {
+              "command": "scan",
+              "description": "List the targets you currently have leads for."
+            },
+            {
               "command": "vpn connect <node>",
               "description": "Connect to the case's fictional VPN node when a target requires it."
             },
             {
               "command": "scan <target>",
-              "description": "Inspect a target and review its access requirements."
+              "description": "Inspect a target: its steps, and how many of its records you have leads for."
             },
             {
               "command": "connect <target>",
@@ -128,6 +139,10 @@
             {
               "command": "download <file>",
               "description": "Save the records made available by the connection."
+            },
+            {
+              "command": "hack <target>",
+              "description": "Get a nudge for a target you already have a lead for."
             }
           ]
         },
@@ -188,6 +203,54 @@
       ]
     },
     {
+      "id": "stuck",
+      "label": "If stuck",
+      "title": "If you are stuck",
+      "paragraphs": [
+        "Nothing in a case is random. When the trail goes cold, go back to what you already have and read it again, slowly."
+      ],
+      "groups": [
+        {
+          "title": "Things to try",
+          "items": [
+            {
+              "description": "Re-read the client's message and its attachments. Names, emails, devices and times are all leads."
+            },
+            {
+              "description": "Search the Database by name, phone, address or plate. Opening a dossier can reveal new terminal targets."
+            },
+            {
+              "command": "scan",
+              "description": "Shows which targets you have leads for. scan <target> shows which of its records you still can't reach."
+            },
+            {
+              "description": "Search the Browser with exact words from the evidence: handles, places, dates, phone numbers."
+            },
+            {
+              "description": "Check Mail. New messages arrive as the case moves."
+            },
+            {
+              "description": "Open the Map: places, towers, the phone route and cameras appear as you find evidence. Compare where people were with when."
+            }
+          ]
+        },
+        {
+          "title": "Testing the official version",
+          "items": [
+            {
+              "description": "Write down the official timeline, then check each step against an independent record. Where two sources disagree, one of them is wrong."
+            },
+            {
+              "description": "Look for things that should be there and aren't: steps, signals, witnesses, activity."
+            },
+            {
+              "description": "An alibi is a record too. Check its time and place as carefully as anything else."
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "commands",
       "label": "Commands",
       "title": "Terminal command reference",
@@ -240,8 +303,8 @@
               "description": "Search case records for an IP location."
             },
             {
-              "command": "scan <target> | connect <target>",
-              "description": "Inspect a fictional target and connect after meeting its requirements."
+              "command": "scan [target] | connect <target>",
+              "description": "List targets you have leads for, inspect one, or connect after meeting its requirements."
             },
             {
               "command": "login <service> <account> <password> | logout",
@@ -274,7 +337,7 @@
             },
             {
               "command": "hack [target]",
-              "description": "Show a hint for the simulated access flow."
+              "description": "Show the access flow, or a nudge for a target you have a lead for."
             }
           ]
         },
@@ -282,7 +345,7 @@
           "title": "Harmless joke commands",
           "items": [
             {
-              "command": "sudo | rm -rf /",
+              "command": "sudo | rm -rf",
               "description": "These return jokes only; they do not execute system commands."
             }
           ]
