@@ -389,6 +389,7 @@ function renderTerminal(container) {
     state.downloaded.add(evidence.id);
     window.markEvidenceFound(evidence.id);
     saveCaseProgress();
+    window.dispatchEvent(new Event("case-files-change"));
   }
 
   function archiveInDownloads() {
@@ -409,6 +410,7 @@ function renderTerminal(container) {
     state.extractedArchives.add(evidence.id);
     state.downloaded.add(evidence.id);
     saveCaseProgress();
+    window.dispatchEvent(new Event("case-files-change"));
     write(`Extracted ${evidence.content?.name || evidence.title} to ~/downloads.`);
   }
 
@@ -567,6 +569,7 @@ function renderTerminal(container) {
     }
     state.crackedArchives.add(normalize(archive));
     saveCaseProgress();
+    window.dispatchEvent(new Event("case-files-change"));
     write(`MATCH · archive unlocked with a word from your wordlist.`);
   }
 

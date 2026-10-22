@@ -2,9 +2,22 @@
 
 const PHONE_SECTIONS = [
   ["messages", "Messages"],
+  ["calls", "Calls"],
+  ["apps", "Apps"],
+  ["steps", "Steps"],
+  ["photos", "Photos"],
   ["social", "Social"],
   ["mail", "Mail"],
   ["device", "Device"],
+];
+
+const PHONE_APP_CATALOG = [
+  ["messages", "Messages", "Private conversations and message backups."],
+  ["calls", "Phone", "Call history stored on the device."],
+  ["steps", "Nimbus Fit", "Steps, Wi-Fi and device activity."],
+  ["photos", "Photos", "Images stored in the account backup."],
+  ["mail", "Mail", "Messages in Mia's personal mailbox."],
+  ["social", "Social", "Public posts linked to the device owner."],
 ];
 
 function renderPhone(container) {
@@ -37,7 +50,8 @@ function renderPhone(container) {
     status.append(
       createEl("span", `phone-status-light${connected ? " is-connected" : ""}`),
       createEl("span", "", connected ? "DEVICE LINK ACTIVE" : "DEVICE NOT CONNECTED"),
-      createEl("span", "phone-status-account", nimbus ? "NIMBUS · SIGNED IN" : "NIMBUS · SIGNED OUT"),
+      createEl("span", "phone-status-account", "MIA HOLT · DEVICE"),
+      createEl("span", `phone-status-account${nimbus ? " is-signed-in" : ""}`, nimbus ? "NIMBUS · SIGNED IN" : "NIMBUS · SIGNED OUT"),
     );
 
     const nav = createEl("nav", "phone-nav");
@@ -67,10 +81,17 @@ function renderPhone(container) {
       ));
     }
 
-    if (!entries.length) {
-      content.appendChild(createEl("p", "phone-empty", "No records in this section."));
+    if (activeSection === "apps") {
+      content.appendChild(renderAppLauncher());
+    } else if (!entries.length) {
+      const emptyMessage = activeSection === "calls"
+        ? "No call history in the recovered device records."
+        : "No records in this section.";
+      content.appendChild(createEl("p", "phone-empty", emptyMessage));
     } else {
-      for (const entry of entries) content.appendChild(renderEntry(entry));
+      for (const entry of entries) {
+        content.appendChild(activeSection === "steps" ? renderStepRecord(entry) : renderEntry(entry));
+      }
     }
 
     nav.addEventListener("click", (event) => {
@@ -87,6 +108,13 @@ function renderPhone(container) {
       if (section === "messages") {
         return entry.app === "phone" && entry.content?.type === "chat";
       }
+      if (section === "calls") {
+        return entry.app === "phone" &&
+          ["callLog", "calls"].includes(entry.content?.type);
+      }
+      if (section === "apps") return false;
+      if (section === "steps") return entry.id === "ev-mia-pedometer";
+      if (section === "photos") return entry.id === "ev-mia-dog-photo";
       if (section === "social") {
         return entry.app === "social" && entry.access?.type === "public";
       }
@@ -95,7 +123,7 @@ function renderPhone(container) {
           (entry.people || []).includes("mia-holt");
       }
       if (section === "device") {
-        return (entry.app === "phone" && entry.content?.type !== "chat") ||
+        return (entry.app === "phone" && entry.content?.type !== "chat" && entry.id !== "ev-mia-pedometer") ||
           (entry.app === "carrier" && entry.access?.type === "hack");
       }
       return false;
@@ -161,6 +189,92 @@ function renderPhone(container) {
       }
     }
     return card;
+  }
+
+  function renderAppLauncher() {
+    const grid = createEl("div", "phone-app-grid");
+    for (const [section, name, description] of PHONE_APP_CATALOG) {
+      const entries = entriesForSection(section);
+      const available = entries.some(isAvailable);
+      const button = createEl("button", `phone-app-tile${available ? "" : " is-locked"}`);
+      button.type = "button";
+      button.dataset.appSection = section;
+      button.append(
+        createEl("span", "phone-app-icon", appIcon(section)),
+        createEl("span", "phone-app-name", name),
+        createEl("span", "phone-app-description", description),
+        createEl("span", "phone-app-state", entries.length
+          ? `${entries.filter(isAvailable).length}/${entries.length} RECORDS AVAILABLE`
+          : "NO RECORDS"),
+      );
+      grid.appendChild(button);
+    }
+    grid.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-app-section]");
+      if (!button) return;
+      activeSection = button.dataset.appSection;
+      draw();
+    });
+    return grid;
+  }
+
+  function renderStepRecord(entry) {
+    const available = isAvailable(entry);
+    if (available) window.markEvidenceFound(entry.id);
+    const card = createEl("article", `phone-record phone-step-record${available ? "" : " is-locked"}`);
+    const header = createEl("div", "phone-record-heading");
+    header.append(
+      createEl("h3", "phone-record-title", entry.title),
+      createEl("span", "phone-record-state", available ? "AVAILABLE" : "LOCKED"),
+    );
+    card.appendChild(header);
+    if (!available) {
+      card.appendChild(createEl("p", "phone-record-lock", accessHint(entry)));
+      return card;
+    }
+
+    const records = entry.content?.entries || [];
+    const stepRecords = records.map((record) => {
+      const match = record.event?.match(/\bSteps\b.*:\s*([\d,]+)$/i);
+      return match ? { ...record, count: Number(match[1].replace(/,/g, "")) } : null;
+    }).filter(Boolean);
+    if (stepRecords.length) {
+      const summary = createEl("div", "phone-step-summary");
+      summary.append(
+        createEl("span", "phone-step-total", String(stepRecords.reduce((sum, record) => sum + record.count, 0))),
+        createEl("span", "phone-step-label", "RECORDED STEPS"),
+      );
+      card.appendChild(summary);
+    }
+
+    for (const record of records) {
+      const row = createEl("div", "phone-device-row");
+      row.append(
+        createEl("span", "phone-device-time", formatTime(record.time)),
+        createEl("span", "phone-device-event", record.event || record.tower || ""),
+      );
+      const stepMatch = record.event?.match(/\bSteps\b.*:\s*([\d,]+)$/i);
+      if (stepMatch) {
+        const count = Number(stepMatch[1].replace(/,/g, ""));
+        const bar = createEl("span", "phone-step-bar");
+        bar.setAttribute("aria-label", `${count} recorded steps`);
+        bar.style.setProperty("--step-fill", `${Math.min(100, count)}%`);
+        row.appendChild(bar);
+      }
+      card.appendChild(row);
+    }
+    return card;
+  }
+
+  function appIcon(section) {
+    return ({
+      messages: "MSG",
+      calls: "TEL",
+      steps: "FIT",
+      photos: "IMG",
+      mail: "MAIL",
+      social: "SOC",
+    })[section] || "APP";
   }
 
   function isAvailable(entry) {

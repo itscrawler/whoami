@@ -55,7 +55,7 @@ function renderHandbook(container) {
         "SEARCH: lookup <name|number|email|vehicle> searches resident records; breach search <email|username> checks the available fictional leak; geoip <ip> searches IP locations in case records.",
         "ACCESS: scan <target> reports access requirements; connect <target> opens a simulated target after scanning and connecting the VPN; login <service> <account> <password> checks discovered credentials; logout ends account sessions; disconnect closes the target connection.",
         "WORDLIST: wordlist add <word> adds a clue you found; wordlist show lists your collected clues; crack <archive> --wordlist mine checks only those clues, never an automatic or external password list.",
-        "PHONE: Open Phone in the dock to browse case messages, social posts, email, and device records. Locked records require the matching terminal connection or account session.",
+        "PHONE: Open Phone in the dock to browse Messages, Calls, Apps, Steps, Photos, Social, Mail, and Device. Mia's Messages and Nimbus Fit step data require her Nimbus session; records unlock from Terminal using credentials found in the case. Calls shows an explicit empty state until the case provides call-history records.",
         "PHONE ACCESS: scan phone → vpn connect NYC-07 → connect phone unlocks carrier records. Find Mia's Nimbus credentials in case evidence, then use login nimbus <account> <password> for her message backup and email.",
         "PHONE RECORDS: towers <number> [--date YYYY-MM-DD] shows an available tower log, optionally filtered by date; calls shows downloaded call logs when present; sms shows downloaded text conversations. hack [target] gives a hint for the simulated access flow.",
         "sudo and rm -rf / are harmless jokes; they do not execute system commands.",
@@ -63,10 +63,10 @@ function renderHandbook(container) {
     },
     {
       id: "other-apps",
-      label: "Other apps",
-      title: "Apps not available yet",
+      label: "Files & other apps",
+      title: "Files and other apps",
       paragraphs: [
-        "Browser, Phone, and Map are active. Map locations, tower signals, routes, and cameras appear as you uncover their evidence. Files, Evidence board, and Report are planned; the case data is preserved for future use.",
+        "Files shows the folders on your computer and case records downloaded through Terminal. Open Downloads, then select a file to inspect it. The recovered backup_veridia folder appears after you download the deleted-folder record; encrypted archives can be opened for details and extracted after you unlock them in Terminal. Evidence board and Report are not available yet.",
       ],
     },
   ];

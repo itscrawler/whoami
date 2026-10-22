@@ -494,6 +494,182 @@ body.is-resizing * {
   overflow-wrap: anywhere;
 }
 
+/* ---------- Files app ---------- */
+
+.files-app {
+  display: grid;
+  grid-template-columns: 142px minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+  background: var(--bg);
+}
+
+.files-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 7px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+
+.files-location,
+.files-nav-button,
+.files-breadcrumb {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font: inherit;
+  cursor: pointer;
+}
+
+.files-location {
+  padding: 8px;
+  text-align: left;
+  font-size: 10px;
+}
+
+.files-location:hover,
+.files-location.is-selected {
+  background: var(--surface-2);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.files-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.files-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 42px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.files-nav-button {
+  width: 25px;
+  height: 25px;
+  border-color: var(--border);
+  font-size: 14px;
+}
+
+.files-nav-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.files-breadcrumbs {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 5px;
+  margin-left: 5px;
+  overflow: auto;
+}
+
+.files-breadcrumb {
+  flex-shrink: 0;
+  padding: 3px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.files-breadcrumb-separator {
+  color: var(--text-dim);
+  font-size: 10px;
+}
+
+.files-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+  align-content: start;
+  gap: 8px;
+  min-height: 0;
+  padding: 12px;
+  overflow: auto;
+}
+
+.files-entry {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  min-height: 64px;
+  padding: 9px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.files-entry:hover,
+.files-entry:focus-visible {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.files-entry.is-locked {
+  border-style: dashed;
+}
+
+.files-entry-icon {
+  display: grid;
+  flex: 0 0 34px;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.files-entry-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 4px;
+}
+
+.files-entry-name {
+  overflow-wrap: anywhere;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.files-entry-description {
+  color: var(--text-muted);
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+.files-empty {
+  grid-column: 1 / -1;
+  align-self: center;
+  justify-self: center;
+  max-width: 300px;
+  color: var(--text-muted);
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.files-archive-note {
+  padding: 18px;
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
 /* ---------- Phone ---------- */
 
 .phone-app {
@@ -702,7 +878,107 @@ body.is-resizing * {
   font-size: 11px;
 }
 
+.phone-app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 9px;
+}
+
+.phone-app-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 132px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.phone-app-tile:hover,
+.phone-app-tile:focus-visible {
+  border-color: var(--accent);
+}
+
+.phone-app-tile.is-locked {
+  border-style: dashed;
+}
+
+.phone-app-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 11px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.phone-app-name {
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.phone-app-description {
+  min-height: 30px;
+  color: var(--text-muted);
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.phone-app-state {
+  margin-top: auto;
+  padding-top: 10px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.phone-step-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.phone-step-total {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 27px;
+}
+
+.phone-step-label {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.phone-step-record .phone-device-row {
+  grid-template-columns: minmax(115px, 0.8fr) minmax(0, 2fr);
+}
+
+.phone-step-bar {
+  grid-column: 2;
+  display: block;
+  width: 100%;
+  height: 3px;
+  margin-top: -6px;
+  background: linear-gradient(to right, var(--accent) var(--step-fill), var(--surface-2) var(--step-fill));
+}
+
 .phone-nav-button:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.phone-app-tile:focus-visible {
   outline: 1px solid var(--accent);
   outline-offset: -2px;
 }

@@ -87,6 +87,7 @@ const APPS = [
     section: "apps",
     width: 560,
     height: 400,
+    render: renderFiles, // js/files.js
     icon: '<path d="M3 6h6l2 2h10v11H3z"/>',
   },
   {
