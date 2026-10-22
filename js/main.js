@@ -16,6 +16,7 @@ window.CASE_PROGRESS = {
   foundPeople: new Set(),
   openedApps: new Set(),
   downloaded: new Set(),
+  terminalHistory: [],
   wordlist: new Map(),
   crackedArchives: new Set(),
   extractedArchives: new Set(),
@@ -43,6 +44,7 @@ function saveCaseProgress() {
       foundPeople: [...window.CASE_PROGRESS.foundPeople],
       openedApps: [...window.CASE_PROGRESS.openedApps],
       downloaded: [...window.CASE_PROGRESS.downloaded],
+      terminalHistory: window.CASE_PROGRESS.terminalHistory,
       wordlist: [...window.CASE_PROGRESS.wordlist],
       crackedArchives: [...window.CASE_PROGRESS.crackedArchives],
       extractedArchives: [...window.CASE_PROGRESS.extractedArchives],
@@ -82,6 +84,12 @@ function restoreCaseProgress(data) {
   window.CASE_PROGRESS.foundPeople = setKnown(saved.foundPeople, personIds);
   window.CASE_PROGRESS.openedApps = setKnown(saved.openedApps, appIds);
   window.CASE_PROGRESS.downloaded = setKnown(saved.downloaded, evidenceIds);
+  window.CASE_PROGRESS.terminalHistory.length = 0;
+  if (Array.isArray(saved.terminalHistory)) {
+    saved.terminalHistory
+      .filter((line) => typeof line === "string")
+      .forEach((line) => window.CASE_PROGRESS.terminalHistory.push(line));
+  }
   window.CASE_PROGRESS.wordlist = new Map(
     Array.isArray(saved.wordlist)
       ? saved.wordlist.filter((entry) =>

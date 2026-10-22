@@ -49,7 +49,7 @@ function renderHandbook(container) {
       title: "Terminal",
       paragraphs: [
         "This is a simulated case terminal. Commands only inspect the fictional case data and your in-game session; they do not run on your computer or contact real services.",
-        "BASICS: help [command] lists commands or explains one; clear clears output; history shows commands; date shows in-game time; whoami prints your handle; exit closes the terminal.",
+        "BASICS: help [command] lists commands or explains one; clear clears output; history shows saved commands and the up/down arrows recall them; date shows in-game time; whoami prints your handle; exit closes the terminal.",
         "FILES: ls lists the current folder; cd <folder> changes folder; cat <file> prints a downloaded text record; open <file> opens a downloaded record in a viewer; download <file|all> saves records available in your current session; unzip <archive> extracts an unlocked archive.",
         "VPN: vpn connect <node> starts the simulated tunnel; vpn status checks it; vpn disconnect closes it. A VPN is required before connecting to protected targets.",
         "SEARCH: lookup <name|number|email|vehicle> searches resident records; breach search <email|username> checks the available fictional leak; geoip <ip> searches IP locations in case records.",
@@ -57,7 +57,7 @@ function renderHandbook(container) {
         "WORDLIST: wordlist add <word> adds a clue you found; wordlist show lists your collected clues; crack <archive> --wordlist mine checks only those clues, never an automatic or external password list.",
         "PHONE: Open Phone in the dock to browse case messages, social posts, email, and device records. Locked records require the matching terminal connection or account session.",
         "PHONE ACCESS: scan phone → vpn connect NYC-07 → connect phone unlocks carrier records. Find Mia's Google credentials in case evidence, then use login google <account> <password> for her message backup and email.",
-        "PHONE RECORDS: towers <number> [--date] shows an available tower log; calls shows downloaded call logs when present; sms shows downloaded text conversations. hack phone prints the first access step.",
+        "PHONE RECORDS: towers <number> [--date YYYY-MM-DD] shows an available tower log, optionally filtered by date; calls shows downloaded call logs when present; sms shows downloaded text conversations. hack [target] gives a hint for the simulated access flow.",
         "sudo and rm -rf / are harmless jokes; they do not execute system commands.",
       ],
     },

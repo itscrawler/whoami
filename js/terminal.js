@@ -27,10 +27,10 @@ const TERMINAL_COMMANDS = [
   ["crack <archive> --wordlist mine", "Check your collected words against an archive clue."],
   ["wordlist add <word>", "Add a clue to your local in-game wordlist."],
   ["wordlist show", "List collected wordlist clues."],
-  ["towers <number> [--date]", "Show an available cell-tower log."],
+  ["towers <number> [--date YYYY-MM-DD]", "Show an available cell-tower log."],
   ["calls", "Show downloaded call records."],
   ["sms", "Show downloaded text-message records."],
-  ["hack phone", "Show the first step for simulated phone access."],
+  ["hack [target]", "Show a hint for the simulated access flow."],
 ];
 
 function renderTerminal(container) {
@@ -52,7 +52,7 @@ function renderTerminal(container) {
 
   const state = {
     cwd: "/home/whoami",
-    history: [],
+    history: window.CASE_PROGRESS.terminalHistory,
     historyIndex: null,
     get vpnNode() {
       return window.CASE_ACCESS.vpnNode;
@@ -78,6 +78,7 @@ function renderTerminal(container) {
     const line = input.value.trim();
     if (!line) return;
     state.history.push(line);
+    saveCaseProgress();
     state.historyIndex = null;
     write(`${state.cwd} $ ${line}`, "terminal-command");
     input.value = "";
@@ -131,8 +132,11 @@ function renderTerminal(container) {
     if (command === "exit") return closeWindow("terminal");
     if (command === "sudo") return write("nice try");
     if (command === "rm" && rest.join(" ") === "-rf /") return write("you first");
-    if (command === "hack" && rest[0]?.toLowerCase() === "phone") {
-      return write("Phone access is simulated. Start with: scan phone");
+    if (command === "hack") {
+      if (rest[0]?.toLowerCase() === "phone") {
+        return write("Phone access is simulated. Start with: scan phone");
+      }
+      return write(`This is a case simulation. Start with: scan ${rest.join(" ") || "<target>"}`);
     }
     if (command === "ls") return listFiles();
     if (command === "cd") return changeDirectory(rest[0]);
@@ -191,10 +195,10 @@ function renderTerminal(container) {
     write("VPN & SEARCH");
     for (const [syntax, description] of TERMINAL_COMMANDS.slice(12, 18)) write(`${syntax} — ${description}`);
     write("SIMULATED ACCESS");
-    for (const [syntax, description] of TERMINAL_COMMANDS.slice(18, 24)) write(`${syntax} — ${description}`);
+    for (const [syntax, description] of TERMINAL_COMMANDS.slice(18, 23)) write(`${syntax} — ${description}`);
     write("WORDLIST & PHONE");
-    for (const [syntax, description] of TERMINAL_COMMANDS.slice(24)) write(`${syntax} — ${description}`);
-    write('Special: sudo, rm -rf /, hack phone. Use "help <command>" for details.');
+    for (const [syntax, description] of TERMINAL_COMMANDS.slice(23)) write(`${syntax} — ${description}`);
+    write('Special: sudo, rm -rf /, hack. Use "help <command>" for details.');
   }
 
   function writeHistory() {
@@ -497,7 +501,7 @@ function renderTerminal(container) {
   }
 
   function breachSearch(query) {
-    if (!query) return write("Usage: breach search <email|username>", "terminal-error");
+    if (!normalize(query)) return write("Usage: breach search <email|username>", "terminal-error");
     const leak = evidenceList().find((evidence) =>
       evidence.content?.type === "dataLeak" &&
       ["email", "username"].some((field) =>
@@ -514,7 +518,7 @@ function renderTerminal(container) {
   }
 
   function lookup(query) {
-    if (!query) return write("Usage: lookup <name|number|email|vehicle>", "terminal-error");
+    if (!normalize(query)) return write("Usage: lookup <name|number|email|vehicle>", "terminal-error");
     const normalized = normalize(query);
     const people = caseData?.people || [];
     const matches = people.filter((person) => {
@@ -523,6 +527,7 @@ function renderTerminal(container) {
     });
     if (!matches.length) return write("No resident records found.");
     matches.forEach((person) => {
+      window.markPersonFound(person.id);
       write(`${person.name} · ${person.role || person.type || "Resident"}`);
       if (person.phone) write(`  phone: ${person.phone}`);
       if (person.email) write(`  email: ${person.email}`);
@@ -566,8 +571,14 @@ function renderTerminal(container) {
   }
 
   function towers(args) {
-    if (!args.length) return write("Usage: towers <number> [--date]", "terminal-error");
-    const number = args.filter((argument) => argument !== "--date").join(" ");
+    if (!args.length) return write("Usage: towers <number> [--date YYYY-MM-DD]", "terminal-error");
+    const dateFlag = args.indexOf("--date");
+    const date = dateFlag < 0 ? null : args[dateFlag + 1];
+    if (dateFlag >= 0 && (!date || !isValidDate(date))) {
+      return write("Usage: towers <number> [--date YYYY-MM-DD]", "terminal-error");
+    }
+    const number = args.slice(0, dateFlag < 0 ? args.length : dateFlag).join(" ");
+    if (!number) return write("Usage: towers <number> [--date YYYY-MM-DD]", "terminal-error");
     const evidence = evidenceList().find((entry) =>
       entry.content?.type === "log" &&
       entry.content.number === number &&
@@ -576,8 +587,12 @@ function renderTerminal(container) {
     if (!evidence || !state.downloaded.has(evidence.id)) {
       return write("No downloaded tower log for that number. Scan and connect to the carrier target first.");
     }
-    for (const entry of evidence.content.entries || []) {
-      if (entry.tower) write(`${entry.time} · ${entry.tower}`);
+    const entries = (evidence.content.entries || []).filter((entry) =>
+      entry.tower && (!date || entry.time?.startsWith(date))
+    );
+    if (!entries.length) return write(`No tower entries found${date ? ` for ${date}` : ""}.`);
+    for (const entry of entries) {
+      write(`${entry.time} · ${entry.tower}`);
     }
   }
 
@@ -621,6 +636,12 @@ function tokenize(line) {
 
 function normalize(value) {
   return String(value || "").trim().toLowerCase();
+}
+
+function isValidDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().startsWith(value);
 }
 
 function sameFileName(first, second) {
