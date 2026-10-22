@@ -57,6 +57,7 @@
     padding:24px;background:var(--surface);border:1px solid var(--accent);font-family:var(--mono);
     font-size:13px;line-height:1.7;color:var(--text);display:none}
   .note b{color:var(--accent)}
+
   .maplibregl-ctrl-attrib{font-size:10px!important;background:rgba(21,23,25,.7)!important;color:var(--dim)!important}
   .maplibregl-ctrl-attrib a{color:var(--muted)!important}
 </style>
@@ -103,14 +104,16 @@ if (KEY.startsWith("GET_A_FREE")) {
 
 // Case places in NYC (real locations). Later these come from case.json.
 const PLACES = [
-  { id:"mia-home",    name:"Mia's apartment · Linden St",     lng:-73.9205, lat:40.6992, key:true },
-  { id:"north-bridge",name:"Marine Parkway Bridge (car found)",lng:-73.8855, lat:40.5735, key:true },
-  { id:"body-site",   name:"Floyd Bennett Field",             lng:-73.8905, lat:40.5905, key:true },
-  { id:"owen-home",   name:"Owen Lind · Gerritsen Beach",     lng:-73.9250, lat:40.5885 },
-  { id:"veridia",     name:"Veridia Health · DUMBO",          lng:-73.9890, lat:40.7030 },
-  { id:"warehouse",   name:"Poker warehouse · Red Hook",      lng:-74.0150, lat:40.6760 },
-  { id:"restaurant",  name:"Salt & Cedar · Williamsburg",     lng:-73.9670, lat:40.7150 },
-];
+  { id:"mia-home",    name:"Mia's apartment · Linden St",      lng:-73.9205, lat:40.6992, key:true, found:true },
+  { id:"north-bridge",name:"Marine Parkway Bridge (car found)", lng:-73.8855, lat:40.5735, key:true, found:true },
+  { id:"body-site",   name:"Floyd Bennett Field",              lng:-73.8905, lat:40.5905, key:true, found:false },
+  { id:"owen-home",   name:"Owen Lind · Gerritsen Beach",      lng:-73.9250, lat:40.5885, found:false },
+  { id:"veridia",     name:"Veridia Health · DUMBO",           lng:-73.9890, lat:40.7030, found:false },
+  { id:"warehouse",   name:"Poker warehouse · Red Hook",       lng:-74.0150, lat:40.6760, found:false },
+  { id:"restaurant",  name:"Salt & Cedar · Williamsburg",      lng:-73.9670, lat:40.7150, found:false },
+]
+const foundPlaceIds = new Set(PLACES.filter(place => place.found).map(place => place.id));
+let routeFound = false;
 
 // Cell-tower route of Mia's phone that night (orange dashed line)
 const TOWER_ROUTE = {
@@ -167,23 +170,46 @@ const map = new maplibregl.Map({
   attributionControl:{ compact:true }
 });
 
-// markers
+const markers = new Map();
+
+function addPlaceMarker(place) {
+  if (markers.has(place.id)) return;
+  const el = document.createElement("div");
+  el.className = "mk" + (place.key ? " key" : "");
+  el.innerHTML = place.key
+    ? `<span class="brk tl"></span><span class="brk br"></span><span class="lbl">${place.name}</span>`
+    : `<span class="lbl">${place.name}</span>`;
+  markers.set(place.id, new maplibregl.Marker({ element:el, anchor:"center" })
+    .setLngLat([place.lng, place.lat]).addTo(map));
+}
+
+function revealPlace(id) {
+  const place = PLACES.find(entry => entry.id === id);
+  if (!place) {
+    console.warn(`Unknown map location: ${id}`);
+    return;
+  }
+  foundPlaceIds.add(id);
+  if (map.loaded()) addPlaceMarker(place);
+}
+
+function revealRoute() {
+  routeFound = true;
+  if (map.getLayer("route")) map.setLayoutProperty("route", "visibility", "visible");
+}
+
+window.addEventListener("whoami:location-found", event => revealPlace(event.detail?.id));
+window.addEventListener("whoami:route-found", revealRoute);
+
 map.on("load", () => {
   // route line
   map.addSource("route",{ type:"geojson", data:TOWER_ROUTE });
   map.addLayer({ id:"route", type:"line", source:"route",
+    layout:{ visibility: routeFound ? "visible" : "none" },
     paint:{ "line-color":"#ff6a00", "line-width":2, "line-dasharray":[2,2] } });
 
   // place markers
-  PLACES.forEach(p => {
-    const el = document.createElement("div");
-    el.className = "mk" + (p.key ? " key" : "");
-    el.innerHTML = p.key
-      ? `<span class="brk tl"></span><span class="brk br"></span><span class="lbl">${p.name}</span>`
-      : `<span class="lbl">${p.name}</span>`;
-    new maplibregl.Marker({ element:el, anchor:"center" })
-      .setLngLat([p.lng,p.lat]).addTo(map);
-  });
+  PLACES.filter(place => foundPlaceIds.has(place.id)).forEach(addPlaceMarker);
 });
 
 // coordinate readout
@@ -204,6 +230,7 @@ document.querySelectorAll(".levels button").forEach(b => {
     map.flyTo({ zoom:+b.dataset.zoom, center:[-73.92,40.62] });
   };
 });
+
 </script>
 </body>
 </html>
