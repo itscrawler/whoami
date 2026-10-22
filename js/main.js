@@ -127,6 +127,7 @@ window.markEvidenceFound = function markEvidenceFound(id) {
   if (!caseData?.evidence.some((entry) => entry.id === id) || window.CASE_PROGRESS.foundEvidence.has(id)) return;
   window.CASE_PROGRESS.foundEvidence.add(id);
   saveCaseProgress();
+  window.refreshCaseMap?.(id);
 };
 
 window.markPersonFound = function markPersonFound(id) {

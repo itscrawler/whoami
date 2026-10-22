@@ -57,6 +57,7 @@ const APPS = [
     section: "apps",
     width: 820,
     height: 540,
+    render: renderMap, // js/map.js
     icon: '<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/>',
   },
   {

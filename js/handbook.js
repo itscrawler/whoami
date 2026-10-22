@@ -66,7 +66,7 @@ function renderHandbook(container) {
       label: "Other apps",
       title: "Apps not available yet",
       paragraphs: [
-        "Browser and Phone are active. Map, Files, Evidence board, and Report are planned; Cameras are also unavailable. Their case data is preserved for future use.",
+        "Browser, Phone, and Map are active. Map locations, tower signals, routes, and cameras appear as you uncover their evidence. Files, Evidence board, and Report are planned; the case data is preserved for future use.",
       ],
     },
   ];
