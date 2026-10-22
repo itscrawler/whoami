@@ -67,7 +67,8 @@
       "conclusion": "Probable suicide. Body not found.",
       "lastPhoneSignal": {
         "time": "2019-11-08T23:47:00-05:00",
-        "tower": "TWR-118 Marine Parkway–Gil Hodges Memorial Bridge"
+        "tower": "TWR-118 Marine Parkway–Gil Hodges Memorial Bridge",
+        "coordinates": [-73.8855, 40.5735]
       },
       "interviews": [
         "ethan-brooks",
@@ -398,27 +399,33 @@
       "entries": [
         {
           "time": "2019-11-08T22:57:00-05:00",
-          "tower": "TWR-044 Linden"
+          "tower": "TWR-044 Linden St, Bushwick",
+          "coordinates": [-73.9205, 40.6992]
         },
         {
           "time": "2019-11-08T23:03:00-05:00",
-          "tower": "TWR-071 Eastside"
+          "tower": "TWR-071 Flatbush",
+          "coordinates": [-73.9300, 40.6600]
         },
         {
           "time": "2019-11-08T23:09:00-05:00",
-          "tower": "TWR-093 Floyd Bennett Field"
+          "tower": "TWR-093 Floyd Bennett Field",
+          "coordinates": [-73.8905, 40.5905]
         },
         {
           "time": "2019-11-08T23:38:00-05:00",
-          "tower": "TWR-093 Floyd Bennett Field"
+          "tower": "TWR-093 Floyd Bennett Field",
+          "coordinates": [-73.8905, 40.5905]
         },
         {
           "time": "2019-11-08T23:44:00-05:00",
-          "tower": "TWR-102 River Rd"
+          "tower": "TWR-102 Marine Park",
+          "coordinates": [-73.9340, 40.6080]
         },
         {
           "time": "2019-11-08T23:47:00-05:00",
-          "tower": "TWR-118 Marine Parkway–Gil Hodges Memorial Bridge"
+          "tower": "TWR-118 Marine Parkway–Gil Hodges Memorial Bridge",
+          "coordinates": [-73.8855, 40.5735]
         }
       ]
     },

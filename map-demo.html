@@ -69,7 +69,7 @@
 <header class="topbar">
   <span style="font-weight:700;letter-spacing:.14em">WHOAMI<span style="color:var(--accent)">_</span></span>
   <span class="muted">MAP / NEW YORK CITY</span>
-  <span style="margin-left:auto" class="muted"><span class="sq"></span> CASE #535 · NORTH BRIDGE</span>
+  <span style="margin-left:auto" class="muted"><span class="sq"></span> CASE #535 · MARINE PARKWAY BRIDGE</span>
 </header>
 
 <div class="levels">
@@ -105,12 +105,12 @@ if (KEY.startsWith("GET_A_FREE")) {
 // Case places in NYC (real locations). Later these come from case.json.
 const PLACES = [
   { id:"mia-home",    name:"Mia's apartment · Linden St",      lng:-73.9205, lat:40.6992, key:true, found:true },
-  { id:"north-bridge",name:"Marine Parkway Bridge (car found)", lng:-73.8855, lat:40.5735, key:true, found:true },
-  { id:"body-site",   name:"Floyd Bennett Field",              lng:-73.8905, lat:40.5905, key:true, found:false },
+  { id:"north-bridge",name:"Marine Parkway–Gil Hodges Memorial Bridge (car found)", lng:-73.8855, lat:40.5735, key:true, found:true },
+  { id:"body-site",   name:"Dead Horse Bay / Floyd Bennett Field", lng:-73.8905, lat:40.5905, key:true, found:false },
   { id:"owen-home",   name:"Owen Lind · Gerritsen Beach",      lng:-73.9250, lat:40.5885, found:false },
   { id:"veridia",     name:"Veridia Health · DUMBO",           lng:-73.9890, lat:40.7030, found:false },
   { id:"warehouse",   name:"Poker warehouse · Red Hook",       lng:-74.0150, lat:40.6760, found:false },
-  { id:"restaurant",  name:"Salt & Cedar · Williamsburg",      lng:-73.9670, lat:40.7150, found:false },
+  { id:"restaurant",  name:"Salt & Cedar · DUMBO",             lng:-73.9860, lat:40.7040, found:false },
 ]
 const foundPlaceIds = new Set(PLACES.filter(place => place.found).map(place => place.id));
 let routeFound = false;
@@ -120,9 +120,10 @@ const TOWER_ROUTE = {
   type:"Feature",
   geometry:{ type:"LineString", coordinates:[
     [-73.9205,40.6992], // home, Bushwick
-    [-73.930,40.630],   // Flatbush en route
-    [-73.890,40.590],   // Floyd Bennett area 23:09
-    [-73.885,40.5735],  // Marine Parkway Bridge 23:47
+    [-73.9300,40.6600], // Flatbush, 23:03
+    [-73.8905,40.5905], // Floyd Bennett Field, 23:09–23:38
+    [-73.9340,40.6080], // Marine Park, 23:44
+    [-73.8855,40.5735], // Marine Parkway Bridge, 23:47
   ]}
 };
 
