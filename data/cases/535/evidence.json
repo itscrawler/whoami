@@ -4,7 +4,7 @@
     "title": "Google sign-in alert",
     "app": "mail",
     "source": "Attached by Jake",
-    "timestamp": "2026-10-12T03:14:00-07:00",
+    "timestamp": "2026-10-12T03:14:00-04:00",
     "access": {
       "type": "client"
     },
@@ -51,7 +51,7 @@
     "app": "police",
     "access": {
       "type": "hack",
-      "target": "tacoma-pd-archive"
+      "target": "nypd-archive"
     },
     "people": [
       "mia-holt",
@@ -66,8 +66,8 @@
       "status": "Suspended 2020-02-14",
       "conclusion": "Probable suicide. Body not found.",
       "lastPhoneSignal": {
-        "time": "2019-11-08T23:47:00-08:00",
-        "tower": "TWR-118 North Bridge"
+        "time": "2019-11-08T23:47:00-05:00",
+        "tower": "TWR-118 Marine Parkway–Gil Hodges Memorial Bridge"
       },
       "interviews": [
         "ethan-brooks",
@@ -97,20 +97,20 @@
       "type": "log",
       "entries": [
         {
-          "time": "2019-11-08T17:51:00-08:00",
+          "time": "2019-11-08T17:51:00-05:00",
           "event": "Sign-in, MacBook (Veridia-LT-07)"
         },
         {
-          "time": "2026-10-12T03:12:00-07:00",
+          "time": "2026-10-12T03:12:00-04:00",
           "event": "Sign-in, Windows PC, VPN"
         },
         {
-          "time": "2026-10-12T03:15:00-07:00",
+          "time": "2026-10-12T03:15:00-04:00",
           "event": "Folder \"backup_veridia\" moved to trash"
         },
         {
-          "time": "2026-10-12T03:16:00-07:00",
-          "event": "Recovery phone change attempted: (253) 555-0187 — failed (verification sent to recovery email)"
+          "time": "2026-10-12T03:16:00-04:00",
+          "event": "Recovery phone change attempted: (718) 555-0187 — failed (verification sent to recovery email)"
         }
       ]
     }
@@ -253,7 +253,7 @@
     "id": "ev-mia-email-journalist",
     "title": "Mia's email to the journalist",
     "app": "mail",
-    "timestamp": "2019-11-08T17:48:00-08:00",
+    "timestamp": "2019-11-08T17:48:00-05:00",
     "access": {
       "type": "login",
       "service": "gmail",
@@ -267,7 +267,7 @@
     "content": {
       "type": "email",
       "from": "mia.holt95@gmail.com",
-      "to": "r.moore@soundledger.news",
+      "to": "r.moore@kingscountyledger.news",
       "subject": "Bloom app user data",
       "body": "Hi Ms. Moore,\n\nI work at Veridia Health. I have proof that data from the Bloom app, including pregnancy data, is being sold to a data broker that resells it to insurance companies. I don't think management knows. Someone inside is doing it.\n\nCan we meet? Please don't contact me at work.\n\nMia"
     }
@@ -276,7 +276,7 @@
     "id": "ev-rachel-reply",
     "title": "Reply from Rachel Moore",
     "app": "mail",
-    "timestamp": "2019-11-08T19:02:00-08:00",
+    "timestamp": "2019-11-08T19:02:00-05:00",
     "access": {
       "type": "login",
       "service": "gmail"
@@ -288,7 +288,7 @@
     "weight": "none",
     "content": {
       "type": "email",
-      "from": "r.moore@soundledger.news",
+      "from": "r.moore@kingscountyledger.news",
       "to": "mia.holt95@gmail.com",
       "subject": "Re: Bloom app user data",
       "body": "Mia, thank you. This is serious. Let's meet on Monday, 10am, Morning Tide café. Bring what you can. — Rachel"
@@ -312,27 +312,27 @@
       "type": "chat",
       "messages": [
         {
-          "time": "2019-11-08T20:24:00-08:00",
+          "time": "2019-11-08T20:24:00-05:00",
           "from": "ethan-brooks",
           "text": "so you're cancelling again?"
         },
         {
-          "time": "2019-11-08T20:26:00-08:00",
+          "time": "2019-11-08T20:26:00-05:00",
           "from": "mia-holt",
           "text": "I'm sorry. something came up with work. I really can't tonight"
         },
         {
-          "time": "2019-11-08T20:29:00-08:00",
+          "time": "2019-11-08T20:29:00-05:00",
           "from": "ethan-brooks",
           "text": "if you pick work again you might as well not call me at all"
         },
         {
-          "time": "2019-11-08T20:30:00-08:00",
+          "time": "2019-11-08T20:30:00-05:00",
           "from": "ethan-brooks",
           "text": "you'll regret this"
         },
         {
-          "time": "2019-11-08T20:34:00-08:00",
+          "time": "2019-11-08T20:34:00-05:00",
           "from": "mia-holt",
           "text": "I can't deal with this right now"
         }
@@ -357,23 +357,23 @@
       "type": "log",
       "entries": [
         {
-          "time": "2019-11-08T18:40:00-08:00",
+          "time": "2019-11-08T18:40:00-05:00",
           "event": "Connected to Wi-Fi \"HOLT_1B\""
         },
         {
-          "time": "2019-11-08T22:56:00-08:00",
+          "time": "2019-11-08T22:56:00-05:00",
           "event": "Disconnected from Wi-Fi \"HOLT_1B\""
         },
         {
-          "time": "2019-11-08T22:56:00-08:00",
+          "time": "2019-11-08T22:56:00-05:00",
           "event": "Steps 22:56–22:58: 41"
         },
         {
-          "time": "2019-11-08T22:58:00-08:00",
+          "time": "2019-11-08T22:58:00-05:00",
           "event": "Steps 22:58–23:47: 0"
         },
         {
-          "time": "2019-11-08T23:47:00-08:00",
+          "time": "2019-11-08T23:47:00-05:00",
           "event": "Device offline"
         }
       ]
@@ -394,31 +394,31 @@
     "weight": "key",
     "content": {
       "type": "log",
-      "number": "(253) 555-0142",
+      "number": "(718) 555-0142",
       "entries": [
         {
-          "time": "2019-11-08T22:57:00-08:00",
+          "time": "2019-11-08T22:57:00-05:00",
           "tower": "TWR-044 Linden"
         },
         {
-          "time": "2019-11-08T23:03:00-08:00",
+          "time": "2019-11-08T23:03:00-05:00",
           "tower": "TWR-071 Eastside"
         },
         {
-          "time": "2019-11-08T23:09:00-08:00",
-          "tower": "TWR-093 Stonehill"
+          "time": "2019-11-08T23:09:00-05:00",
+          "tower": "TWR-093 Floyd Bennett Field"
         },
         {
-          "time": "2019-11-08T23:38:00-08:00",
-          "tower": "TWR-093 Stonehill"
+          "time": "2019-11-08T23:38:00-05:00",
+          "tower": "TWR-093 Floyd Bennett Field"
         },
         {
-          "time": "2019-11-08T23:44:00-08:00",
+          "time": "2019-11-08T23:44:00-05:00",
           "tower": "TWR-102 River Rd"
         },
         {
-          "time": "2019-11-08T23:47:00-08:00",
-          "tower": "TWR-118 North Bridge"
+          "time": "2019-11-08T23:47:00-05:00",
+          "tower": "TWR-118 Marine Parkway–Gil Hodges Memorial Bridge"
         }
       ]
     },
@@ -443,23 +443,23 @@
       "camera": "Window on Linden St",
       "clips": [
         {
-          "time": "2019-11-08T22:12:00-08:00",
+          "time": "2019-11-08T22:12:00-05:00",
           "description": "A man in a dark hooded jacket, carrying a laptop bag, walks into the entrance of 418 Linden St. Face not visible."
         },
         {
-          "time": "2019-11-08T22:56:00-08:00",
+          "time": "2019-11-08T22:56:00-05:00",
           "description": "Two people leave the building. The taller one opens the driver's door of the silver Civic."
         },
         {
-          "time": "2019-11-08T22:58:00-08:00",
-          "description": "The Civic (WA BKR-2187) drives away. The driver's head almost touches the roof. A smaller person in the passenger seat."
+          "time": "2019-11-08T22:58:00-05:00",
+          "description": "The Civic (NY BKR-2187) drives away. The driver's head almost touches the roof. A smaller person in the passenger seat."
         }
       ]
     }
   },
   {
     "id": "ev-poker-photo",
-    "title": "\"Tacoma Aces\" group photo",
+    "title": "\"Brooklyn Aces\" group photo",
     "app": "messenger",
     "access": {
       "type": "hack",
@@ -473,14 +473,14 @@
     "weight": "none",
     "content": {
       "type": "chat",
-      "group": "Tacoma Aces",
+      "group": "Brooklyn Aces",
       "messages": [
         {
-          "time": "2019-11-08T23:30:00-08:00",
+          "time": "2019-11-08T23:30:00-05:00",
           "from": "mark-dellinger",
           "text": "full table tonight 🃏",
           "attachment": "photo: poker table, Ethan in the center",
-          "location": "15 Dock Rd"
+          "location": "Red Hook, Brooklyn, NY"
         }
       ]
     },
@@ -504,7 +504,7 @@
       "type": "chat",
       "messages": [
         {
-          "time": "2019-10-28T14:10:00-08:00",
+          "time": "2019-10-28T14:10:00-05:00",
           "from": "tony-russo",
           "text": "End of the month, bro. I'm not joking."
         }
@@ -515,7 +515,7 @@
     "id": "ev-kerr-mail-deletion",
     "title": "Order to delete Mia's work mailbox",
     "app": "veridia",
-    "timestamp": "2019-11-09T09:15:00-08:00",
+    "timestamp": "2019-11-09T09:15:00-05:00",
     "access": {
       "type": "hack",
       "target": "veridia-backup"
@@ -612,7 +612,7 @@
       "type": "post",
       "platform": "Instagram",
       "author": "melissa-kerr",
-      "date": "2019-11-08T22:47:00-08:00",
+      "date": "2019-11-08T22:47:00-05:00",
       "text": "Evening with the best people. Go Veridia! 🥂",
       "location": "Salt & Cedar",
       "photo": "Long dinner table, Daniel raising a glass with five investors."
@@ -637,17 +637,17 @@
       "system": "Veridia Endpoint Monitor",
       "entries": [
         {
-          "time": "2019-11-08T18:02:00-08:00",
+          "time": "2019-11-08T18:02:00-05:00",
           "user": "o.lind (admin)",
           "event": "Opened screen recording: Veridia-LT-07 (m.holt), 17:40–17:55"
         },
         {
-          "time": "2019-11-08T18:09:00-08:00",
+          "time": "2019-11-08T18:09:00-05:00",
           "user": "o.lind (admin)",
           "event": "Exported recording to local disk"
         },
         {
-          "time": "2019-11-09T09:41:00-08:00",
+          "time": "2019-11-09T09:41:00-05:00",
           "user": "o.lind (admin)",
           "event": "Wiped device Veridia-LT-07"
         }
@@ -672,17 +672,17 @@
       "platform": "Slack",
       "messages": [
         {
-          "time": "2019-11-08T19:40:00-08:00",
+          "time": "2019-11-08T19:40:00-05:00",
           "from": "mia-holt",
           "text": "Hey, can you help me encrypt an archive? It's important and just between us."
         },
         {
-          "time": "2019-11-08T19:43:00-08:00",
+          "time": "2019-11-08T19:43:00-05:00",
           "from": "owen-lind",
           "text": "Sure. I'll come by after 10, I'll bring everything we need."
         },
         {
-          "time": "2019-11-08T19:44:00-08:00",
+          "time": "2019-11-08T19:44:00-05:00",
           "from": "mia-holt",
           "text": "thank you!! 418 Linden, 1B"
         }
@@ -707,17 +707,17 @@
       "platform": "Slack",
       "messages": [
         {
-          "time": "2019-11-05T16:12:00-08:00",
+          "time": "2019-11-05T16:12:00-05:00",
           "from": "mia-holt",
           "text": "I found something really bad in the data. Can't say yet."
         },
         {
-          "time": "2019-11-05T16:13:00-08:00",
+          "time": "2019-11-05T16:13:00-05:00",
           "from": "priya-natarajan",
           "text": "?? are you ok"
         },
         {
-          "time": "2019-11-05T16:20:00-08:00",
+          "time": "2019-11-05T16:20:00-05:00",
           "from": "mia-holt",
           "text": "I will be. lunch tomorrow?"
         }
@@ -730,7 +730,7 @@
     "app": "registry",
     "access": {
       "type": "public",
-      "where": "Washington business registry"
+      "where": "New York State business registry"
     },
     "people": [
       "carol-lind",
@@ -742,7 +742,7 @@
       "company": "OL Data Consulting LLC",
       "registered": "2019-04-15",
       "owner": "Carol Lind",
-      "address": "880 Orchard Way, Tacoma, WA",
+      "address": "880 Orchard Way, Brooklyn, NY",
       "status": "Dissolved 2022"
     }
   },
@@ -764,19 +764,19 @@
       "account": "0wl",
       "entries": [
         {
-          "time": "2019-11-08T21:58:00-08:00",
+          "time": "2019-11-08T21:58:00-05:00",
           "event": "Status: Online"
         },
         {
-          "time": "2019-11-08T22:00:00-08:00",
+          "time": "2019-11-08T22:00:00-05:00",
           "event": "Last input in game"
         },
         {
-          "time": "2019-11-09T00:40:00-08:00",
+          "time": "2019-11-09T00:40:00-05:00",
           "event": "Input resumed"
         },
         {
-          "time": "2019-11-09T01:30:00-08:00",
+          "time": "2019-11-09T01:30:00-05:00",
           "event": "Status: Offline"
         }
       ]
@@ -801,12 +801,12 @@
       "platform": "Steam",
       "messages": [
         {
-          "time": "2019-11-08T22:31:00-08:00",
+          "time": "2019-11-08T22:31:00-05:00",
           "from": "trevor-nguyen",
           "text": "wanna play?"
         },
         {
-          "time": "2019-11-09T00:52:00-08:00",
+          "time": "2019-11-09T00:52:00-05:00",
           "from": "owen-lind",
           "text": "sorry, fell asleep"
         }
@@ -830,12 +830,12 @@
       "account": "owen.lind@gmail.com",
       "entries": [
         {
-          "time": "2019-11-09T00:04:00-08:00",
-          "event": "Ride start, scooter #4471, North Bridge parking lot"
+          "time": "2019-11-09T00:04:00-05:00",
+          "event": "Ride start, scooter #4471, Marine Parkway–Gil Hodges Memorial Bridge parking lot"
         },
         {
-          "time": "2019-11-09T00:31:00-08:00",
-          "event": "Ride end, Ridgeback Ct, Hillcrest (outside parking zone)"
+          "time": "2019-11-09T00:31:00-05:00",
+          "event": "Ride end, Gerritsen Ave, Gerritsen Beach (outside parking zone)"
         }
       ]
     }
@@ -856,8 +856,8 @@
       "type": "log",
       "entries": [
         {
-          "time": "2019-11-09T08:15:00-08:00",
-          "event": "Scooter #4471 left in Hillcrest outside parking zone, moved. — J. Williams"
+          "time": "2019-11-09T08:15:00-05:00",
+          "event": "Scooter #4471 left in Gerritsen Beach outside parking zone, moved. — J. Williams"
         }
       ]
     }
@@ -880,11 +880,11 @@
       "platform": "Strava",
       "author": "owen-lind",
       "name": "Evening Walk",
-      "start": "2019-11-08T23:14:00-08:00",
-      "end": "2019-11-08T23:41:00-08:00",
+      "start": "2019-11-08T23:14:00-05:00",
+      "end": "2019-11-08T23:41:00-05:00",
       "distance": "0.75 mi",
-      "location": "Old Stonehill Quarry",
-      "map": "Short loop from the quarry road to the edge of the old pit and back."
+      "location": "Floyd Bennett Field / Dead Horse Bay",
+      "map": "Short loop from the trail at Dead Horse Bay to the edge of the shoreline and back."
     },
     "designNote": "Owen often runs here, so the place alone isn't suspicious — the time is."
   },
@@ -905,8 +905,8 @@
       "platform": "Craigslist",
       "date": "2025-03-08",
       "title": "27\" 144Hz gaming monitor — $120",
-      "body": "Barely used. Pick up in Hillcrest. Text only.",
-      "contact": "(253) 555-0187"
+      "body": "Barely used. Pick up in Gerritsen Beach. Text only.",
+      "contact": "(718) 555-0187"
     }
   },
   {
@@ -916,7 +916,7 @@
     "access": {
       "type": "hack",
       "target": "carrier",
-      "number": "(253) 555-0187"
+      "number": "(718) 555-0187"
     },
     "people": [
       "nick-kowalski",
@@ -927,12 +927,12 @@
       "type": "chat",
       "messages": [
         {
-          "time": "2025-03-09T11:02:00-08:00",
+          "time": "2025-03-09T11:02:00-05:00",
           "from": "nick-kowalski",
-          "text": "Ok, I'll pick it up Saturday. Ridgeback Ct, 34?"
+          "text": "Ok, I'll pick it up Saturday. Gerritsen Ave, 34?"
         },
         {
-          "time": "2025-03-09T11:10:00-08:00",
+          "time": "2025-03-09T11:10:00-05:00",
           "from": "owen-lind",
           "text": "Yes, call when you're here. Owen."
         }
@@ -960,7 +960,7 @@
         {
           "date": "2019-11-12",
           "author": "owen-lind",
-          "text": "I went through the phone data. Her last signal was at North Bridge, 11:47pm. I'm so sorry. Map attached."
+          "text": "I went through the phone data. Her last signal was at Marine Parkway–Gil Hodges Memorial Bridge, 11:47pm. I'm so sorry. Map attached."
         },
         {
           "date": "2019-11-12",
@@ -977,11 +977,11 @@
   },
   {
     "id": "ev-tate-report",
-    "title": "Patrol report: car at North Bridge",
+    "title": "Patrol report: car at Marine Parkway–Gil Hodges Memorial Bridge",
     "app": "police",
     "access": {
       "type": "hack",
-      "target": "tacoma-pd-archive"
+      "target": "nypd-archive"
     },
     "people": [
       "brian-tate",
@@ -991,8 +991,8 @@
     "content": {
       "type": "report",
       "author": "brian-tate",
-      "time": "2019-11-09T07:20:00-08:00",
-      "body": "Silver Honda Civic WA BKR-2187 found in North Bridge lot. Doors unlocked, keys in ignition, handbag on passenger seat. Driver's seat pushed back to the last position. No phone found."
+      "time": "2019-11-09T07:20:00-05:00",
+      "body": "Silver Honda Civic NY BKR-2187 found in Marine Parkway–Gil Hodges Memorial Bridge lot. Doors unlocked, keys in ignition, handbag on passenger seat. Driver's seat pushed back to the last position. No phone found."
     }
   },
   {
@@ -1001,7 +1001,7 @@
     "app": "police",
     "access": {
       "type": "hack",
-      "target": "tacoma-pd-archive"
+      "target": "nypd-archive"
     },
     "people": [
       "robert-douglas"
@@ -1019,7 +1019,7 @@
     "app": "police",
     "access": {
       "type": "hack",
-      "target": "tacoma-pd-archive"
+      "target": "nypd-archive"
     },
     "people": [
       "dorothy-shaw"
@@ -1037,7 +1037,7 @@
     "app": "police",
     "access": {
       "type": "hack",
-      "target": "tacoma-pd-archive"
+      "target": "nypd-archive"
     },
     "people": [
       "sandra-reyes",
@@ -1052,7 +1052,7 @@
   },
   {
     "id": "ev-heather-nextdoor",
-    "title": "Nextdoor post: car at the quarry",
+    "title": "Nextdoor post: car at Dead Horse Bay",
     "app": "social",
     "access": {
       "type": "public",
@@ -1067,7 +1067,7 @@
       "platform": "Nextdoor",
       "author": "heather-klein",
       "date": "2019-11-09",
-      "text": "Someone was driving around the quarry again last night. Around 11pm a car was parked with its lights off. Teenagers?"
+      "text": "Someone was driving around Dead Horse Bay again last night. Around 11pm a car was parked with its lights off. Teenagers?"
     }
   },
   {
@@ -1115,11 +1115,11 @@
   },
   {
     "id": "ev-news-mia-search",
-    "title": "Missing analyst searched for near North Bridge",
+    "title": "Missing analyst searched for near Marine Parkway–Gil Hodges Memorial Bridge",
     "app": "web",
     "access": {
       "type": "public",
-      "platform": "The Sound Ledger"
+      "platform": "The Kings County Ledger"
     },
     "people": [
       "mia-holt"
@@ -1127,10 +1127,10 @@
     "weight": "none",
     "content": {
       "type": "article",
-      "platform": "The Sound Ledger",
+      "platform": "The Kings County Ledger",
       "author": "rachel-moore",
       "date": "2019-11-09",
-      "body": "Search teams are looking for 24-year-old Mia Holt, who was reported missing after her silver Honda Civic was found in the North Bridge parking lot. Her phone last connected to a tower near the bridge late Friday night. Police have not confirmed where she may have gone."
+      "body": "Search teams are looking for 24-year-old Mia Holt, who was reported missing after her silver Honda Civic was found in the Marine Parkway–Gil Hodges Memorial Bridge parking lot. Her phone last connected to a tower near the bridge late Friday night. Police have not confirmed where she may have gone."
     }
   },
   {
@@ -1139,7 +1139,7 @@
     "app": "web",
     "access": {
       "type": "public",
-      "platform": "The Sound Ledger"
+      "platform": "The Kings County Ledger"
     },
     "people": [
       "daniel-kerr",
@@ -1148,7 +1148,7 @@
     "weight": "none",
     "content": {
       "type": "article",
-      "platform": "The Sound Ledger",
+      "platform": "The Kings County Ledger",
       "author": "rachel-moore",
       "date": "2022",
       "body": "Veridia Health has filed for bankruptcy as investors sue founder Daniel Kerr. Reporter Rachel Moore covered the company's collapse; at the time, the story was not connected to Mia Holt's disappearance."

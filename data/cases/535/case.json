@@ -1,16 +1,16 @@
 {
   "id": "535",
-  "title": "North Bridge",
-  "city": "Tacoma, WA",
+  "title": "Marine Parkway–Gil Hodges Memorial Bridge",
+  "city": "New York City, NY",
   "difficulty": "medium",
   "incidentDate": "2019-11-08",
   "investigationDate": "2026-10-13",
-  "summary": "Everyone believes Mia Holt jumped from the North Bridge. Seven years later, someone secretly logs into her Google account and deletes a folder.",
+  "summary": "Everyone believes Mia Holt jumped from the Marine Parkway–Gil Hodges Memorial Bridge. Seven years later, someone secretly logs into her Google account and deletes a folder.",
   "client": "jake-holt",
   "intro": {
     "from": "jake-holt",
     "channel": "forum-dm",
-    "timestamp": "2026-10-13T01:24:00-07:00",
+    "timestamp": "2026-10-13T01:24:00-04:00",
     "subject": "my sister",
     "body": "My sister went missing in 2019. The police decided she killed herself. My mom and I never believed it.\n\nLast night I got a notification: someone signed in to her Google account from a new device. Her account still has my email for recovery. Someone is logging into a dead girl's account seven years later. Why?\n\nThe police say it's spam or a random hack and has nothing to do with her case. Please help. I can pay.",
     "attachments": [
@@ -21,76 +21,76 @@
     "status": "Suspended (February 2020). Probable suicide, body not found.",
     "timeline": [
       {
-        "time": "2019-11-08T18:40:00-08:00",
+        "time": "2019-11-08T18:40:00-05:00",
         "text": "Mia arrives home from work."
       },
       {
-        "time": "2019-11-08T23:00:00-08:00",
+        "time": "2019-11-08T23:00:00-05:00",
         "text": "Mia leaves home in her car (approximate)."
       },
       {
-        "time": "2019-11-08T23:47:00-08:00",
-        "text": "Last signal from her phone, cell tower near North Bridge. Phone goes offline."
+        "time": "2019-11-08T23:47:00-05:00",
+        "text": "Last signal from her phone, cell tower near Marine Parkway–Gil Hodges Memorial Bridge. Phone goes offline."
       },
       {
-        "time": "2019-11-09T07:20:00-08:00",
-        "text": "Her car is found in the North Bridge parking lot. Bag and keys inside. No phone."
+        "time": "2019-11-09T07:20:00-05:00",
+        "text": "Her car is found in the Marine Parkway–Gil Hodges Memorial Bridge parking lot. Bag and keys inside. No phone."
       }
     ]
   },
   "places": [
     {
       "id": "mia-home",
-      "name": "418 Linden St",
+      "name": "Linden St, Bushwick, Brooklyn",
       "type": "home",
       "map": {
-        "x": 38,
-        "y": 44
+        "x": 58,
+        "y": 29
       }
     },
     {
-      "id": "north-bridge",
-      "name": "North Bridge",
+      "id": "marine-parkway-bridge",
+      "name": "Marine Parkway–Gil Hodges Memorial Bridge",
       "type": "bridge",
       "map": {
-        "x": 62,
-        "y": 18
+        "x": 83,
+        "y": 73
       }
     },
     {
-      "id": "stonehill-quarry",
-      "name": "Old Stonehill Quarry",
-      "type": "quarry",
+      "id": "dead-horse-bay",
+      "name": "Floyd Bennett Field / Dead Horse Bay",
+      "type": "park",
       "map": {
-        "x": 81,
-        "y": 62
+        "x": 77,
+        "y": 82
       }
     },
     {
-      "id": "hillcrest",
-      "name": "Hillcrest",
+      "id": "gerritsen-beach",
+      "name": "Gerritsen Beach",
       "type": "district",
       "map": {
-        "x": 24,
-        "y": 70
+        "x": 91,
+        "y": 69
       }
     },
     {
       "id": "owen-home",
-      "name": "34 Ridgeback Ct",
+      "name": "34 Gerritsen Ave, Gerritsen Beach",
       "type": "home",
       "map": {
-        "x": 21,
-        "y": 74
+        "x": 90,
+        "y": 71
       }
     },
     {
       "id": "veridia-office",
-      "name": "Veridia Health office",
+      "name": "Veridia Health office, DUMBO",
       "type": "office",
       "map": {
-        "x": 47,
-        "y": 33
+        "x": 53,
+        "y": 35
       }
     },
     {
@@ -98,32 +98,32 @@
       "name": "Salt & Cedar restaurant",
       "type": "restaurant",
       "map": {
-        "x": 52,
-        "y": 38
+        "x": 55,
+        "y": 37
       }
     },
     {
-      "id": "dock-rd-warehouse",
-      "name": "15 Dock Rd warehouse",
+      "id": "red-hook-warehouse",
+      "name": "Red Hook warehouse, Brooklyn, NY",
       "type": "warehouse",
       "map": {
-        "x": 70,
-        "y": 30
+        "x": 43,
+        "y": 56
       }
     },
     {
       "id": "walter-home",
-      "name": "421 Linden St",
+      "name": "421 Linden St, Bushwick",
       "type": "home",
       "map": {
-        "x": 39,
-        "y": 42
+        "x": 59,
+        "y": 28
       }
     }
   ],
   "answerKey": {
     "culprit": "owen-lind",
-    "location": "stonehill-quarry",
+    "location": "dead-horse-bay",
     "time": {
       "date": "2019-11-08",
       "from": "23:09",
@@ -179,15 +179,15 @@
       {
         "id": "where-took",
         "text": "He drove her in her own car to ___",
-        "answer": "stonehill-quarry",
+        "answer": "dead-horse-bay",
         "options": [
           {
-            "id": "stonehill-quarry",
-            "text": "the old Stonehill Quarry"
+            "id": "dead-horse-bay",
+            "text": "Dead Horse Bay"
           },
           {
-            "id": "north-bridge",
-            "text": "the North Bridge"
+            "id": "marine-parkway-bridge",
+            "text": "the Marine Parkway–Gil Hodges Memorial Bridge"
           },
           {
             "id": "owen-home",
@@ -202,23 +202,23 @@
       {
         "id": "where-left",
         "text": "He left the car and her phone at ___",
-        "answer": "north-bridge",
+        "answer": "marine-parkway-bridge",
         "options": [
           {
-            "id": "north-bridge",
-            "text": "the North Bridge"
+            "id": "marine-parkway-bridge",
+            "text": "the Marine Parkway–Gil Hodges Memorial Bridge"
           },
           {
-            "id": "stonehill-quarry",
-            "text": "the quarry"
+            "id": "dead-horse-bay",
+            "text": "Dead Horse Bay"
           },
           {
             "id": "mia-home",
             "text": "her home"
           },
           {
-            "id": "hillcrest",
-            "text": "Hillcrest"
+            "id": "gerritsen-beach",
+            "text": "Gerritsen Beach"
           }
         ]
       },
@@ -322,7 +322,7 @@
     "mid": {
       "condition": "culprit is right, score < 70",
       "headline": "Police reopen review of Mia Holt case",
-      "body": "Tacoma police have quietly reopened a review of the 2019 disappearance of Mia Holt. A former Veridia Health employee was questioned but not detained.",
+      "body": "NYPD has quietly reopened a review of the 2019 disappearance of Mia Holt. A former Veridia Health employee was questioned but not detained.",
       "message": {
         "from": "jake-holt",
         "body": "At least something moved. Thank you."
@@ -339,10 +339,10 @@
         {
           "type": "article",
           "delayDays": 7,
-          "outlet": "The Sound Ledger",
+          "outlet": "The Kings County Ledger",
           "author": "rachel-moore",
           "headline": "Mia Holt case reopened seven years later",
-          "body": "Tacoma police have reopened the investigation into the disappearance of 24-year-old Mia Holt, who went missing in November 2019. According to sources, investigators received an anonymous package of evidence. A search is underway near the old Stonehill Quarry. A 38-year-old former employee of Veridia Health has been arrested. The company itself is also under investigation on suspicion of selling medical data of users of its Bloom app.",
+          "body": "NYPD has reopened the investigation into the disappearance of 24-year-old Mia Holt, who went missing in November 2019. According to sources, investigators received an anonymous package of evidence. A search is underway near Dead Horse Bay. A 38-year-old former employee of Veridia Health has been arrested. The company itself is also under investigation on suspicion of selling medical data of users of its Bloom app.",
           "bonusParagraph": {
             "requires": "ev-kerr-fake-metrics",
             "text": "Separately, former Veridia CEO Daniel Kerr faces fraud charges for allegedly inflating user numbers to investors."

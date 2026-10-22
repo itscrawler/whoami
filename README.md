@@ -19,7 +19,7 @@ You play as **WHOAMI** — an anonymous hacker who takes jobs on closed forums. 
 
 | # | Title | City | Year | Difficulty |
 |---|---|---|---|---|
-| 535 | North Bridge | Tacoma, WA | 2019 | Medium |
+| 535 | Marine Parkway–Gil Hodges Memorial Bridge | New York City, NY | 2019 | Medium |
 
 ## Tech
 

@@ -413,7 +413,7 @@ function renderTerminal(container) {
     }
     if (action === "connect" && args[1]) {
       const node = args[1].toUpperCase();
-      if (node !== "TAC-07") return write(`Unknown node: ${args[1]}. Available node: TAC-07.`, "terminal-error");
+      if (node !== "NYC-07") return write(`Unknown node: ${args[1]}. Available node: NYC-07.`, "terminal-error");
       state.vpnNode = node;
       return write(`VPN connected · NODE ${node}`);
     }
@@ -421,7 +421,7 @@ function renderTerminal(container) {
   }
 
   function targetName(value) {
-    const aliases = { phone: "carrier", police: "tacoma-pd-archive" };
+    const aliases = { phone: "carrier", police: "nypd-archive" };
     const normalized = normalize(value);
     return aliases[normalized] || normalized;
   }
@@ -441,7 +441,7 @@ function renderTerminal(container) {
     }
     state.scannedTargets.add(target);
     write(`SCAN ${target.toUpperCase()} · case simulation`);
-    write("need: vpn connect TAC-07");
+    write("need: vpn connect NYC-07");
     write("need: connect target after the VPN tunnel is active");
   }
 
@@ -450,7 +450,7 @@ function renderTerminal(container) {
     if (!target) return write("Usage: connect <target>", "terminal-error");
     if (!hackTargets().includes(target)) return write(`Unknown simulated target: ${value}`, "terminal-error");
     if (!state.scannedTargets.has(target)) return write(`too risky. start with: scan ${target}`);
-    if (!state.vpnNode) return write("too risky. need: VPN connection. Use vpn connect TAC-07.");
+    if (!state.vpnNode) return write("too risky. need: VPN connection. Use vpn connect NYC-07.");
     state.connectedTargets.add(target);
     write(`Connected to ${target}. Available case records can now be downloaded.`);
     window.notifyAccessChange();

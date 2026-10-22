@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WHOAMI — Map demo (NYC)</title>
+
+<!-- MapLibre GL: the real interactive map engine (pan/zoom like Google Maps) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
+
+<style>
+  :root{
+    --bg:#151719; --surface:#1b1e21; --surface-2:#26292d; --border:#363a3f;
+    --border-strong:#44494f; --text:#dcdfe3; --muted:#9aa0a8; --dim:#5d636b; --accent:#ff6a00;
+    --mono:ui-monospace,"JetBrains Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;overflow:hidden}
+  #map{position:absolute;inset:0;background:var(--bg)}
+
+  /* top bar */
+  .topbar{position:absolute;top:0;left:0;right:0;height:40px;z-index:5;display:flex;align-items:center;gap:16px;
+    padding:0 16px;background:rgba(27,30,33,.92);border-bottom:1px solid var(--border);
+    font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+  .topbar .sq{width:6px;height:6px;background:var(--accent)}
+  .topbar .muted{color:var(--muted)}
+
+  /* zoom level chips */
+  .levels{position:absolute;top:56px;left:50%;transform:translateX(-50%);z-index:5;display:flex;
+    background:rgba(27,30,33,.92);border:1px solid var(--border);font-family:var(--mono);font-size:12px}
+  .levels button{padding:8px 16px;background:transparent;border:none;color:var(--muted);cursor:pointer;font:inherit}
+  .levels button.is-active{background:var(--surface-2);color:var(--text);outline:1px solid var(--dim);outline-offset:-4px}
+
+  /* zoom +/- */
+  .zoom{position:absolute;right:16px;bottom:16px;z-index:5;display:flex;flex-direction:column;gap:6px}
+  .zoom button{width:36px;height:36px;background:rgba(27,30,33,.95);border:1px solid var(--border-strong);
+    color:var(--text);font-size:18px;cursor:pointer}
+  .zoom button:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* coordinate readout */
+  .coords{position:absolute;left:16px;bottom:16px;z-index:5;padding:6px 10px;
+    background:rgba(21,23,25,.85);border:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+  /* markers */
+  .mk{position:relative;width:14px;height:14px;background:var(--surface);border:2px solid var(--muted);cursor:pointer}
+  .mk.key{background:var(--accent);border-color:#151719;outline:1px solid var(--accent)}
+  .mk .lbl{position:absolute;left:18px;top:-4px;white-space:nowrap;padding:3px 8px;
+    background:rgba(27,30,33,.92);border:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text)}
+  .mk .brk{position:absolute;width:5px;height:5px;border:0 solid var(--accent)}
+  .mk.key .brk.tl{top:-4px;left:-4px;border-top-width:1.5px;border-left-width:1.5px}
+  .mk.key .brk.br{bottom:-4px;right:-4px;border-bottom-width:1.5px;border-right-width:1.5px}
+
+  /* key banner if no map key yet */
+  .note{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9;max-width:520px;
+    padding:24px;background:var(--surface);border:1px solid var(--accent);font-family:var(--mono);
+    font-size:13px;line-height:1.7;color:var(--text);display:none}
+  .note b{color:var(--accent)}
+  .maplibregl-ctrl-attrib{font-size:10px!important;background:rgba(21,23,25,.7)!important;color:var(--dim)!important}
+  .maplibregl-ctrl-attrib a{color:var(--muted)!important}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<header class="topbar">
+  <span style="font-weight:700;letter-spacing:.14em">WHOAMI<span style="color:var(--accent)">_</span></span>
+  <span class="muted">MAP / NEW YORK CITY</span>
+  <span style="margin-left:auto" class="muted"><span class="sq"></span> CASE #535 · NORTH BRIDGE</span>
+</header>
+
+<div class="levels">
+  <button data-zoom="11" class="is-active">CITY</button>
+  <button data-zoom="13">DISTRICT</button>
+  <button data-zoom="16">STREET</button>
+</div>
+
+<div class="zoom">
+  <button id="zin" aria-label="Zoom in">+</button>
+  <button id="zout" aria-label="Zoom out">−</button>
+</div>
+
+<div class="coords" id="coords">—</div>
+
+<div class="note" id="note">
+  <b>Нужен бесплатный ключ карты.</b><br><br>
+  1. Зайди на <b>maptiler.com</b>, зарегистрируйся (бесплатно).<br>
+  2. Скопируй свой <b>API key</b>.<br>
+  3. Открой этот файл, найди строку <b>const KEY</b> и вставь ключ.<br><br>
+  Это нужно только пока карта берёт улицы из интернета. Для Steam потом перейдём на оффлайн-файл города.
+</div>
+
+<script>
+// ======== 1. KEY: вставь сюда бесплатный ключ с maptiler.com ========
+const KEY = "JVcZ1WnVBAIhsf3s1jme";
+// ====================================================================
+
+if (KEY.startsWith("GET_A_FREE")) {
+  document.getElementById("note").style.display = "block";
+}
+
+// Case places in NYC (real locations). Later these come from case.json.
+const PLACES = [
+  { id:"mia-home",    name:"Mia's apartment · Linden St",     lng:-73.9205, lat:40.6992, key:true },
+  { id:"north-bridge",name:"Marine Parkway Bridge (car found)",lng:-73.8855, lat:40.5735, key:true },
+  { id:"body-site",   name:"Floyd Bennett Field",             lng:-73.8905, lat:40.5905, key:true },
+  { id:"owen-home",   name:"Owen Lind · Gerritsen Beach",     lng:-73.9250, lat:40.5885 },
+  { id:"veridia",     name:"Veridia Health · DUMBO",          lng:-73.9890, lat:40.7030 },
+  { id:"warehouse",   name:"Poker warehouse · Red Hook",      lng:-74.0150, lat:40.6760 },
+  { id:"restaurant",  name:"Salt & Cedar · Williamsburg",     lng:-73.9670, lat:40.7150 },
+];
+
+// Cell-tower route of Mia's phone that night (orange dashed line)
+const TOWER_ROUTE = {
+  type:"Feature",
+  geometry:{ type:"LineString", coordinates:[
+    [-73.9205,40.6992], // home, Bushwick
+    [-73.930,40.630],   // Flatbush en route
+    [-73.890,40.590],   // Floyd Bennett area 23:09
+    [-73.885,40.5735],  // Marine Parkway Bridge 23:47
+  ]}
+};
+
+// ---- custom game-style map (dark, sharp, orange accent) ----
+const style = {
+  version:8,
+  glyphs:`https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=${KEY}`,
+  sources:{
+    omt:{ type:"vector", url:`https://api.maptiler.com/tiles/v3/tiles.json?key=${KEY}` }
+  },
+  layers:[
+    { id:"bg", type:"background", paint:{ "background-color":"#151719" } },
+    { id:"water", type:"fill", source:"omt", "source-layer":"water",
+      paint:{ "fill-color":"#10202e" } },
+    { id:"park", type:"fill", source:"omt", "source-layer":"park",
+      paint:{ "fill-color":"#17201b", "fill-opacity":0.7 } },
+    { id:"landcover", type:"fill", source:"omt", "source-layer":"landcover",
+      filter:["in","class","wood","grass"], paint:{ "fill-color":"#171f1a","fill-opacity":0.5 } },
+    { id:"roads-minor", type:"line", source:"omt", "source-layer":"transportation",
+      filter:["in","class","minor","service","track"],
+      paint:{ "line-color":"#2a313a", "line-width":["interpolate",["linear"],["zoom"],12,0.4,16,1.6] } },
+    { id:"roads-sec", type:"line", source:"omt", "source-layer":"transportation",
+      filter:["in","class","secondary","tertiary"],
+      paint:{ "line-color":"#333b44", "line-width":["interpolate",["linear"],["zoom"],10,0.6,16,3] } },
+    { id:"roads-main", type:"line", source:"omt", "source-layer":"transportation",
+      filter:["in","class","motorway","trunk","primary"],
+      paint:{ "line-color":"#3c454f", "line-width":["interpolate",["linear"],["zoom"],8,0.8,16,5] } },
+    { id:"buildings", type:"fill", source:"omt", "source-layer":"building", minzoom:14,
+      paint:{ "fill-color":"#1d2126", "fill-opacity":0.8 } },
+    { id:"boundary", type:"line", source:"omt", "source-layer":"boundary",
+      filter:["<=","admin_level",6],
+      paint:{ "line-color":"#2f353b", "line-dasharray":[3,3], "line-width":1 } },
+    { id:"place-labels", type:"symbol", source:"omt", "source-layer":"place",
+      filter:["in","class","city","town","suburb","neighbourhood","locality"],
+      layout:{ "text-field":["get","name"], "text-font":["Noto Sans Regular"],
+        "text-size":["interpolate",["linear"],["zoom"],10,10,15,14],
+        "text-letter-spacing":0.08, "text-transform":"uppercase" },
+      paint:{ "text-color":"#9aa0a8", "text-halo-color":"#151719", "text-halo-width":1.4 } }
+  ]
+};
+
+const map = new maplibregl.Map({
+  container:"map", style,
+  center:[-73.95,40.66], zoom:11, minzoom:9, maxzoom:18,
+  attributionControl:{ compact:true }
+});
+
+// markers
+map.on("load", () => {
+  // route line
+  map.addSource("route",{ type:"geojson", data:TOWER_ROUTE });
+  map.addLayer({ id:"route", type:"line", source:"route",
+    paint:{ "line-color":"#ff6a00", "line-width":2, "line-dasharray":[2,2] } });
+
+  // place markers
+  PLACES.forEach(p => {
+    const el = document.createElement("div");
+    el.className = "mk" + (p.key ? " key" : "");
+    el.innerHTML = p.key
+      ? `<span class="brk tl"></span><span class="brk br"></span><span class="lbl">${p.name}</span>`
+      : `<span class="lbl">${p.name}</span>`;
+    new maplibregl.Marker({ element:el, anchor:"center" })
+      .setLngLat([p.lng,p.lat]).addTo(map);
+  });
+});
+
+// coordinate readout
+map.on("mousemove", e => {
+  document.getElementById("coords").textContent =
+    `${e.lngLat.lat.toFixed(4)}° N · ${Math.abs(e.lngLat.lng).toFixed(4)}° W · ZOOM ${map.getZoom().toFixed(0)}`;
+});
+
+// zoom buttons
+document.getElementById("zin").onclick = () => map.zoomIn();
+document.getElementById("zout").onclick = () => map.zoomOut();
+
+// City / District / Street
+document.querySelectorAll(".levels button").forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll(".levels button").forEach(x => x.classList.remove("is-active"));
+    b.classList.add("is-active");
+    map.flyTo({ zoom:+b.dataset.zoom, center:[-73.92,40.62] });
+  };
+});
+</script>
+</body>
+</html>

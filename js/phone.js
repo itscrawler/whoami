@@ -63,7 +63,7 @@ function renderPhone(container) {
       content.appendChild(createEl(
         "p",
         "phone-access-note",
-        "Use Terminal: scan phone → vpn connect TAC-07 → connect phone. Sign in to Mia's Google account to view message backups.",
+        "Use Terminal: scan phone → vpn connect NYC-07 → connect phone. Sign in to Mia's Google account to view message backups.",
       ));
     }
 
@@ -182,7 +182,7 @@ function renderPhone(container) {
   function accessHint(entry) {
     const access = entry.access || {};
     if (access.type === "hack") {
-      return "Connect through Terminal: scan phone → vpn connect TAC-07 → connect phone.";
+      return "Connect through Terminal: scan phone → vpn connect NYC-07 → connect phone.";
     }
     if (access.type === "login") {
       const service = access.service || "account";
