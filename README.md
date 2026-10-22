@@ -9,6 +9,7 @@ You play as **WHOAMI** — an anonymous hacker who takes jobs on closed forums. 
 - **A fake desktop OS** — apps open as movable, overlapping windows (database, mail, browser, phone, map, cameras, terminal, and more). Map locations, tower signals, routes, and cameras unlock as evidence is found.
 - **A simulated phone** — browse messages, calls, apps, steps, photos, social posts, email and device records; unlock private records through in-game terminal access.
 - **A local file explorer** — browse the hacker's folders, view downloaded case evidence, and inspect recovered archive files.
+- **An evidence board** — automatically collect discovered evidence, connect cards with player-made threads, and choose evidence for the final report.
 - **A shared handbook** — six help topics and a command reference loaded from case-independent JSON.
 - **A case-limited web** — search fictional public pages in Dorne without access to the wider internet.
 - **Fully manual investigation** — every search, every login, every password is on you. How-tos live in an in-game handbook, not in tooltips.

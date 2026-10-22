@@ -17,6 +17,10 @@ window.CASE_PROGRESS = {
   foundPeople: new Set(),
   openedApps: new Set(),
   downloaded: new Set(),
+  reportEvidence: new Set(),
+  evidenceThreads: [],
+  evidencePositions: new Map(),
+  evidenceBoardHintSeen: false,
   terminalHistory: [],
   wordlist: new Map(),
   crackedArchives: new Set(),
@@ -45,6 +49,10 @@ function saveCaseProgress() {
       foundPeople: [...window.CASE_PROGRESS.foundPeople],
       openedApps: [...window.CASE_PROGRESS.openedApps],
       downloaded: [...window.CASE_PROGRESS.downloaded],
+      reportEvidence: [...window.CASE_PROGRESS.reportEvidence],
+      evidenceThreads: window.CASE_PROGRESS.evidenceThreads,
+      evidencePositions: [...window.CASE_PROGRESS.evidencePositions],
+      evidenceBoardHintSeen: window.CASE_PROGRESS.evidenceBoardHintSeen,
       terminalHistory: window.CASE_PROGRESS.terminalHistory,
       wordlist: [...window.CASE_PROGRESS.wordlist],
       crackedArchives: [...window.CASE_PROGRESS.crackedArchives],
@@ -85,6 +93,27 @@ function restoreCaseProgress(data) {
   window.CASE_PROGRESS.foundPeople = setKnown(saved.foundPeople, personIds);
   window.CASE_PROGRESS.openedApps = setKnown(saved.openedApps, appIds);
   window.CASE_PROGRESS.downloaded = setKnown(saved.downloaded, evidenceIds);
+  window.CASE_PROGRESS.reportEvidence = setKnown(saved.reportEvidence, window.CASE_PROGRESS.foundEvidence);
+  window.CASE_PROGRESS.evidenceThreads = Array.isArray(saved.evidenceThreads)
+    ? saved.evidenceThreads.filter((thread) =>
+      Array.isArray(thread) && thread.length === 2 &&
+      thread[0] !== thread[1] &&
+      evidenceIds.has(thread[0]) && evidenceIds.has(thread[1]) &&
+      window.CASE_PROGRESS.foundEvidence.has(thread[0]) &&
+      window.CASE_PROGRESS.foundEvidence.has(thread[1])
+    ).map((thread) => [...thread].sort())
+    : [];
+  window.CASE_PROGRESS.evidencePositions = new Map(
+    Array.isArray(saved.evidencePositions)
+      ? saved.evidencePositions.filter((entry) =>
+        Array.isArray(entry) && entry.length === 2 &&
+        evidenceIds.has(entry[0]) &&
+        Number.isFinite(entry[1]?.x) && entry[1].x >= 0 && entry[1].x <= 10000 &&
+        Number.isFinite(entry[1]?.y) && entry[1].y >= 0 && entry[1].y <= 10000
+      ).map(([id, position]) => [id, { x: position.x, y: position.y }])
+      : []
+  );
+  window.CASE_PROGRESS.evidenceBoardHintSeen = saved.evidenceBoardHintSeen === true;
   window.CASE_PROGRESS.terminalHistory.length = 0;
   if (Array.isArray(saved.terminalHistory)) {
     saved.terminalHistory
@@ -129,6 +158,7 @@ window.markEvidenceFound = function markEvidenceFound(id) {
   window.CASE_PROGRESS.foundEvidence.add(id);
   saveCaseProgress();
   window.refreshCaseMap?.(id);
+  window.dispatchEvent(new Event("case-evidence-found"));
 };
 
 window.markPersonFound = function markPersonFound(id) {

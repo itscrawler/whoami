@@ -95,8 +95,9 @@ const APPS = [
     name: "Evidence board",
     subtitle: "/ case notes",
     section: "tools",
-    width: 560,
-    height: 400,
+    width: 1180,
+    height: 760,
+    render: renderEvidenceBoard, // js/board.js
     icon: '<rect x="3" y="4" width="18" height="16"/><path d="M7 9h4M7 13h6M15 9l2 6"/>',
   },
   {

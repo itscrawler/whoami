@@ -31,6 +31,17 @@
               "description": "Evidence may be public, found in an app, or locked behind a simulated account or target. Keep track of what you have discovered and downloaded."
             }
           ]
+        },
+        {
+          "title": "Evidence board",
+          "items": [
+            {
+              "description": "Found evidence appears on the Evidence board automatically. Select two cards and connect them to draw a thread; you can remove a thread at any time."
+            },
+            {
+              "description": "Use Add to report on evidence cards to choose which collected records should be available to the final report."
+            }
+          ]
         }
       ]
     },
