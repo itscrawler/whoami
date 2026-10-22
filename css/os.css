@@ -1727,6 +1727,56 @@ body.is-resizing * {
   line-height: 1.6;
 }
 
+.handbook-group {
+  margin-top: 18px;
+}
+
+.handbook-group h3 {
+  margin: 0 0 7px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.handbook-list {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.handbook-list-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 5px 9px;
+  padding: 8px 9px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.handbook-command {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
+.handbook-description {
+  color: var(--text);
+  font-size: 11px;
+}
+
+.handbook-error {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
 /* ---------- Public web browser ---------- */
 
 .browser-app {

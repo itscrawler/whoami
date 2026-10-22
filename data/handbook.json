@@ -1,0 +1,282 @@
+{
+  "topics": [
+    {
+      "id": "start",
+      "label": "Start",
+      "title": "Start investigating",
+      "paragraphs": [
+        "You are an independent investigator working from the WHOAMI desktop. Read the client's message first, then follow the evidence across the available apps.",
+        "Search records, compare sources, and build a timeline. A useful conclusion should be supported by several independent pieces of evidence.",
+        "The desktop is a simulation: your commands only affect this case and never run on your computer or contact real services."
+      ],
+      "groups": [
+        {
+          "title": "Using the desktop",
+          "items": [
+            {
+              "description": "Select an app in the dock to open it. Drag windows by their title bars; minimize, maximize, close, or resize them with the window controls."
+            },
+            {
+              "description": "Use the ? button beside the clock or open Handbook from the dock to return to these instructions."
+            }
+          ]
+        },
+        {
+          "title": "A good investigation",
+          "items": [
+            {
+              "description": "Start with what is already available, then follow names, dates, accounts, locations, and other details into related records."
+            },
+            {
+              "description": "Evidence may be public, found in an app, or locked behind a simulated account or target. Keep track of what you have discovered and downloaded."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "terminal",
+      "label": "Terminal",
+      "title": "The case terminal",
+      "paragraphs": [
+        "The terminal is a simulated command interface for the fictional case. It does not provide access to your computer, the internet, or real systems.",
+        "Type a command and press Enter. Use the up and down arrows to recall previous commands. The terminal history and investigation progress are saved for this case."
+      ],
+      "groups": [
+        {
+          "title": "Files and downloads",
+          "items": [
+            {
+              "command": "ls",
+              "description": "List the current virtual folder."
+            },
+            {
+              "command": "cd <folder>",
+              "description": "Change virtual folder; use cd .. to go up or cd ~ to return home."
+            },
+            {
+              "command": "download <file|all>",
+              "description": "Save records available in the current simulated session to the hacker's Downloads folder."
+            },
+            {
+              "command": "cat <file>",
+              "description": "Print a downloaded text record."
+            },
+            {
+              "command": "open <file>",
+              "description": "Open a downloaded record in a viewer window."
+            },
+            {
+              "command": "unzip <archive>",
+              "description": "Extract an unlocked archive."
+            }
+          ]
+        },
+        {
+          "title": "Other useful commands",
+          "items": [
+            {
+              "command": "help [command]",
+              "description": "List terminal commands or show help for one command."
+            },
+            {
+              "command": "history",
+              "description": "Show commands entered in this case session."
+            },
+            {
+              "command": "clear",
+              "description": "Clear the visible terminal output."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "how-to-hack",
+      "label": "How to hack",
+      "title": "Unlocking simulated records",
+      "paragraphs": [
+        "Some fictional records require a simulated access path. Follow the requirements shown by the case; not every record uses every step."
+      ],
+      "groups": [
+        {
+          "title": "Protected targets",
+          "items": [
+            {
+              "command": "vpn connect <node>",
+              "description": "Connect to the case's fictional VPN node when a target requires it."
+            },
+            {
+              "command": "scan <target>",
+              "description": "Inspect a target and review its access requirements."
+            },
+            {
+              "command": "connect <target>",
+              "description": "Connect to a scanned target after meeting its requirements."
+            },
+            {
+              "command": "download <file>",
+              "description": "Save the records made available by the connection."
+            }
+          ]
+        },
+        {
+          "title": "Account-protected records",
+          "items": [
+            {
+              "command": "login <service> <account> <password>",
+              "description": "Sign in to a fictional account using credentials found in the case evidence."
+            },
+            {
+              "command": "logout",
+              "description": "End active simulated account sessions."
+            }
+          ]
+        },
+        {
+          "title": "Encrypted archives",
+          "items": [
+            {
+              "command": "wordlist add <word>",
+              "description": "Save a password clue you have actually found."
+            },
+            {
+              "command": "crack <archive> --wordlist mine",
+              "description": "Check your collected clues against a case archive."
+            },
+            {
+              "description": "After the archive is unlocked, use unzip <archive> to extract its records."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "passwords",
+      "label": "Passwords",
+      "title": "Finding passwords and clues",
+      "paragraphs": [
+        "Passwords are part of the investigation. The handbook does not contain case passwords: look for clues in evidence, messages, public posts, and account records.",
+        "A clue may point to a meaningful word, date, or combination. Treat it as a lead and verify it against the evidence rather than trying unrelated guesses."
+      ],
+      "groups": [
+        {
+          "title": "Using a discovered password",
+          "items": [
+            {
+              "description": "Use login with the service, account, and password supported by the case records. A failed login means the credentials or account do not match."
+            },
+            {
+              "description": "For encrypted archives, add a discovered clue to your wordlist and run crack with --wordlist mine. Only clues you collected in-game are checked."
+            },
+            {
+              "description": "Once an archive is unlocked, extract it with unzip. Its contents then become available in Files."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "commands",
+      "label": "Commands",
+      "title": "Terminal command reference",
+      "paragraphs": [
+        "All commands below are simulated and operate only on the fictional case."
+      ],
+      "groups": [
+        {
+          "title": "Basics and files",
+          "items": [
+            {
+              "command": "help [command]",
+              "description": "Show available commands or command-specific help."
+            },
+            {
+              "command": "clear | history | date | whoami | exit",
+              "description": "Clear output, show command history, show the in-game time, print your handle, or close Terminal."
+            },
+            {
+              "command": "ls | cd <folder>",
+              "description": "List the current virtual folder or change folders."
+            },
+            {
+              "command": "cat <file> | open <file>",
+              "description": "Print a downloaded text record or open a downloaded record in a viewer."
+            },
+            {
+              "command": "download <file|all> | unzip <archive>",
+              "description": "Save available records or extract an unlocked archive."
+            }
+          ]
+        },
+        {
+          "title": "VPN, search, and access",
+          "items": [
+            {
+              "command": "vpn connect <node> | vpn status | vpn disconnect",
+              "description": "Connect, check, or disconnect the simulated VPN."
+            },
+            {
+              "command": "lookup <name|number|email|vehicle>",
+              "description": "Search resident records."
+            },
+            {
+              "command": "breach search <email|username>",
+              "description": "Search the fictional public leak."
+            },
+            {
+              "command": "geoip <ip>",
+              "description": "Search case records for an IP location."
+            },
+            {
+              "command": "scan <target> | connect <target>",
+              "description": "Inspect a fictional target and connect after meeting its requirements."
+            },
+            {
+              "command": "login <service> <account> <password> | logout",
+              "description": "Start or end a simulated account session."
+            },
+            {
+              "command": "disconnect",
+              "description": "Close current simulated target connections."
+            }
+          ]
+        },
+        {
+          "title": "Clues, archives, and phone records",
+          "items": [
+            {
+              "command": "wordlist add <word> | wordlist show",
+              "description": "Save or list password clues found in the case."
+            },
+            {
+              "command": "crack <archive> --wordlist mine",
+              "description": "Check collected clues against an encrypted case archive."
+            },
+            {
+              "command": "towers <number> [--date YYYY-MM-DD]",
+              "description": "Show a downloaded tower log, optionally filtered by date."
+            },
+            {
+              "command": "calls | sms",
+              "description": "Show downloaded call logs or text-message records when available."
+            },
+            {
+              "command": "hack [target]",
+              "description": "Show a hint for the simulated access flow."
+            }
+          ]
+        },
+        {
+          "title": "Harmless joke commands",
+          "items": [
+            {
+              "command": "sudo | rm -rf /",
+              "description": "These return jokes only; they do not execute system commands."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

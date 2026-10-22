@@ -6,6 +6,7 @@ const CASE_ID = new URLSearchParams(location.search).get("case") || "535";
 
 // The loaded case ({ caseInfo, people, evidence, web }). Apps read from it; null until it loads.
 let caseData = null;
+let handbookData = null;
 
 const CASE_PROGRESS_VERSION = 1;
 const CASE_PROGRESS_KEY = `whoami:case:${CASE_ID}:progress`;
@@ -136,16 +137,17 @@ window.markPersonFound = function markPersonFound(id) {
   saveCaseProgress();
 };
 
-// Loads the case data files at the same time.
+// Loads the shared handbook and case data at the same time.
 async function loadCase(id) {
   const base = `data/cases/${id}`;
-  const [caseInfo, people, evidence, web] = await Promise.all([
+  const [caseInfo, people, evidence, web, handbook] = await Promise.all([
     fetch(`${base}/case.json`).then((r) => r.json()),
     fetch(`${base}/people.json`).then((r) => r.json()),
     fetch(`${base}/evidence.json`).then((r) => r.json()),
     fetch(`${base}/web.json`).then((r) => r.json()),
+    fetch("data/handbook.json").then((r) => r.json()),
   ]);
-  return { caseInfo, people, evidence, web };
+  return { caseInfo, people, evidence, web, handbook };
 }
 
 // Builds the dock from the APPS list in apps.js:
@@ -216,6 +218,7 @@ initWindowManager(document.getElementById("windows"), updateDock);
 loadCase(CASE_ID)
   .then((data) => {
     caseData = data;
+    handbookData = data.handbook;
     const hasSavedProgress = restoreCaseProgress(data);
     document.title = `WHOAMI — #${data.caseInfo.id} ${data.caseInfo.title}`;
     initTopbar(data.caseInfo);

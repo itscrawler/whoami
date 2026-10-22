@@ -1,75 +1,11 @@
-// WHOAMI — help directory
+// WHOAMI — shared help directory
 
 function renderHandbook(container) {
   const handbook = createEl("div", "handbook");
   const navigation = createEl("nav", "handbook-nav");
   navigation.setAttribute("aria-label", "Help topics");
   const content = createEl("div", "handbook-content");
-
-  const topics = [
-    {
-      id: "getting-started",
-      label: "Getting started",
-      title: "Start investigating",
-      paragraphs: [
-        "Read the client's message in Mail, then open any attached evidence for its full details.",
-        "Collect facts from available apps, compare sources, and build a timeline. Look for details that confirm or contradict each other; a single clue is rarely the whole story.",
-        "When you have enough evidence, the intended goal is to report who was responsible and explain how the evidence supports your conclusion. The report workflow is not available yet.",
-      ],
-    },
-    {
-      id: "windows",
-      label: "Desktop & windows",
-      title: "Using the desktop",
-      paragraphs: [
-        "Select an app in the dock to open it. Drag a window by its title bar, use the title-bar controls to minimize, maximize, or close it, and resize it from the lower-right corner.",
-        "Select the ? button beside the clock any time to reopen this directory. The Handbook is also available from the dock.",
-      ],
-    },
-    {
-      id: "mail",
-      label: "Mail",
-      title: "Mail",
-      paragraphs: [
-        "The inbox contains messages from the client. Select a message to read it. Select an attachment below the message to open that email in its own window and inspect its sender, recipient, date, subject, and body.",
-      ],
-    },
-    {
-      id: "database",
-      label: "Database",
-      title: "Resident database",
-      paragraphs: [
-        "Enter a name, record ID, birth detail, address, or status. Choose the matching search field, then select SEARCH or press Enter.",
-        "Select a result to open its dossier. Dossier tabs show different record sections; linked people can be selected to move between dossiers.",
-      ],
-    },
-    {
-      id: "terminal",
-      label: "Terminal commands",
-      title: "Terminal",
-      paragraphs: [
-        "This is a simulated case terminal. Commands only inspect the fictional case data and your in-game session; they do not run on your computer or contact real services.",
-        "BASICS: help [command] lists commands or explains one; clear clears output; history shows saved commands and the up/down arrows recall them; date shows in-game time; whoami prints your handle; exit closes the terminal.",
-        "FILES: ls lists the current folder; cd <folder> changes folder; cat <file> prints a downloaded text record; open <file> opens a downloaded record in a viewer; download <file|all> saves records available in your current session; unzip <archive> extracts an unlocked archive.",
-        "VPN: vpn connect <node> starts the simulated tunnel; vpn status checks it; vpn disconnect closes it. A VPN is required before connecting to protected targets.",
-        "SEARCH: lookup <name|number|email|vehicle> searches resident records; breach search <email|username> checks the available fictional leak; geoip <ip> searches IP locations in case records.",
-        "ACCESS: scan <target> reports access requirements; connect <target> opens a simulated target after scanning and connecting the VPN; login <service> <account> <password> checks discovered credentials; logout ends account sessions; disconnect closes the target connection.",
-        "WORDLIST: wordlist add <word> adds a clue you found; wordlist show lists your collected clues; crack <archive> --wordlist mine checks only those clues, never an automatic or external password list.",
-        "PHONE: Open Phone in the dock to browse Messages, Calls, Apps, Steps, Photos, Social, Mail, and Device. Mia's Messages and Nimbus Fit step data require her Nimbus session; records unlock from Terminal using credentials found in the case. Calls shows an explicit empty state until the case provides call-history records.",
-        "PHONE ACCESS: scan phone → vpn connect NYC-07 → connect phone unlocks carrier records. Find Mia's Nimbus credentials in case evidence, then use login nimbus <account> <password> for her message backup and email.",
-        "PHONE RECORDS: towers <number> [--date YYYY-MM-DD] shows an available tower log, optionally filtered by date; calls shows downloaded call logs when present; sms shows downloaded text conversations. hack [target] gives a hint for the simulated access flow.",
-        "sudo and rm -rf / are harmless jokes; they do not execute system commands.",
-      ],
-    },
-    {
-      id: "other-apps",
-      label: "Files & other apps",
-      title: "Files and other apps",
-      paragraphs: [
-        "Files shows the folders on your computer and case records downloaded through Terminal. Open Downloads, then select a file to inspect it. The recovered backup_veridia folder appears after you download the deleted-folder record; encrypted archives can be opened for details and extracted after you unlock them in Terminal. Evidence board and Report are not available yet.",
-      ],
-    },
-  ];
+  const topics = handbookData?.topics || [];
 
   for (const topic of topics) {
     const button = createEl("button", "handbook-link", topic.label);
@@ -91,9 +27,27 @@ function renderHandbook(container) {
 
     const page = createEl("section", "handbook-section");
     page.appendChild(createEl("h2", "", topic.title));
-    for (const text of topic.paragraphs) {
-      page.appendChild(createEl("p", "", text));
+
+    for (const paragraph of topic.paragraphs || []) {
+      page.appendChild(createEl("p", "", paragraph));
     }
+
+    for (const group of topic.groups || []) {
+      const section = createEl("section", "handbook-group");
+      section.appendChild(createEl("h3", "", group.title));
+      const list = createEl("ul", "handbook-list");
+      for (const item of group.items || []) {
+        const row = createEl("li", "handbook-list-item");
+        if (item.command) {
+          row.appendChild(createEl("code", "handbook-command", item.command));
+        }
+        row.appendChild(createEl("span", "handbook-description", item.description));
+        list.appendChild(row);
+      }
+      section.appendChild(list);
+      page.appendChild(section);
+    }
+
     content.replaceChildren(page);
   }
 
@@ -104,5 +58,10 @@ function renderHandbook(container) {
 
   handbook.append(navigation, content);
   container.appendChild(handbook);
-  showTopic(topics[0].id);
+
+  if (topics.length) {
+    showTopic(topics[0].id);
+  } else {
+    content.appendChild(createEl("p", "handbook-error", "Handbook content is unavailable."));
+  }
 }
