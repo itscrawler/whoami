@@ -43,6 +43,7 @@
       "id": "mia-home",
       "name": "Linden St, Bushwick, Brooklyn",
       "type": "home",
+      "coordinates": [-73.9205, 40.6992],
       "map": {
         "x": 58,
         "y": 29
@@ -52,6 +53,7 @@
       "id": "marine-parkway-bridge",
       "name": "Marine Parkway–Gil Hodges Memorial Bridge",
       "type": "bridge",
+      "coordinates": [-73.8855, 40.5735],
       "map": {
         "x": 83,
         "y": 73
@@ -61,6 +63,7 @@
       "id": "dead-horse-bay",
       "name": "Floyd Bennett Field / Dead Horse Bay",
       "type": "park",
+      "coordinates": [-73.8905, 40.5905],
       "map": {
         "x": 77,
         "y": 82
@@ -70,6 +73,7 @@
       "id": "gerritsen-beach",
       "name": "Gerritsen Beach",
       "type": "district",
+      "coordinates": [-73.9250, 40.5885],
       "map": {
         "x": 91,
         "y": 69
@@ -79,6 +83,7 @@
       "id": "owen-home",
       "name": "34 Gerritsen Ave, Gerritsen Beach",
       "type": "home",
+      "coordinates": [-73.9250, 40.5885],
       "map": {
         "x": 90,
         "y": 71
@@ -88,6 +93,7 @@
       "id": "veridia-office",
       "name": "Veridia Health office, DUMBO",
       "type": "office",
+      "coordinates": [-73.9890, 40.7030],
       "map": {
         "x": 53,
         "y": 35
@@ -97,6 +103,7 @@
       "id": "salt-and-cedar",
       "name": "Salt & Cedar restaurant",
       "type": "restaurant",
+      "coordinates": [-73.9860, 40.7040],
       "map": {
         "x": 55,
         "y": 37
@@ -106,6 +113,7 @@
       "id": "red-hook-warehouse",
       "name": "Red Hook warehouse, Brooklyn, NY",
       "type": "warehouse",
+      "coordinates": [-74.0150, 40.6760],
       "map": {
         "x": 43,
         "y": 56
@@ -115,6 +123,7 @@
       "id": "walter-home",
       "name": "421 Linden St, Bushwick",
       "type": "home",
+      "coordinates": [-73.9200, 40.6995],
       "map": {
         "x": 59,
         "y": 28
