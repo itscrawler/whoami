@@ -1874,6 +1874,15 @@ body.is-resizing * {
 
 /* ---------- Case map ---------- */
 
+.case-map-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  background: var(--bg);
+}
+
 .case-map {
   display: flex;
   flex-direction: column;
