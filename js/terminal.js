@@ -54,14 +54,19 @@ function renderTerminal(container) {
     cwd: "/home/whoami",
     history: [],
     historyIndex: null,
-    vpnNode: null,
-    scannedTargets: new Set(),
+    get vpnNode() {
+      return window.CASE_ACCESS.vpnNode;
+    },
+    set vpnNode(value) {
+      window.CASE_ACCESS.vpnNode = value;
+    },
+    scannedTargets: window.CASE_ACCESS.scannedTargets,
     connectedTargets: window.CASE_ACCESS.connectedTargets,
     sessions: window.CASE_ACCESS.sessions,
-    wordlist: new Map(),
-    downloaded: new Set(),
-    crackedArchives: new Set(),
-    extractedArchives: new Set(),
+    wordlist: window.CASE_PROGRESS.wordlist,
+    downloaded: window.CASE_PROGRESS.downloaded,
+    crackedArchives: window.CASE_PROGRESS.crackedArchives,
+    extractedArchives: window.CASE_PROGRESS.extractedArchives,
   };
   updatePrompt();
 
@@ -378,6 +383,8 @@ function renderTerminal(container) {
 
   function saveEvidence(evidence) {
     state.downloaded.add(evidence.id);
+    window.markEvidenceFound(evidence.id);
+    saveCaseProgress();
   }
 
   function archiveInDownloads() {
@@ -397,6 +404,7 @@ function renderTerminal(container) {
     if (!evidence) return write("No extraction record is attached to this archive.", "terminal-error");
     state.extractedArchives.add(evidence.id);
     state.downloaded.add(evidence.id);
+    saveCaseProgress();
     write(`Extracted ${evidence.content?.name || evidence.title} to ~/downloads.`);
   }
 
@@ -415,6 +423,7 @@ function renderTerminal(container) {
       const node = args[1].toUpperCase();
       if (node !== "NYC-07") return write(`Unknown node: ${args[1]}. Available node: NYC-07.`, "terminal-error");
       state.vpnNode = node;
+      saveCaseProgress();
       return write(`VPN connected · NODE ${node}`);
     }
     write("Usage: vpn connect <node> | vpn status | vpn disconnect", "terminal-error");
@@ -440,6 +449,7 @@ function renderTerminal(container) {
       return write(`No simulated target named "${value}" in this case.`, "terminal-error");
     }
     state.scannedTargets.add(target);
+    saveCaseProgress();
     write(`SCAN ${target.toUpperCase()} · case simulation`);
     write("need: vpn connect NYC-07");
     write("need: connect target after the VPN tunnel is active");
@@ -531,6 +541,7 @@ function renderTerminal(container) {
   function addWord(word) {
     if (!word) return write("Usage: wordlist add <word>", "terminal-error");
     state.wordlist.set(normalize(word), word);
+    saveCaseProgress();
     write(`Added clue to mine wordlist: ${word}`);
   }
 
@@ -550,6 +561,7 @@ function renderTerminal(container) {
       return write("No match in your wordlist. Collect a clue, then use wordlist add <word>.");
     }
     state.crackedArchives.add(normalize(archive));
+    saveCaseProgress();
     write(`MATCH · archive unlocked with a word from your wordlist.`);
   }
 

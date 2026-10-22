@@ -11,6 +11,7 @@ You play as **WHOAMI** — an anonymous hacker who takes jobs on closed forums. 
 - **A case-limited web** — search fictional public pages in Dorne without access to the wider internet.
 - **Fully manual investigation** — every search, every login, every password is on you. How-tos live in an in-game handbook, not in tooltips.
 - **A living database** — not just suspects: every resident of the city can be looked up, and some of them know more than they think.
+- **Saved case progress** — discovered evidence, resident dossiers, unlocked access, downloads, and open apps persist in browser storage.
 - **Fictional cases in real places** — real US cities, real platforms (Instagram, Google, Strava, Steam…), fictional people and companies.
 - **Twisty cases** — several suspects with motives, red herrings that make sense in the end, evidence spread across many apps.
 - **Graded reports** — at the end you file a report: who, where, when, how, and up to five pieces of evidence. You get a score (0–100%) and a grade from A+ to F, plus one of several endings.

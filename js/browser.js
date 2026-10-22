@@ -39,7 +39,10 @@ function renderBrowser(container) {
   }
 
   function openPage(id) {
-    if (pageById.has(id)) navigate({ type: "page", id });
+    if (pageById.has(id)) {
+      window.markEvidenceFound(id);
+      navigate({ type: "page", id });
+    }
   }
 
   function draw() {

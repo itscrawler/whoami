@@ -89,6 +89,7 @@ function renderMail(container) {
   }
 
   function openEmailWindow(attachment) {
+    window.markEvidenceFound(attachment.id);
     const email = attachment.content;
     openAuxiliaryWindow({
       id: `mail-message-${attachment.id}`,

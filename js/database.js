@@ -131,6 +131,7 @@ function renderDatabase(container) {
     const person = caseData.people.find((entry) => entry.id === personId && entry.record);
     if (!person) return;
 
+    window.markPersonFound(person.id);
     results.querySelector(".is-selected")?.classList.remove("is-selected");
     results.querySelectorAll(".db-resident").forEach((button) => {
       const isSelected = button.dataset.person === person.id;

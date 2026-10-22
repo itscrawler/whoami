@@ -104,6 +104,7 @@ function renderPhone(container) {
 
   function renderEntry(entry) {
     const available = isAvailable(entry);
+    if (available) window.markEvidenceFound(entry.id);
     const card = createEl("article", `phone-record${available ? "" : " is-locked"}`);
     const heading = createEl("div", "phone-record-heading");
     heading.append(
