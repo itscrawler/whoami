@@ -68,11 +68,11 @@ function renderPhone(container) {
       createEl("span", "phone-section-count", String(entries.length).padStart(2, "0")),
     );
     content.appendChild(heading);
-    if (activeSection === "messages" && !connected && !nimbus) {
+    if (activeSection === "messages" && !nimbus) {
       content.appendChild(createEl(
         "p",
         "phone-access-note",
-        "Use Terminal: scan phone → vpn connect NYC-07 → connect phone. Sign in to Mia's Nimbus account to view message backups.",
+        "Message backups are stored in Mia's Nimbus account. Sign in to it from the Terminal to read them.",
       ));
     }
 
@@ -111,7 +111,8 @@ function renderPhone(container) {
       if (section === "steps") return entry.id === "ev-mia-pedometer";
       if (section === "photos") return entry.id === "ev-mia-dog-photo";
       if (section === "social") {
-        return entry.app === "social" && entry.access?.type === "public";
+        return entry.app === "social" && entry.access?.type === "public" &&
+          entry.content?.author === PHONE_OWNER;
       }
       if (section === "mail") {
         return entry.app === "mail" && entry.access?.type === "login" &&

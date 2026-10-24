@@ -193,7 +193,7 @@
               "description": "Use login with the service, account, and password supported by the case records. A failed login means the credentials or account do not match."
             },
             {
-              "description": "For encrypted archives, add a discovered clue to your wordlist and run crack with --wordlist mine. Only clues you collected in-game are checked."
+              "description": "For encrypted archives, add discovered clues to your wordlist and run crack with --wordlist mine. Each clue is tried on its own and joined with one other clue; only clues you collected in-game are checked."
             },
             {
               "description": "Once an archive is unlocked, extract it with unzip. Its contents then become available in Files."
@@ -332,8 +332,8 @@
               "description": "Show a downloaded tower log, optionally filtered by date."
             },
             {
-              "command": "calls | sms",
-              "description": "Show downloaded call logs or text-message records when available."
+              "command": "sms",
+              "description": "Show downloaded text-message records when available."
             },
             {
               "command": "hack [target]",

@@ -181,7 +181,10 @@ function renderBrowser(container) {
     );
     viewport.appendChild(heading);
     if (!results.length) {
-      viewport.appendChild(createEl("p", "browser-no-results", "No public pages matched that search."));
+      const message = searchTerms(query).length
+        ? "No public pages matched that search."
+        : "Search words need at least 3 letters.";
+      viewport.appendChild(createEl("p", "browser-no-results", message));
       return;
     }
 
@@ -298,8 +301,10 @@ function renderBrowser(container) {
     parent.appendChild(list);
   }
 
+  // Only words a reader can see on the page (plus its search phrases) are indexed:
+  // the hidden "people" tags and JSON keys would give away links the page doesn't show.
   function searchPages(query) {
-    const terms = query.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    const terms = searchTerms(query);
     if (!terms.length) return [];
     return [...pageById.values()].filter((entry) => {
       const haystack = [
@@ -308,11 +313,26 @@ function renderBrowser(container) {
         entry.handle,
         entry.url,
         entry.queries?.join(" "),
-        entry.people?.map(personName).join(" "),
-        JSON.stringify(entry.content || {}),
+        visibleText(entry.content),
       ].join(" ").toLocaleLowerCase();
       return terms.every((term) => haystack.includes(term));
     });
+  }
+
+  function searchTerms(query) {
+    return query.toLocaleLowerCase().split(/\s+/).filter((term) => term.length >= 3);
+  }
+
+  function visibleText(value) {
+    if (typeof value === "string") return personById(value) ? personName(value) : value;
+    if (Array.isArray(value)) return value.map(visibleText).join(" ");
+    if (value && typeof value === "object") {
+      return Object.entries(value)
+        .filter(([key]) => key !== "type" && key !== "archiveEvidenceId")
+        .map(([, inner]) => visibleText(inner))
+        .join(" ");
+    }
+    return value == null ? "" : String(value);
   }
 
   function navigateAddress(value) {

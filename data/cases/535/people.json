@@ -38,8 +38,8 @@
       "Quiet and meticulous. Brooklyn College (CUNY), Mathematics & Statistics, 2017. Volunteered on weekends at the Second Chance animal shelter.",
       "Picto: coffee at work, the shelter, sunsets over the bay. Last post 2019-11-02: a dark office window at night, caption \"Numbers don't lie. People do.\"",
       "News 2019: \"Missing analyst searched for near Marine Parkway–Gil Hodges Memorial Bridge\", \"Search for Mia Holt called off\".",
-      "Second Chance shelter: 2018 thank-you post to volunteers, Mia is on the list.",
-      "Nimbus Photos: a dog photo with no name, caption \"My best friend ❤️\"."
+      "Missing-person poster, 2019: 5'3\", slim build, brown hair, last seen wearing a gray coat.",
+      "Second Chance shelter: 2018 thank-you post to volunteers, Mia is on the list."
     ],
     "record": {
       "id": "P-06289",
@@ -126,8 +126,7 @@
       }
     ],
     "findings": [
-      "Signed an NDA with Daniel Kerr in exchange for \"family support\" after Mia disappeared. Still regrets it.",
-      "TownSquare post, 2018: \"Today we lost our Biscuit. He was with us since 2011. Mia has been crying all evening…\" (password clue)",
+      "TownSquare, 2018: a post about losing the family dog.",
       "Posts every March 14, Mia's birthday.",
       "Photos from the school book fair."
     ],
@@ -179,7 +178,7 @@
     "id": "ethan-brooks",
     "name": "Ethan Brooks",
     "type": "key",
-    "role": "Mia's boyfriend in 2019 (red herring)",
+    "role": "Mia's boyfriend in 2019",
     "status": "Alive",
     "born": "1993-04-30",
     "birthplace": "Brooklyn, NY",
@@ -201,9 +200,9 @@
       }
     ],
     "findings": [
-      "Dated Mia for a year and a half. Lied to the police that he was home that night.",
-      "SwapMeet 2020: sold his Dodge Charger in a hurry, \"need cash\". Hint at debts.",
-      "Chatterbox group \"Brooklyn Aces\": 23:30 photo from Mark, Ethan is in the shot. Alibi.",
+      "Dated Mia for a year and a half. Told police he was home alone on the night of 2019-11-08.",
+      "SwapMeet 2020: sold his Dodge Charger in a hurry, \"need cash\".",
+      "Chatterbox: member of a group chat called \"Brooklyn Aces\".",
       "Comment under Sam Wright's video: \"You don't know anything.\""
     ],
     "record": {
@@ -217,7 +216,7 @@
     "id": "daniel-kerr",
     "name": "Daniel Kerr",
     "type": "key",
-    "role": "CEO of Veridia Health (red herring)",
+    "role": "CEO of Veridia Health (2019)",
     "status": "Alive",
     "record": {
       "id": "P-09001",
@@ -248,10 +247,10 @@
       }
     ],
     "findings": [
-      "Founder of Veridia. Charismatic, loves talking about the company's \"mission\". Deleted Mia's work email the morning after and paid her family.",
+      "Founder of Veridia. Charismatic, loves talking about the company's \"mission\".",
       "News 2022: \"Veridia Health files for bankruptcy. Investors sue founder.\"",
       "WorkNet: \"Sometimes a startup is 99 failures and one truth.\" Liked by ex-employees, except Kyle Bennett.",
-      "Dinner with investors 2019-11-08 on Melissa's Picto and Salt & Cedar's page. Alibi.",
+      "Tagged in a dinner photo on Melissa Kerr's Picto, 2019-11-08.",
       "Plate DKR-0001 — yes, he paid for it."
     ],
     "spoiler": "Not the killer. Faked user metrics for investors."
@@ -287,7 +286,7 @@
       }
     ],
     "findings": [
-      "Picto post 2019-11-08 22:47: table at Salt & Cedar, \"Evening with the best people. Go Veridia!\" Daniel is in the photo. Confirms his alibi.",
+      "Picto post 2019-11-08 22:47: table at Salt & Cedar, \"Evening with the best people. Go Veridia!\" Daniel is in the photo.",
       "Lots of photos of their home interior — clearly beyond a startup's means."
     ]
   },
@@ -295,7 +294,7 @@
     "id": "walter-green",
     "name": "Walter Green",
     "type": "key",
-    "role": "Mia's neighbor (red herring → witness)",
+    "role": "Mia's neighbor across the street",
     "status": "Alive",
     "record": {
       "id": "P-09003",
@@ -328,7 +327,7 @@
     ],
     "findings": [
       "Grumpy loner. Neighbors think he's creepy because of the camera in his window. Was rude to police in 2019 and quickly let go.",
-      "Website \"Window on Linden St\": 24/7 weather and bird stream, archive by date. Recording of 2019-11-08 is key evidence.",
+      "Website \"Window on Linden St\": 24/7 weather and bird stream, archive by date.",
       "Letter to city council, 2018: complaint about cars at night on Linden St.",
       "Birdwatchers forum: proud of a \"rare waxwing\" photo, 2020.",
       "Complaint about him from Dorothy Shaw to the property manager."
@@ -349,7 +348,7 @@
     "birthplace": "Spokane, WA",
     "address": "34 Gerritsen Ave, Gerritsen Beach, Brooklyn, NY",
     "place": "owen-home",
-    "phone": "(718) 555-0129; prepaid: (718) 555-0187",
+    "phone": "(718) 555-0129",
     "email": "owen.lind@nimbusmail.com",
     "job": "2019: Head of IT & Security, Veridia Health. 2026: security consultant, Cascade Secure",
     "car": "2017 Toyota RAV4, gray, NY OWL-3327",
@@ -379,10 +378,9 @@
     ],
     "findings": [
       "Friendly, \"one of the guys\", fixed everyone's laptops. Runs trails on weekends. In 2020 the city gave him an award for helping search for Mia Holt.",
-      "TrailTrack @owenruns: dozens of runs, including at Dead Horse Bay — so the 2019-11-08 \"walk\" there doesn't look strange until you check the time (23:14).",
-      "GamePort \"0wl\": shown online all night on 2019-11-08, but the activity log has a gap 22:00–00:40.",
-      "ZipScoot: ride 00:04–00:31 from Marine Parkway–Gil Hodges Memorial Bridge to Gerritsen Beach.",
-      "SwapMeet 2025: \"Selling gaming monitor\", number (718) 555-0187.",
+      "TrailTrack @owenruns: dozens of public runs and walks, many around Floyd Bennett Field and Dead Horse Bay.",
+      "GamePort \"0wl\": a heavy player, thousands of hours on his profile.",
+      "Rides ZipScoot scooters; the account is registered to owen.lind@nimbusmail.com.",
       "News 2020: photo with the mayor and the award.",
       "\"Find Mia\" group: the most active member, posts \"the map of the phone's last location\"."
     ],
@@ -419,7 +417,7 @@
       }
     ],
     "findings": [
-      "Doesn't know a company is registered in her name and at her address. Her son \"asked her to sign some tax papers\".",
+      "Retired nurse. Lives alone at 880 Orchard Way.",
       "Business registry: OL Data Consulting LLC, owner Carol Lind, 880 Orchard Way.",
       "TownSquare, 2019: \"My Owen is helping the police again! So proud!\""
     ]
@@ -450,8 +448,8 @@
       }
     ],
     "findings": [
-      "Mia's email of 2019-11-08 and her reply \"Let's meet on Monday\".",
-      "Her 2022 article on Veridia's bankruptcy — she never connected it to Mia.",
+      "Covers tech and health companies for The Kings County Ledger.",
+      "Wrote the 2022 article on Veridia's bankruptcy.",
       "Pulse, 2019-11-11: \"Source didn't show up. It happens.\""
     ]
   },
@@ -481,7 +479,7 @@
       }
     ],
     "findings": [
-      "Sat next to Mia. In Teamspace on 2019-11-05 Mia wrote to her: \"I found something really bad in the data. Can't say yet.\"",
+      "Worked next to Mia at Veridia Health in 2019.",
       "Anniversary post: \"She was always the last to leave. I still think I should have stayed with her that night.\""
     ]
   },
@@ -516,8 +514,8 @@
       }
     ],
     "findings": [
-      "Left Veridia in October 2019. WorkNet: \"Left because I disagreed with how the company counts its users.\" Hint at Kerr's fake metrics.",
-      "If contacted, replies: \"Ask Dan where Bloom got a million active users.\""
+      "Left Veridia in October 2019. WorkNet: \"Left because I disagreed with how the company counts its users.\"",
+      "WorkNet comment, 2022: \"Ask Dan where Bloom got a million active users.\""
     ]
   },
   {
@@ -551,7 +549,7 @@
       }
     ],
     "findings": [
-      "Listed as \"buyer contact\" in the spreadsheet from Mia's archive.",
+      "Account manager at Northline Analytics, a data broker.",
       "WorkNet: \"Data is the new oil.\""
     ]
   },
@@ -581,7 +579,7 @@
     ],
     "social": [],
     "findings": [
-      "Her notes in the police archive: \"Neighbor across the street with a camera — check recordings?\" marked \"no time, case reassigned\".",
+      "Led the Holt investigation in 2019; the case was reassigned in late November 2019.",
       "News 2023: retirement party, photo with a cake."
     ]
   },
@@ -611,14 +609,14 @@
       }
     ],
     "findings": [
-      "Report 2019-11-09 07:20: car at the bridge, doors unlocked, keys in the ignition, driver's seat pushed far back. Nobody noticed — Mia was 5'3\"."
+      "Patrol officer who found Mia Holt's car in the bridge parking lot on the morning of 2019-11-09."
     ]
   },
   {
     "id": "mark-dellinger",
     "name": "Mark Dellinger",
     "type": "secondary",
-    "role": "Runs the underground poker game",
+    "role": "Owner, Dellinger Storage",
     "status": "Alive",
     "record": {
       "id": "P-09012",
@@ -641,14 +639,15 @@
       }
     ],
     "findings": [
-      "Photo in \"Brooklyn Aces\" 2019-11-08 23:30: table, cards, Ethan in the shot. Ethan's alibi."
+      "Owns a storage business in a Red Hook warehouse.",
+      "Chatterbox: admin of the group \"Brooklyn Aces\"."
     ]
   },
   {
     "id": "tony-russo",
     "name": "Tony Russo",
     "type": "resident",
-    "role": "Poker player, Ethan's lender",
+    "role": "Delivery driver",
     "status": "Alive",
     "record": {
       "id": "P-09013",
@@ -670,7 +669,8 @@
       }
     ],
     "findings": [
-      "Message to Ethan, 2019: \"End of the month, bro. I'm not joking.\" Explains why Ethan lied."
+      "Chatterbox: member of the group \"Brooklyn Aces\".",
+      "Picto: lots of photos at card tables."
     ]
   },
   {
@@ -700,7 +700,7 @@
     ],
     "social": [],
     "findings": [
-      "Statement 2019: \"Around ten someone walked down the hallway to her door. Heavy steps, not hers.\" Written down, never followed up.",
+      "Lives across the hallway from Mia's old apartment. Gave a statement to police in November 2019.",
       "Complaint about Walter Green: \"watches me from his window\"."
     ]
   },
@@ -793,7 +793,7 @@
       }
     ],
     "findings": [
-      "Video 2021 \"What happened to Mia Holt?\": 50 minutes of theories, almost all wrong. Nearly accuses Ethan. Mentions cameras on Linden St without realizing it matters.",
+      "Video 2021 \"What happened to Mia Holt?\": 50 minutes of theories. Nearly accuses Ethan. Briefly mentions a camera in a window on Linden St.",
       "Comment from Ethan Brooks: \"You don't know anything.\""
     ]
   },
@@ -858,14 +858,14 @@
       }
     ],
     "findings": [
-      "ZipScoot maintenance log 2019-11-09: \"Scooter #4471 left in Gerritsen Beach outside parking zone, moved.\" The same scooter."
+      "ZipScoot technician covering south Brooklyn: collects scooters left outside parking zones."
     ]
   },
   {
     "id": "nick-kowalski",
     "name": "Nick Kowalski",
     "type": "resident",
-    "role": "Bought a monitor from Owen",
+    "role": "Student",
     "status": "Alive",
     "record": {
       "id": "P-09020",
@@ -887,7 +887,7 @@
       }
     ],
     "findings": [
-      "SwapMeet chat 2025 with (718) 555-0187: \"Ok, I'll pick it up Saturday. Gerritsen Ave, 34?\" — \"Yes, call when you're here. Owen.\""
+      "Picto, 2025: a photo of his gaming setup, \"new 144Hz monitor, got it cheap off SwapMeet\"."
     ]
   },
   {
@@ -922,7 +922,7 @@
       }
     ],
     "findings": [
-      "GamePort chat 2019-11-08 22:31: \"wanna play?\" — Owen doesn't answer until 00:52: \"sorry, fell asleep\". His status was \"online\" the whole time."
+      "GamePort \"trevng\": plays online with neighbors most evenings."
     ]
   },
   {
@@ -951,7 +951,7 @@
       }
     ],
     "findings": [
-      "Covered for Ethan on 2019-11-08. Jokes in chat: \"Off to his aces again, I'm working for two.\""
+      "Picto, 2019-11-08: \"Working a double tonight. Thanks a lot, E.\""
     ]
   },
   {
@@ -1020,7 +1020,7 @@
       }
     ],
     "findings": [
-      "Lost cat posters for \"Pumpkin\" (2019) all over the neighborhood. Not related to the case."
+      "Lost cat posters for \"Pumpkin\" (2019) all over the neighborhood."
     ]
   },
   {
@@ -1113,7 +1113,7 @@
     ],
     "social": [],
     "findings": [
-      "Statement 2019: fished at the bridge until midnight. Saw a car pull into the lot and \"someone tall got out and walked toward the road, no flashlight\". Police assumed it was Mia."
+      "Regular fisherman under the Marine Parkway–Gil Hodges Memorial Bridge. Gave a statement to police in November 2019."
     ]
   }
 ]

@@ -109,7 +109,7 @@
       "type": "log",
       "entries": [
         {
-          "time": "2019-11-08T17:51:00-05:00",
+          "time": "2019-11-08T17:41:00-05:00",
           "event": "Sign-in, MacBook (Veridia-LT-07)"
         },
         {
@@ -483,7 +483,7 @@
       "mia-holt",
       "owen-lind"
     ],
-    "weight": "key",
+    "weight": "weak",
     "content": {
       "type": "video",
       "platform": "ViewTube",
@@ -502,7 +502,9 @@
           "description": "The Civic (NY BKR-2187) drives away. The driver's head almost touches the roof. A smaller person in the passenger seat."
         }
       ]
-    }
+    },
+    "optional": true,
+    "designNote": "Камеры отложены — улика необязательна. Тот же вывод даёт лог вышек + шагомер + показания Дугласа/Тейта."
   },
   {
     "id": "ev-poker-photo",
@@ -1173,7 +1175,7 @@
       "brian-tate",
       "mia-holt"
     ],
-    "weight": "weak",
+    "weight": "key",
     "content": {
       "type": "report",
       "author": "brian-tate",
@@ -1200,7 +1202,7 @@
     "people": [
       "robert-douglas"
     ],
-    "weight": "weak",
+    "weight": "key",
     "content": {
       "type": "statement",
       "date": "2019-11-10",

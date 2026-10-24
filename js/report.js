@@ -11,9 +11,26 @@ function renderReport(container) {
   const caseInfo = caseData.caseInfo;
   const answerKey = caseInfo.answerKey;
   const scoring = caseInfo.scoring;
-  const people = (caseData.people || []).filter((person) => person.id !== "mia-holt");
+  const people = (caseData.people || [])
+    .filter((person) => person.id !== "mia-holt")
+    .sort((first, second) => first.name.localeCompare(second.name));
   const places = caseInfo.places || [];
   let evidenceSyncListener = null;
+
+  // Chain options in a fixed but scrambled order, so the answer is not always in the same spot.
+  function scrambled(options, salt) {
+    const hash = (text) => [...text].reduce((value, char) => (value * 31 + char.charCodeAt(0)) >>> 0, 7);
+    return [...options].sort((first, second) => hash(salt + first.id) - hash(salt + second.id));
+  }
+
+  function minutes(time) {
+    const [hours, mins] = String(time || "").split(":").map(Number);
+    return hours * 60 + mins;
+  }
+
+  function closeTo(time, answer, tolerance) {
+    return Math.abs(minutes(time) - minutes(answer)) <= tolerance;
+  }
 
   // Everything on the evidence board (every found record) can support the report.
   function availableEvidence() {
@@ -121,7 +138,7 @@ function renderReport(container) {
     const chainFields = createEl("section", "report-chain");
     for (const [index, step] of answerKey.chain.entries()) {
       const select = createSelect(
-        step.options.map((option) => ({ value: option.id, label: option.text })),
+        scrambled(step.options, step.id).map((option) => ({ value: option.id, label: option.text })),
         draft.chain[index],
         "Choose what happened"
       );
@@ -160,7 +177,7 @@ function renderReport(container) {
       const copy = createEl("span", "report-evidence-copy");
       copy.append(
         createEl("strong", "", entry.title || entry.id),
-        createEl("small", "", `${entry.app || "evidence"} · ${entry.weight || "none"} weight`)
+        createEl("small", "", entry.app || "evidence")
       );
       label.append(checkbox, copy);
       evidenceOptions.appendChild(label);
@@ -231,6 +248,7 @@ function renderReport(container) {
         validation.hidden = false;
         return;
       }
+      if (!window.confirm("File the final report? It can't be changed after it is sent.")) return;
       window.CASE_PROGRESS.reportSubmission = {
         ...evaluateReport(draft, [...window.CASE_PROGRESS.reportEvidence]),
         submittedAt: gameTimestamp(),
@@ -246,7 +264,9 @@ function renderReport(container) {
   function evaluateReport(draft, selectedEvidence) {
     const points = scoring.points;
     const dateIsCorrect = draft.date === answerKey.time.date;
-    const timeIsCorrect = draft.from === answerKey.time.from && draft.to === answerKey.time.to;
+    const tolerance = answerKey.time.toleranceMinutes || 0;
+    const timeIsCorrect = closeTo(draft.from, answerKey.time.from, tolerance) &&
+      closeTo(draft.to, answerKey.time.to, tolerance);
     const timePoints = dateIsCorrect
       ? (timeIsCorrect ? points.time : points.timeDateOnly)
       : 0;
@@ -457,15 +477,8 @@ function renderReport(container) {
       result.evidencePoints === scoring.points.evidence
     ));
 
+    // The report is final: the review shows the answers, so it can't be edited and resent.
     const actions = createEl("div", "report-actions");
-    const edit = createEl("button", "report-secondary", "Edit report");
-    edit.type = "button";
-    edit.addEventListener("click", () => {
-      window.CASE_PROGRESS.reportSubmission = null;
-      saveCaseProgress();
-      window.dispatchEvent(new Event("case-mail-change"));
-      showForm();
-    });
     const replay = createEl("button", "report-submit", "Replay case");
     replay.type = "button";
     replay.addEventListener("click", () => {
@@ -477,7 +490,7 @@ function renderReport(container) {
         console.error("Could not reset case progress.", error);
       }
     });
-    actions.append(edit, replay);
+    actions.append(replay);
     report.append(outcome, review, actions);
   }
 

@@ -205,12 +205,13 @@
     "time": {
       "date": "2019-11-08",
       "from": "23:09",
-      "to": "23:41"
+      "to": "23:41",
+      "toleranceMinutes": 5
     },
     "chain": [
       {
         "id": "how-knew",
-        "text": "Owen learned about Mia's plan through ___",
+        "text": "The killer learned about Mia's plan through ___",
         "answer": "screen-monitoring",
         "options": [
           {
@@ -233,7 +234,7 @@
       },
       {
         "id": "why-came",
-        "text": "Mia asked him herself to ___",
+        "text": "Mia herself had asked the killer to ___",
         "answer": "encrypt-archive",
         "options": [
           {
@@ -256,7 +257,7 @@
       },
       {
         "id": "where-took",
-        "text": "He drove her in her own car to ___",
+        "text": "The killer drove her in her own car to ___",
         "answer": "dead-horse-bay",
         "options": [
           {
@@ -279,7 +280,7 @@
       },
       {
         "id": "where-left",
-        "text": "He left the car and her phone at ___",
+        "text": "Then the car and her phone were left at ___",
         "answer": "marine-parkway-bridge",
         "options": [
           {
@@ -420,7 +421,7 @@
           "outlet": "The Kings County Ledger",
           "author": "rachel-moore",
           "headline": "Mia Holt case reopened seven years later",
-          "body": "NYPD has reopened the investigation into the disappearance of 24-year-old Mia Holt, who went missing in November 2019. According to sources, investigators received an anonymous package of evidence. A search is underway near Dead Horse Bay. A 38-year-old former employee of Veridia Health has been arrested. The company itself is also under investigation on suspicion of selling medical data of users of its Bloom app.",
+          "body": "NYPD has reopened the investigation into the disappearance of 24-year-old Mia Holt, who went missing in November 2019. According to sources, investigators received an anonymous package of evidence. A search is underway near Dead Horse Bay. A 37-year-old former employee of Veridia Health has been arrested. The company itself is also under investigation on suspicion of selling medical data of users of its Bloom app.",
           "bonusParagraph": {
             "requires": "ev-kerr-fake-metrics",
             "text": "Separately, former Veridia CEO Daniel Kerr faces fraud charges for allegedly inflating user numbers to investors."

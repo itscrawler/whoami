@@ -1,37 +1,40 @@
 // WHOAMI — simulated case terminal
 
+// [group, syntax, description]; "help" prints the groups in this order.
 const TERMINAL_COMMANDS = [
-  ["help [command]", "List commands or show help for one command."],
-  ["clear", "Clear terminal output."],
-  ["history", "Show commands entered in this session."],
-  ["date", "Show the in-game date and time."],
-  ["whoami", "Print WHOAMI."],
-  ["exit", "Close the terminal window."],
-  ["ls", "List files in the current virtual directory."],
-  ["cd <folder>", "Change the current virtual directory."],
-  ["cat <file>", "Print a downloaded text record."],
-  ["open <file>", "Open a downloaded record in a viewer window."],
-  ["download <file|all>", "Save records available in the current simulated session."],
-  ["unzip <archive>", "Extract an unlocked archive."],
-  ["vpn connect <node>", "Connect the simulated VPN tunnel."],
-  ["vpn status", "Show simulated VPN status."],
-  ["vpn disconnect", "Disconnect the simulated VPN tunnel."],
-  ["lookup <name|number|email|vehicle>", "Search resident records."],
-  ["breach search <email|username>", "Search the fictional public leak."],
-  ["geoip <ip>", "Search case records for an IP location."],
-  ["scan [target]", "List targets you have leads for, or inspect one and show what it needs."],
-  ["connect <target>", "Connect to a scanned target over the simulated VPN."],
-  ["login <service> <account> <password>", "Check credentials found in case evidence."],
-  ["logout", "End simulated account sessions."],
-  ["disconnect", "Close the current target connection."],
-  ["crack <archive> --wordlist mine", "Check your collected words against an archive clue."],
-  ["wordlist add <word>", "Add a clue to your local in-game wordlist."],
-  ["wordlist show", "List collected wordlist clues."],
-  ["towers <number> [--date YYYY-MM-DD]", "Show an available cell-tower log."],
-  ["calls", "Show downloaded call records."],
-  ["sms", "Show downloaded text-message records."],
-  ["hack [target]", "Show a hint for the simulated access flow."],
+  ["BASICS", "help [command]", "List commands or show help for one command."],
+  ["BASICS", "clear", "Clear terminal output."],
+  ["BASICS", "history", "Show commands entered in this session."],
+  ["BASICS", "date", "Show the in-game date and time."],
+  ["BASICS", "whoami", "Print WHOAMI."],
+  ["BASICS", "exit", "Close the terminal window."],
+  ["FILES", "ls", "List files in the current virtual directory."],
+  ["FILES", "cd <folder>", "Change the current virtual directory."],
+  ["FILES", "cat <file>", "Print a downloaded text record."],
+  ["FILES", "open <file>", "Open a downloaded record in a viewer window."],
+  ["FILES", "download <file|all>", "Save records available in the current simulated session."],
+  ["FILES", "unzip <archive>", "Extract an unlocked archive."],
+  ["VPN & SEARCH", "vpn connect <node>", "Connect the simulated VPN tunnel."],
+  ["VPN & SEARCH", "vpn status", "Show simulated VPN status."],
+  ["VPN & SEARCH", "vpn disconnect", "Disconnect the simulated VPN tunnel."],
+  ["VPN & SEARCH", "lookup <name|number|email|vehicle>", "Search resident records."],
+  ["VPN & SEARCH", "breach search <email|username>", "Search the fictional public leak."],
+  ["VPN & SEARCH", "geoip <ip>", "Search case records for an IP location."],
+  ["SIMULATED ACCESS", "scan [target]", "List targets you have leads for, or inspect one and show what it needs."],
+  ["SIMULATED ACCESS", "connect <target>", "Connect to a scanned target over the simulated VPN."],
+  ["SIMULATED ACCESS", "login <service> <account> <password>", "Check credentials found in case evidence."],
+  ["SIMULATED ACCESS", "logout", "End simulated account sessions."],
+  ["SIMULATED ACCESS", "disconnect", "Close the current target connection."],
+  ["SIMULATED ACCESS", "hack [target]", "Show a hint for the simulated access flow."],
+  ["WORDLIST & PHONE", "crack <archive> --wordlist mine", "Check your collected words, alone and in pairs, against an archive."],
+  ["WORDLIST & PHONE", "wordlist add <word>", "Add a clue to your local in-game wordlist."],
+  ["WORDLIST & PHONE", "wordlist show", "List collected wordlist clues."],
+  ["WORDLIST & PHONE", "towers <number> [--date YYYY-MM-DD]", "Show an available cell-tower log."],
+  ["WORDLIST & PHONE", "sms", "Show downloaded text-message records."],
 ];
+
+// Most residents a lookup prints at once; a broader query has to be narrowed down.
+const LOOKUP_MAX_RESULTS = 5;
 
 function renderTerminal(container) {
   const terminal = createEl("div", "terminal-app");
@@ -177,24 +180,20 @@ function renderTerminal(container) {
   function showHelp(args) {
     if (args.length) {
       const requested = args.join(" ").toLowerCase();
-      const command = TERMINAL_COMMANDS.find(([syntax]) => {
+      const command = TERMINAL_COMMANDS.find(([, syntax]) => {
         const name = syntax.replace(/<[^>]+>|\[[^\]]+\]/g, "").trim().toLowerCase();
         return name === requested || name.split(" ")[0] === requested;
       });
       if (!command) return write(`No help available for "${requested}".`, "terminal-error");
-      return write(`${command[0]}\n${command[1]}`);
+      return write(`${command[1]}\n${command[2]}`);
     }
 
-    write("BASICS");
-    for (const [syntax, description] of TERMINAL_COMMANDS.slice(0, 6)) write(`${syntax} — ${description}`);
-    write("FILES");
-    for (const [syntax, description] of TERMINAL_COMMANDS.slice(6, 12)) write(`${syntax} — ${description}`);
-    write("VPN & SEARCH");
-    for (const [syntax, description] of TERMINAL_COMMANDS.slice(12, 18)) write(`${syntax} — ${description}`);
-    write("SIMULATED ACCESS");
-    for (const [syntax, description] of TERMINAL_COMMANDS.slice(18, 23)) write(`${syntax} — ${description}`);
-    write("WORDLIST & PHONE");
-    for (const [syntax, description] of TERMINAL_COMMANDS.slice(23)) write(`${syntax} — ${description}`);
+    for (const group of new Set(TERMINAL_COMMANDS.map(([name]) => name))) {
+      write(group);
+      for (const [name, syntax, description] of TERMINAL_COMMANDS) {
+        if (name === group) write(`${syntax} — ${description}`);
+      }
+    }
     write('Special: sudo, rm -rf /, hack. Use "help <command>" for details.');
   }
 
@@ -238,20 +237,23 @@ function renderTerminal(container) {
     return [...new Set(names)].sort();
   }
 
+  // Resolves "~", ".", ".." and relative or absolute paths against the current folder.
+  function resolvePath(folder) {
+    const expanded = folder.replace(/^~(?=\/|$)/, "/home/whoami");
+    const parts = expanded.startsWith("/")
+      ? expanded.split("/")
+      : [...state.cwd.split("/"), ...expanded.split("/")];
+    const resolved = [];
+    for (const part of parts) {
+      if (!part || part === ".") continue;
+      if (part === "..") resolved.pop();
+      else resolved.push(part);
+    }
+    return `/${resolved.join("/")}`;
+  }
+
   function changeDirectory(folder) {
-    if (!folder || folder === "~") {
-      state.cwd = "/home/whoami";
-      updatePrompt();
-      return write(state.cwd);
-    }
-    if (folder === "..") {
-      state.cwd = state.cwd.substring(0, state.cwd.lastIndexOf("/")) || "/";
-      updatePrompt();
-      return write(state.cwd);
-    }
-    const path = folder.startsWith("/")
-      ? folder.replace(/\/+$/, "") || "/"
-      : `${state.cwd}/${folder}`.replace(/\/+$/, "");
+    const path = resolvePath(folder || "~");
     if (["/", "/home", "/home/whoami", "/home/whoami/downloads", "/tmp"].includes(path)) {
       state.cwd = path;
       updatePrompt();
@@ -328,8 +330,10 @@ function renderTerminal(container) {
         );
       });
       if (!scoped.length) return write("No records available. Connect to a target or log in first.");
-      scoped.forEach((evidence) => saveEvidence(evidence));
-      return write(`Downloaded ${scoped.length} record(s) to ~/downloads.`);
+      const fresh = scoped.filter((evidence) => !state.downloaded.has(evidence.id));
+      if (!fresh.length) return write("Every available record is already in ~/downloads.");
+      fresh.forEach((evidence) => saveEvidence(evidence));
+      return write(`Downloaded ${fresh.length} new record(s) to ~/downloads.`);
     }
 
     const evidence = candidates.find((entry) =>
@@ -535,13 +539,16 @@ function renderTerminal(container) {
   function lookup(query) {
     if (!normalize(query)) return write("Usage: lookup <name|number|email|vehicle>", "terminal-error");
     const normalized = normalize(query);
-    const people = caseData?.people || [];
+    const people = (caseData?.people || []).filter(isCityResident); // same registry as the Database app
     const matches = people.filter((person) => {
       const fields = [person.name, person.phone, person.email, person.car, person.record?.id, person.address];
       return phoneMatches(person.phone, query) ||
         fields.some((value) => value && normalize(value).includes(normalized));
     });
     if (!matches.length) return write("No resident records found.");
+    if (matches.length > LOOKUP_MAX_RESULTS) {
+      return write(`${matches.length} residents match "${query}". Narrow the search.`);
+    }
     matches.forEach((person) => {
       window.markPersonFound(person.id);
       write(`${person.name} · ${person.record?.id || "—"} · ${person.record?.address || "address unknown"}`);
@@ -553,8 +560,11 @@ function renderTerminal(container) {
 
   function geoip(ip) {
     if (!ip) return write("Usage: geoip <ip>", "terminal-error");
+    if (!/^(\d{1,3})(\.\d{1,3}){3}$/.test(ip) || ip.split(".").some((part) => Number(part) > 255)) {
+      return write(`Not an IPv4 address: ${ip}`, "terminal-error");
+    }
     const text = evidenceList().map((evidence) => JSON.stringify(evidence.content || {})).join(" ");
-    const exists = text.includes(ip);
+    const exists = new RegExp(`(^|[^\\d.])${ip.replace(/\./g, "\\.")}($|[^\\d.])`).test(text);
     if (!exists) return write(`No case location record found for ${ip}.`);
     write(`IP ${ip} appears in case records. No more precise location data is available.`);
   }
@@ -578,13 +588,26 @@ function renderTerminal(container) {
       evidence.access?.type === "decrypt" && normalize(evidence.access.file) === normalize(archive)
     );
     if (!record) return write("No matching archive record in this case.", "terminal-error");
-    if (!state.wordlist.has(normalize(record.access.password))) {
+    if (!wordlistCandidates().has(normalize(record.access.password))) {
       return write("No match in your wordlist. Collect a clue, then use wordlist add <word>.");
     }
     state.crackedArchives.add(normalize(archive));
     saveCaseProgress();
     window.dispatchEvent(new Event("case-files-change"));
     write(`MATCH · archive unlocked with a word from your wordlist.`);
+  }
+
+  // Every word on its own and every pair of words joined together, spaces ignored:
+  // "Biscuit" + "2011" also tries "biscuit2011" and "2011biscuit".
+  function wordlistCandidates() {
+    const words = [...state.wordlist.keys()].map((word) => word.replace(/\s+/g, ""));
+    const candidates = new Set(words);
+    for (const first of words) {
+      for (const second of words) {
+        if (first !== second) candidates.add(first + second);
+      }
+    }
+    return candidates;
   }
 
   function towers(args) {
@@ -620,6 +643,7 @@ function renderTerminal(container) {
         if (kind === "sms") return evidence?.app === "phone" && evidence.content?.type === "chat";
         return evidence?.content?.type === "callLog" || evidence?.content?.type === "calls";
       });
+    if (!chats.length && kind === "calls") return write("No call records found.");
     if (!chats.length) return write(`No downloaded ${kind} records. Download an available phone record first.`);
     for (const evidence of chats) {
       write(evidence.title);
