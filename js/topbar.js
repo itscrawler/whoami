@@ -7,7 +7,8 @@ const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "
 const gameClock = { start: 0, realStart: 0, offsetMinutes: 0 };
 
 // Fills the top bar with info from case.json and starts the clock.
-function initTopbar(caseInfo) {
+// resumeAt = saved in-game time (ms), so a reload doesn't turn the clock back.
+function initTopbar(caseInfo, resumeAt) {
   // "CASE #535 · NORTH BRIDGE" with the number in orange
   const label = document.getElementById("case-label");
   const number = document.createElement("span");
@@ -17,7 +18,7 @@ function initTopbar(caseInfo) {
   label.append("CASE ", number, " · " + caseInfo.title.toUpperCase());
 
   document.getElementById("case-city").textContent = caseInfo.city.toUpperCase();
-  startClock(caseInfo.intro.timestamp);
+  startClock(caseInfo.intro.timestamp, resumeAt);
   updateVpnIndicator();
   window.addEventListener("case-access-change", updateVpnIndicator);
 }
@@ -46,12 +47,13 @@ function showCaseNotFound(caseId) {
   document.getElementById("case-label").textContent = "CASE #" + caseId + " NOT FOUND";
 }
 
-// Starts the in-game clock at the case's start time (e.g. Oct 13 2026, 01:24)
-// and moves it forward in real time, one second per second.
+// Starts the in-game clock at the case's start time (e.g. Oct 13 2026, 01:24),
+// or at the saved time if the case is resumed, and moves it forward in real time, one second per second.
 // It shows the time in the case city's time zone, not the player's.
-function startClock(timestamp) {
+function startClock(timestamp, resumeAt) {
   const clock = document.getElementById("game-clock");
-  gameClock.start = Date.parse(timestamp); // the case start time, in milliseconds
+  // the case start time (or the saved time, never earlier), in milliseconds
+  gameClock.start = Math.max(Date.parse(timestamp), Number(resumeAt) || 0);
   gameClock.realStart = Date.now(); // when the player opened the page
   gameClock.offsetMinutes = getUtcOffsetMinutes(timestamp);
 
@@ -66,8 +68,12 @@ function startClock(timestamp) {
 // Trick: shift the time by the city's UTC offset and then read it with the
 // getUTC... methods. That gives the city's local time in any time zone.
 function cityTime() {
-  const passed = Date.now() - gameClock.realStart;
-  return new Date(gameClock.start + passed + gameClock.offsetMinutes * 60 * 1000);
+  return new Date(gameTimeMs() + gameClock.offsetMinutes * 60 * 1000);
+}
+
+// The current in-game moment in milliseconds (saved with case progress).
+function gameTimeMs() {
+  return gameClock.start + (Date.now() - gameClock.realStart);
 }
 
 // The current in-game time as an ISO string with the city's offset, e.g. "2026-10-13T01:31:00-04:00".

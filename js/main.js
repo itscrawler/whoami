@@ -29,6 +29,7 @@ window.CASE_PROGRESS = {
   extractedArchives: new Set(),
   deliveredMail: new Map(), // mail id -> in-game time it arrived
   readMail: new Set(),
+  gameTime: null, // in-game time (ms) at the last save, so the clock resumes from it
 };
 
 // Access granted through the simulated terminal is shared with device apps.
@@ -65,6 +66,7 @@ function saveCaseProgress() {
       extractedArchives: [...window.CASE_PROGRESS.extractedArchives],
       deliveredMail: [...window.CASE_PROGRESS.deliveredMail],
       readMail: [...window.CASE_PROGRESS.readMail],
+      gameTime: gameClock.start ? gameTimeMs() : window.CASE_PROGRESS.gameTime,
       vpnNode: window.CASE_ACCESS.vpnNode,
       scannedTargets: [...window.CASE_ACCESS.scannedTargets],
       connectedTargets: [...window.CASE_ACCESS.connectedTargets],
@@ -158,6 +160,7 @@ function restoreCaseProgress(data) {
   window.CASE_PROGRESS.readMail = new Set(
     Array.isArray(saved.readMail) ? saved.readMail.filter((value) => typeof value === "string") : []
   );
+  window.CASE_PROGRESS.gameTime = Number.isFinite(saved.gameTime) ? saved.gameTime : null;
   window.CASE_ACCESS.vpnNode = saved.vpnNode === "NYC-07" ? saved.vpnNode : null;
   window.CASE_ACCESS.scannedTargets = setKnown(saved.scannedTargets, targetIds);
   window.CASE_ACCESS.connectedTargets = setKnown(saved.connectedTargets, targetIds);
@@ -398,7 +401,7 @@ loadCase(CASE_ID)
     handbookData = data.handbook;
     const hasSavedProgress = restoreCaseProgress(data);
     document.title = `WHOAMI — #${data.caseInfo.id} ${data.caseInfo.title}`;
-    initTopbar(data.caseInfo);
+    initTopbar(data.caseInfo, window.CASE_PROGRESS.gameTime);
 
     console.log("Case loaded:", data.caseInfo.title);
     console.log(`${data.people.length} people, ${data.evidence.length} pieces of evidence`);

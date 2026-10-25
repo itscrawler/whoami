@@ -524,7 +524,7 @@ function renderTerminal(container) {
     const leak = evidenceList().find((evidence) =>
       evidence.content?.type === "dataLeak" &&
       ["email", "username"].some((field) =>
-        normalize(evidence.content.match?.[field]).includes(normalize(query))
+        normalize(evidence.content.match?.[field]) === normalize(query)
       )
     );
     if (!leak) return write(`No leak record matches "${query}".`);
